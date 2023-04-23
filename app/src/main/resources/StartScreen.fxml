@@ -7,13 +7,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
+<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="ch.zhaw.team5.StartScreenController">
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="30.0">
          <children>
-            <Button mnemonicParsing="false" text="Start" />
-            <Button mnemonicParsing="false" text="Quit">
+            <Button fx:id="startButton" mnemonicParsing="false" text="Start" />
+            <Button fx:id="quitButton" mnemonicParsing="false" text="Quit">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
