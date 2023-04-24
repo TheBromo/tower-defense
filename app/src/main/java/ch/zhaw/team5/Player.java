@@ -7,7 +7,6 @@ public class Player {
 
     public int health;
     private int money;
-    private Tower towers;
 
     ArrayList<Tower> towerList = new ArrayList<Tower>();
 
