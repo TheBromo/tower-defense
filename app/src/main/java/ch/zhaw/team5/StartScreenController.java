@@ -1,10 +1,22 @@
 package ch.zhaw.team5;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 
 public class StartScreenController {
+    @FXML
+    public Button startButton;
+    @FXML
+    public Button quitButton;
+
+    @FXML
+    private void initialize(){
+        quitButton.setOnAction(this::onQuitButtonClicked);
+        startButton.setOnAction(this::onStartButtonClicked);
+    }
+
     public void onStartButtonClicked (ActionEvent event) {
-        System.out.println("Start Button clicked");
         // TODO: Hier kommt dann Logik von Micha
     }
 
