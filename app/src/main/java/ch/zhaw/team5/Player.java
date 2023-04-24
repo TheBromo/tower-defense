@@ -10,7 +10,7 @@ public class Player {
 
     ArrayList<Tower> towerList = new ArrayList<Tower>();
 
-    public Player(int health, int money, Tower towers){
+    public Player(int health, int money, List<Tower> towers){
 
         this.health = health;
         this.money = money;
