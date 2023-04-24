@@ -4,7 +4,7 @@ import javafx.scene.image.Image;
 
 public abstract class StaticGameObject implements Game {
     private Point2D postion;
-    private Image sprites;
+    private Image sprite;
     public StaticGameObject(Point2D postion, Image sprites){
         this.postion = postion;
         this.sprites = sprites;
