@@ -33,7 +33,7 @@ public class Player {
     }
 
     public Tower getTowers(){
-        return this.towers;
+        return this.towerList ;
     }
     public void addTower(Tower towers){
         towerList.add(towers);
