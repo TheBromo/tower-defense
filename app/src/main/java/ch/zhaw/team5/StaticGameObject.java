@@ -3,11 +3,11 @@ import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 
 public abstract class StaticGameObject implements Game {
-    private Point2D postion;
+    private Point2D position;
     private Image sprite;
-    public StaticGameObject(Point2D postion, Image sprites){
-        this.postion = postion;
-        this.sprites = sprites;
+    public StaticGameObject(Point2D position, Image sprite){
+        this.position = position;
+        this.sprite = sprite;
 
     }
 
@@ -17,11 +17,11 @@ public abstract class StaticGameObject implements Game {
     }
 
     public Point2D getPosition(){
-        return postion;
+        return position;
     }
 
-    public Image getSprites(){
-        return sprites;
+    public Image getSprite(){
+        return sprite;
     }
 
 
