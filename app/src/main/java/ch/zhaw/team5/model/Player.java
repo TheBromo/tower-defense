@@ -1,7 +1,6 @@
-package ch.zhaw.team5;
+package ch.zhaw.team5.model;
+
 import java.util.ArrayList; // import the ArrayList class
-
-
 
 public class Player {
 
@@ -10,7 +9,7 @@ public class Player {
 
     ArrayList<Tower> towerList = new ArrayList<Tower>();
 
-    public Player(int health, int money, List<Tower> towers){
+    public Player(int health, int money, List<Tower> towers) {
 
         this.health = health;
         this.money = money;
@@ -18,29 +17,28 @@ public class Player {
 
     }
 
-    public int getHealth(){
+    public int getHealth() {
         return this.health;
     }
-    public int setHealth(int health){
+
+    public int setHealth(int health) {
         return health;
     }
 
-    public int getMoney(){
+    public int getMoney() {
         return this.money;
     }
-    public int setMoney(int money){
+
+    public int setMoney(int money) {
         return money;
     }
 
-    public Tower getTowers(){
-        return this.towerList ;
+    public Tower getTowers() {
+        return this.towerList;
     }
-    public void addTower(Tower towers){
+
+    public void addTower(Tower towers) {
         towerList.add(towers);
     }
-
-
-
-
 
 }
