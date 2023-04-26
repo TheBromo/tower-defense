@@ -4,7 +4,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 
 public abstract class StaticGameObject implements Renderable {
-    private Point2D position;
+    protected Point2D position;
     private Image sprite;
 
     public StaticGameObject(Point2D position, Image sprite) {
@@ -13,10 +13,6 @@ public abstract class StaticGameObject implements Renderable {
 
     }
 
-    @Override
-    public void render() {
-
-    }
 
     public Point2D getPosition() {
         return position;
