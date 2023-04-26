@@ -10,11 +10,11 @@ public class StartScreenController {
     @FXML
     public Button quitButton;
 
-    public void onStartButtonClicked (ActionEvent event) {
+    public void onStartButtonClicked(ActionEvent event) {
         // TODO: Hier kommt dann Logik von Micha
     }
 
-    public void onQuitButtonClicked (ActionEvent event) {
+    public void onQuitButtonClicked(ActionEvent event) {
         System.exit(0);
     }
 }
