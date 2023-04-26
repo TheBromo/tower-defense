@@ -10,12 +10,6 @@ public class StartScreenController {
     @FXML
     public Button quitButton;
 
-    @FXML
-    private void initialize(){
-        quitButton.setOnAction(this::onQuitButtonClicked);
-        startButton.setOnAction(this::onStartButtonClicked);
-    }
-
     public void onStartButtonClicked (ActionEvent event) {
         // TODO: Hier kommt dann Logik von Micha
     }

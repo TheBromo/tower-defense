@@ -12,11 +12,12 @@
         <children>
             <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="30.0">
                 <children>
-                    <Button fx:id="startButton" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Start">
-                  <font>
-                     <Font name="System Bold" size="13.0" />
-                  </font></Button>
-                    <Button fx:id="quitButton" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Quit">
+                    <Button fx:id="startButton" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Start" onAction="#onStartButtonClicked">
+                        <font>
+                            <Font name="System Bold" size="13.0" />
+                        </font>
+                    </Button>
+                    <Button fx:id="quitButton" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Quit" onAction="#onQuitButtonClicked">
                         <VBox.margin>
                             <Insets />
                         </VBox.margin>
