@@ -1,7 +1,6 @@
 package ch.zhaw.team5.model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 import ch.zhaw.team5.model.util.ImageLoader;
 import ch.zhaw.team5.model.util.RandomUtil;
@@ -12,7 +11,7 @@ public class TowerPosition extends StaticGameObject {
 
     private Tower tower;
     private int positionNumber;
-    private final ArrayList<String> towerImageNames = new ArrayList<>(Arrays.asList("Tower1", "Tower2", "Tower3"));
+    private final List<String> towerImageNames = List.of("Tower1", "Tower2", "Tower3");
 
     public TowerPosition(Point2D position, int number) {
         super(position, ImageLoader.getInstance().getByName("Hole"));
