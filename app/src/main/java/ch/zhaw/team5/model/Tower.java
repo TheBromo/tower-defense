@@ -33,13 +33,13 @@ public class Tower extends StaticGameObject {
 
     }
 
-    private boolean inRange(Enemy enemy){
-        return position.distance(enemy.getPosition()) <= range;
+    private boolean outOfRange(Enemy enemy){
+        return position.distance(enemy.getPosition()) > range;
     }
 
     public Enemy shootAtEnemies(List<Enemy> enemies){
         var possibleTargets= new ArrayList<>(enemies);
-        possibleTargets.removeIf(enemy -> !inRange(enemy));
+        possibleTargets.removeIf(enemy -> outOfRange(enemy));
         
         Random rand = new Random();
         var target = possibleTargets.get(rand.nextInt(possibleTargets.size()));
