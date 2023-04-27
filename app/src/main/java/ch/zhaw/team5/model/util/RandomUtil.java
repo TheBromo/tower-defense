@@ -1,11 +1,7 @@
 package ch.zhaw.team5.model.util;
 
-
 import java.util.List;
 import java.util.Random;
-
-
-
 
 public class RandomUtil {
     
@@ -26,6 +22,4 @@ public class RandomUtil {
     public <T> T getRandomCollectionElement(List<T> list){
         return  list.get(generator.nextInt(list.size()));
     }
-
-
 }

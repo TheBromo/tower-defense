@@ -3,8 +3,6 @@ package ch.zhaw.team5.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import com.google.common.collect.ImmutableList;
-
 import ch.zhaw.team5.model.util.ImageLoader;
 import ch.zhaw.team5.model.util.RandomUtil;
 import javafx.geometry.Point2D;
