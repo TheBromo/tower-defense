@@ -26,6 +26,8 @@ public class TowerPosition extends StaticGameObject {
         if (hasTower()) {
             tower.render();
         }
+
+        //TODO implement render method
     }
 
     public boolean BuildTower() {
