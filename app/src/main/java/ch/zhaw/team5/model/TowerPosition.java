@@ -1,39 +1,56 @@
 package ch.zhaw.team5.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import com.google.common.collect.ImmutableList;
+
+import ch.zhaw.team5.model.util.ImageLoader;
+import ch.zhaw.team5.model.util.RandomUtil;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 
 public class TowerPosition extends StaticGameObject {
 
-    public TowerPosition(Point2D position, Image sprite) {
-        super(position, sprite);
+    private Tower tower;
+    private int positionNumber;
+    private final ArrayList<String> towerImageNames = new ArrayList<>(Arrays.asList("Tower1", "Tower2", "Tower3"));
+
+    public TowerPosition(Point2D position, int number) {
+        super(position, ImageLoader.getInstance().getByName("Hole"));
+        positionNumber = number;
     }
 
     @Override
     public void render() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'render'");
+        if (hasTower()) {
+            tower.render();
+        }
     }
 
-    
-    public boolean hasTower(){
+    public boolean BuildTower() {
+        if (!hasTower()) {
+            tower = new Tower(position, getRandomSprite());
+            return true;
+        }
         return false;
-
     }
 
-
-    public int getNumber(){
-        return 0;
-
+    private Image getRandomSprite() {
+        var imageLoader = ImageLoader.getInstance();
+        var random = RandomUtil.getInstance();
+        return imageLoader.getByName(random.getRandomCollectionElement(towerImageNames));
     }
 
-
-    public boolean BuildTower(){
-        return false;
-
+    public Tower getTower() {
+        return tower;
     }
 
-    public Tower getTower(){
+    public boolean hasTower() {
+        return tower != null;
+    }
 
+    public int getNumber() {
+        return positionNumber;
     }
 }
