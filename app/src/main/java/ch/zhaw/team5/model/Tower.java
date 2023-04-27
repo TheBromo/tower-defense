@@ -37,7 +37,7 @@ public class Tower extends StaticGameObject {
     }
 
     public Enemy shootAtEnemies(List<Enemy> enemies){
-        enemies.removeIf(enemy -> inRange(enemy));
+        enemies.removeIf(enemy -> !inRange(enemy));
         
         Random rand = new Random();
         var target = enemies.get(rand.nextInt(enemies.size()));
