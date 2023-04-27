@@ -4,6 +4,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -37,10 +38,11 @@ public class Tower extends StaticGameObject {
     }
 
     public Enemy shootAtEnemies(List<Enemy> enemies){
-        enemies.removeIf(enemy -> !inRange(enemy));
+        var possibleTargets= new ArrayList<>(enemies);
+        possibleTargets.removeIf(enemy -> !inRange(enemy));
         
         Random rand = new Random();
-        var target = enemies.get(rand.nextInt(enemies.size()));
+        var target = possibleTargets.get(rand.nextInt(possibleTargets.size()));
         
         arrows.add(new Arrow(target, this.position));
 
