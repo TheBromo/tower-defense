@@ -1,8 +1,5 @@
 package ch.zhaw.team5;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class GameDecorator implements IsObservable {
     /*
      * 

@@ -10,7 +10,7 @@ import javafx.scene.control.ProgressBar;
 public class GameViewController {
 
     private PlayerDecorator playerDecorator;
-    private GameDecorator gameDecorator;
+    // private GameDecorator gameDecorator;
 
     @FXML
     private Label moneyLabel;
