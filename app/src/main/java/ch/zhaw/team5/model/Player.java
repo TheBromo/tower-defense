@@ -1,19 +1,20 @@
 package ch.zhaw.team5.model;
 
 import java.util.ArrayList; // import the ArrayList class
+import java.util.List;
 
 public class Player {
 
     public int health;
     private int money;
 
-    ArrayList<Tower> towerList = new ArrayList<Tower>();
+    List<Tower> towerList = new ArrayList<Tower>();
 
     public Player(int health, int money, List<Tower> towers) {
 
         this.health = health;
         this.money = money;
-        this.towers = towers;
+        this.towerList = towers;
 
     }
 
@@ -33,7 +34,7 @@ public class Player {
         return money;
     }
 
-    public Tower getTowers() {
+    public List<Tower> getTowers() {
         return this.towerList;
     }
 
