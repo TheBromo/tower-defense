@@ -1,7 +1,10 @@
 package ch.zhaw.team5;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import ch.zhaw.team5.model.Player;
+import ch.zhaw.team5.model.Tower;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,8 +20,11 @@ public class StartScreenController {
     public Button quitButton;
 
     public void onStartButtonClicked(ActionEvent event) throws IOException {
-        FXMLLoader resultWindowLoader = new FXMLLoader(getClass().getResource("GameView.fxml"));
-        Parent root = (Parent) resultWindowLoader.load();
+        FXMLLoader gameViewLoader = new FXMLLoader(getClass().getResource("GameView.fxml"));
+        Parent root = (Parent) gameViewLoader.load();
+
+        GameViewController gameViewController = gameViewLoader.getController();
+		gameViewController.setPlayerModel(new Player(100, 50, new ArrayList<Tower>()));
 
         Stage gameStage = new Stage();
         gameStage.setTitle("Tower Defense");

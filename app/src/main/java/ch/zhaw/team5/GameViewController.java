@@ -1,5 +1,6 @@
 package ch.zhaw.team5;
 
+import ch.zhaw.team5.model.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -7,6 +8,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 
 public class GameViewController {
+
+    private PlayerDecorator playerDecorator;
+    private GameDecorator gameDecorator;
 
     @FXML
     private Label moneyLabel;
@@ -18,7 +22,6 @@ public class GameViewController {
 
     @FXML
     private Button buttonTower1;
-
     @FXML
     private Button buttonTower2;
     @FXML
@@ -29,6 +32,27 @@ public class GameViewController {
     private Button buttonTower5;
     @FXML
     private Button buttonTower6;
+
+    public void setPlayerModel(Player player) {
+        playerDecorator = new PlayerDecorator(player);
+        playerDecorator.addListener(new IsObserver() {
+            @Override
+            public void update() {
+                moneyLabel.setText(String.valueOf(player.getMoney()) + "$");
+            }
+        });
+        playerDecorator.addListener(new IsObserver() {
+            @Override
+            public void update() {
+                healthBar.setProgress(Double.valueOf(player.getHealth()));
+            }
+        });
+        playerDecorator.initialize();
+    }
+
+    public void setGameDecorator() {
+        // TODO initialize as soon as game is ready
+    }
 
     public void onBuildTower1(ActionEvent event) {
         buildTower(1);
