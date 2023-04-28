@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -17,14 +18,16 @@ public class StartScreenController {
     public Button quitButton;
 
     public void onStartButtonClicked(ActionEvent event) throws IOException {
-        FXMLLoader resultWindowLoader = FXMLLoader.load(getClass().getResource("GameWindow.fxml"));
-        Parent root1 = (Parent) resultWindowLoader.load();
+        FXMLLoader resultWindowLoader = new FXMLLoader(getClass().getResource("GameView.fxml"));
+        Parent root = (Parent) resultWindowLoader.load();
 
-        GameViewController controller = resultWindowLoader.getController();
-        Stage stage = new Stage();
-        stage.setTitle("Result Window");
-        stage.setScene(new Scene(root1));
-        stage.show();
+        Stage gameStage = new Stage();
+        gameStage.setTitle("Tower Defense");
+        gameStage.setScene(new Scene(root));
+        gameStage.show();
+
+        Stage currentStage = (Stage) quitButton.getScene().getWindow();
+        currentStage.close();
     }
 
     public void onQuitButtonClicked(ActionEvent event) {
