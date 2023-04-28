@@ -2,15 +2,9 @@ package ch.zhaw.team5;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class GameViewController {
 
@@ -36,8 +30,6 @@ public class GameViewController {
     @FXML
     private Button buttonTower6;
 
-
-    
     public void onBuildTower1(ActionEvent event) {
         buildTower(1);
         buttonTower1.setDisable(true);
@@ -75,8 +67,7 @@ public class GameViewController {
     }
 
     private void buildTower(int towerIndex) {
-        //TODO game.buildTower(towerIndex);
+        // TODO game.buildTower(towerIndex);
     }
-    
 
 }
