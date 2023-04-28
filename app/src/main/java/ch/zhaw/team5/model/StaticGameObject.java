@@ -13,10 +13,6 @@ public abstract class StaticGameObject implements Renderable {
 
     }
 
-    @Override
-    public void render() {
-
-    }
 
     public Point2D getPosition() {
         return position;
