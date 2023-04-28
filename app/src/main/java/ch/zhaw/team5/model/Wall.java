@@ -1,28 +1,31 @@
 package ch.zhaw.team5.model;
 
 public class Wall {
-    int healthOfWall;
-    int initialHealth = 100;
-    boolean hasWallPositiveHealth;
+    private int health;
+    private final int reductionOfHealth=5;
+    private final int increaseOfHealth=5;
+
+    private final int initialHealth = 100;
+    private boolean hasWallPositiveHealth;
 
     public Wall() {
-        healthOfWall = initialHealth;
+        health = initialHealth;
         hasWallPositiveHealth = true;
     }
 
     public int reduceHealthOfWall() {
-        healthOfWall -= 5;
-        return healthOfWall;
+        health -= reductionOfHealth;
+        return health;
     }
 
 
     public int recoverHealthOfWall() {
-        healthOfWall += 5;
-        return healthOfWall;
+        health += increaseOfHealth;
+        return health;
     }
 
     public boolean checkHealthOfWall() {
-        if (healthOfWall < 0) {
+        if (health < 0) {
             hasWallPositiveHealth = false;
         } else {
             hasWallPositiveHealth = true;
