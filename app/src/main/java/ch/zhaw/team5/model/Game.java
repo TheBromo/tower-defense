@@ -2,7 +2,7 @@ package ch.zhaw.team5.model;
 
 import java.util.ArrayList;
 
-public class Game implements Renderable {
+/*public class Game implements Renderable {
     private List<TowerPosition> towerPositions = new ArrayList<>();
     private List<Enemies> enemies = new ArrayList<>();
     private List<Phase> phases = new ArrayList<>();
@@ -21,4 +21,4 @@ public class Game implements Renderable {
     @Override
     public void render() {
     }
-}
+}*/
