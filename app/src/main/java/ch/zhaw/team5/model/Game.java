@@ -1,33 +1,24 @@
 package ch.zhaw.team5.model;
 
-public class Game implements Renderable{
+import java.util.ArrayList;
 
-    //TODO: Sind dies alle Objekte?
-    private Tower tower;
+public class Game implements Renderable {
+    private List<TowerPosition> towerPositions = new ArrayList<>();
+    private List<Enemies> enemies = new ArrayList<>();
+    private List<Phase> phases = new ArrayList<>();
+    private Player player;
     private Wall wall;
     private Phase phase;
-    private Path path;
-    private Enemy enemy;
-    private Money money;
-    private Player player;
-    private Arrow arrow;
+    private PhaseCurrent phaseCurrent;
 
-    public Game(Tower tower, Wall wall, Phase phase, Path path, Enemy enemy, Money money, Player player, Arrow arrow) {
-        this.tower = tower;
+    public Game(Player player, Wall wall, Phase phase, PhaseCurrent phaseCurrent) {
+        this.player = player;
         this.wall = wall;
         this.phase = phase;
-        this.path = path;
-        this.enemy = enemy;
-        this.money = money;
-        this.player = player;
-        this.arrow = arrow;
+        this.phaseCurrent = phaseCurrent;
     }
 
-    //TODO: Wie wird render implementiert?
     @Override
     public void render() {
-
-
-
     }
 }
