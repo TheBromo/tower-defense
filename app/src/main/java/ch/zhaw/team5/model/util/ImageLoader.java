@@ -1,4 +1,4 @@
-package ch.zhaw.team5.model;
+package ch.zhaw.team5.model.util;
 
 import java.io.IOException;
 
@@ -18,7 +18,7 @@ public class ImageLoader {
         return instance;
     }
 
-    public Image name(String name) {
+    public Image getByName(String name) {
         var url = ClassLoader.getSystemClassLoader().getResource("images/" + name + ".PNG");
         try {
             return new Image(url.openStream());

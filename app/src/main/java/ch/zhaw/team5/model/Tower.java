@@ -25,6 +25,7 @@ public class Tower extends StaticGameObject {
 
     @Override
     public void render() {
+
         arrows.removeIf(arrow -> arrow.hasHitTarget());
 
         //TODO call render on each arrow 
@@ -48,4 +49,5 @@ public class Tower extends StaticGameObject {
 
         return target;
     }
+
 }
