@@ -24,6 +24,7 @@ public class StartScreenController {
         Stage gameStage = new Stage();
         gameStage.setTitle("Tower Defense");
         gameStage.setScene(new Scene(root));
+        gameStage.setResizable(false);
         gameStage.show();
 
         Stage currentStage = (Stage) quitButton.getScene().getWindow();
