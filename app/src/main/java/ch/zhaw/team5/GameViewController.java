@@ -35,18 +35,8 @@ public class GameViewController {
 
     public void setPlayerModel(Player player) {
         playerDecorator = new PlayerDecorator(player);
-        playerDecorator.addListener(new IsObserver() {
-            @Override
-            public void update() {
-                moneyLabel.setText(String.valueOf(player.getMoney()) + "$");
-            }
-        });
-        playerDecorator.addListener(new IsObserver() {
-            @Override
-            public void update() {
-                healthBar.setProgress(Double.valueOf(player.getHealth()));
-            }
-        });
+        playerDecorator.addListener(() -> moneyLabel.setText(player.getMoney() + "$"));
+        playerDecorator.addListener(() -> healthBar.setProgress(Double.valueOf(player.getHealth())));
         playerDecorator.initialize();
     }
 
