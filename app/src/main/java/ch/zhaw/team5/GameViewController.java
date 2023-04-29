@@ -45,44 +45,20 @@ public class GameViewController {
         gameState.setMoney(player.getMoney());
     }
 
-    public void onBuildTower1(ActionEvent event) {
-        buildTower(1);
-        buttonTower1.setDisable(true);
-        buttonTower1.setText("Bought");
-    }
+    public void onBuildTower(ActionEvent event) {
+        Button pressedButton = (Button) event.getSource();
 
-    public void onBuildTower2(ActionEvent event) {
-        buildTower(2);
-        buttonTower2.setDisable(true);
-        buttonTower2.setText("Bought");
-    }
+        switch (pressedButton.getId()) {
+            case "buttonTower1" -> System.out.println("here will tower 1 be built"); // TODO game.buildTower(1);
+            case "buttonTower2" -> System.out.println("here will tower 2 be built"); // TODO game.buildTower(2);
+            case "buttonTower3" -> System.out.println("here will tower 3 be built"); // TODO game.buildTower(3);
+            case "buttonTower4" -> System.out.println("here will tower 4 be built"); // TODO game.buildTower(4);
+            case "buttonTower5" -> System.out.println("here will tower 5 be built"); // TODO game.buildTower(5);
+            case "buttonTower6" -> System.out.println("here will tower 6 be built"); // TODO game.buildTower(6);
+        }
 
-    public void onBuildTower3(ActionEvent event) {
-        buildTower(3);
-        buttonTower3.setDisable(true);
-        buttonTower3.setText("Bought");
-    }
-
-    public void onBuildTower4(ActionEvent event) {
-        buildTower(4);
-        buttonTower4.setDisable(true);
-        buttonTower4.setText("Bought");
-    }
-
-    public void onBuildTower5(ActionEvent event) {
-        buildTower(5);
-        buttonTower5.setDisable(true);
-        buttonTower5.setText("Bought");
-    }
-
-    public void onBuildTower6(ActionEvent event) {
-        buildTower(6);
-        buttonTower6.setDisable(true);
-        buttonTower6.setText("Bought");
-    }
-
-    private void buildTower(int towerIndex) {
-        // TODO game.buildTower(towerIndex);
+        pressedButton.setDisable(true);
+        pressedButton.setText("Bought");
     }
 
 }
