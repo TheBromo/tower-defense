@@ -9,7 +9,7 @@ import javafx.scene.control.ProgressBar;
 
 public class GameViewController {
 
-    private PlayerDecorator playerDecorator;
+    private GameState playerDecorator;
     // private GameDecorator gameDecorator;
 
     @FXML
@@ -33,15 +33,16 @@ public class GameViewController {
     @FXML
     private Button buttonTower6;
 
-    public void setPlayerModel(Player player) {
-        playerDecorator = new PlayerDecorator(player);
-        playerDecorator.addListener(() -> moneyLabel.setText(player.getMoney() + "$"));
-        playerDecorator.addListener(() -> healthBar.setProgress(Double.valueOf(player.getHealth())));
-        playerDecorator.initialize();
-    }
-
-    public void setGameDecorator() {
-        // TODO initialize as soon as game is ready
+    public void initializeListeners(Player player) {
+        GameState gameState = new GameState(player);
+        gameState.moneyProperty().addListener((observable, oldValue, newValue) -> {
+            moneyLabel.setText(newValue + "$");
+        });
+        gameState.healthProperty().addListener((observable, oldValue, newValue) -> {
+            healthBar.setProgress((double) newValue);
+        });
+        gameState.setHealth(player.getHealth());
+        gameState.setMoney(player.getMoney());
     }
 
     public void onBuildTower1(ActionEvent event) {

@@ -24,7 +24,7 @@ public class StartScreenController {
         Parent root = (Parent) gameViewLoader.load();
 
         GameViewController gameViewController = gameViewLoader.getController();
-		gameViewController.setPlayerModel(new Player(100, 50, new ArrayList<Tower>()));
+        gameViewController.initializeListeners(new Player(100, 50, new ArrayList<Tower>()));
 
         Stage gameStage = new Stage();
         gameStage.setTitle("Tower Defense");
