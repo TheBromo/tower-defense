@@ -1,10 +1,11 @@
 package ch.zhaw.team5.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
-/*public class Game implements Renderable {
+public class Game implements Renderable {
     private List<TowerPosition> towerPositions = new ArrayList<>();
-    private List<Enemies> enemies = new ArrayList<>();
+    private List<Enemy> enemies = new ArrayList<>();
     private List<Phase> phases = new ArrayList<>();
     private Player player;
     private Wall wall;
@@ -18,7 +19,24 @@ import java.util.ArrayList;
         this.phaseCurrent = phaseCurrent;
     }
 
+    public void loop() {
+
+        boolean running = true;
+
+        while (running) {
+            render();
+
+            //TODO game logic
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
     @Override
     public void render() {
     }
-}*/
+}
