@@ -1,8 +1,17 @@
 package ch.zhaw.team5;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
+import ch.zhaw.team5.model.Player;
+import ch.zhaw.team5.model.Tower;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 public class StartScreenController {
     @FXML
@@ -10,8 +19,21 @@ public class StartScreenController {
     @FXML
     public Button quitButton;
 
-    public void onStartButtonClicked(ActionEvent event) {
-        // TODO: Hier kommt dann Logik von Micha
+    public void onStartButtonClicked(ActionEvent event) throws IOException {
+        FXMLLoader gameViewLoader = new FXMLLoader(getClass().getResource("GameView.fxml"));
+        Parent root = (Parent) gameViewLoader.load();
+
+        GameViewController gameViewController = gameViewLoader.getController();
+        gameViewController.initializeListeners(new Player(100, 50, new ArrayList<Tower>()));
+
+        Stage gameStage = new Stage();
+        gameStage.setTitle("Tower Defense");
+        gameStage.setScene(new Scene(root));
+        gameStage.setResizable(false);
+        gameStage.show();
+
+        Stage currentStage = (Stage) quitButton.getScene().getWindow();
+        currentStage.close();
     }
 
     public void onQuitButtonClicked(ActionEvent event) {
