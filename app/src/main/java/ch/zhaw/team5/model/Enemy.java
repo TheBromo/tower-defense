@@ -17,7 +17,6 @@ public class Enemy implements Renderable{
 
     @Override
     public void render(Canvas canvas) {
-        System.out.println("rendering enemy");
     }
 
 }

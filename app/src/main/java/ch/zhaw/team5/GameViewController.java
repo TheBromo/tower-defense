@@ -61,7 +61,6 @@ public class GameViewController {
         gameState.setMoney(player.getMoney());
         gameState.renderNeededProperty().addListener((observable, oldValue, newValue) -> {
             Platform.runLater(() -> {
-                System.out.println("platformrender render");
                 game.render(canvas);
                 gameState.setRenderNeeded(false);
             });

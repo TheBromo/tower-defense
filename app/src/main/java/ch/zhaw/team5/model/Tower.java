@@ -27,7 +27,7 @@ public class Tower extends StaticGameObject {
 
     @Override
     public void render(Canvas canvas) {
-        System.out.println("rendering tower");
+        //TODO maybe remove this and move it to an update function
         arrows.removeIf(arrow -> arrow.hasHitTarget());
 
         //TODO call render on each arrow 

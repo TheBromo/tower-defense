@@ -69,7 +69,6 @@ public class Game implements Renderable {
                 gameState.setRenderNeeded(true);
 
             }
-            System.out.println("calling rendering");
         }
     }
 
