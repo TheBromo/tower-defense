@@ -2,12 +2,15 @@ package ch.zhaw.team5.model;
 
 import java.util.List;
 
+import org.checkerframework.checker.units.qual.h;
+
 import ch.zhaw.team5.model.util.ImageLoader;
 import ch.zhaw.team5.model.util.RandomUtil;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 public class TowerPosition extends StaticGameObject {
 
@@ -18,16 +21,21 @@ public class TowerPosition extends StaticGameObject {
     public TowerPosition(Point2D position, int number) {
         super(position, ImageLoader.getInstance().getByName("Hole"));
         positionNumber = number;
+        height = 100;
+        width = 100;
     }
 
     @Override
     public void render(Canvas canvas) {
-        System.out.println("rendering tower position");
+        //TODO make the position depend on path 
+        var g2d = canvas.getGraphicsContext2D();
         if (hasTower()) {
             tower.render(canvas);
+        } else {
+            g2d.drawImage(sprite,position.getX(),position.getY(), height,width);
+            g2d.setStroke(Color.GRAY);
+            g2d.strokeText(""+positionNumber,position.getX()  ,position.getY()+ height /2);
         }
-
-        //TODO implement render method
     }
 
     public boolean BuildTower() {

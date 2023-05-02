@@ -8,7 +8,7 @@ import javafx.scene.paint.Color;
 
 public abstract class StaticGameObject implements Renderable {
     protected Point2D position;
-    private Image sprite;
+    protected Image sprite;
     protected int width, height;
 
     public StaticGameObject(Point2D position, Image sprite) {

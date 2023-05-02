@@ -50,7 +50,7 @@ public class GameViewController {
 
     public void initializeListeners(Player player, Stage parent) {
         GameState gameState = new GameState(player);
-        this.game = new Game(player, gameState, new Wall(new Point2D(canvas.getWidth()-100, 0)));
+        this.game = new Game(player, gameState,canvas);
         gameState.moneyProperty().addListener((observable, oldValue, newValue) -> {
             moneyLabel.setText(newValue + "$");
         });
