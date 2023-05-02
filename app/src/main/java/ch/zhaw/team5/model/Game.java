@@ -1,10 +1,11 @@
 package ch.zhaw.team5.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
-/*public class Game implements Renderable {
+public class Game implements Renderable {
     private List<TowerPosition> towerPositions = new ArrayList<>();
-    private List<Enemies> enemies = new ArrayList<>();
+    private List<Enemy> enemies = new ArrayList<>();
     private List<Phase> phases = new ArrayList<>();
     private Player player;
     private Wall wall;
@@ -18,7 +19,30 @@ import java.util.ArrayList;
         this.phaseCurrent = phaseCurrent;
     }
 
+    public void loop() {
+        boolean running = true;
+
+        double previous = System.nanoTime();
+        double lag = 0.0;
+        while (true) {
+            double current = System.nanoTime();
+            double elapsed = current - previous;
+            previous = current;
+            lag += elapsed;
+
+            // TODO processInput();
+            double MS_PER_UPDATE = 0.0; // TODO question: idk how we determine this. Found nothing online.
+
+            while (lag >= MS_PER_UPDATE) {
+                // TODO update();
+                lag -= MS_PER_UPDATE;
+            }
+
+            render();
+        }
+    }
+
     @Override
     public void render() {
     }
-}*/
+}
