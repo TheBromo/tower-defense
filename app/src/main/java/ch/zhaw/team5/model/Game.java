@@ -20,20 +20,26 @@ public class Game implements Renderable {
     }
 
     public void loop() {
-
         boolean running = true;
 
-        while (running) {
-            render();
+        double previous = System.nanoTime();
+        double lag = 0.0;
+        while (true) {
+            double current = System.nanoTime();
+            double elapsed = current - previous;
+            previous = current;
+            lag += elapsed;
 
-            //TODO game logic
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            // TODO processInput();
+            double MS_PER_UPDATE = 0.0; // TODO question: idk how we determine this. Found nothing online.
+
+            while (lag >= MS_PER_UPDATE) {
+                // TODO update();
+                lag -= MS_PER_UPDATE;
             }
-        }
 
+            render();
+        }
     }
 
     @Override
