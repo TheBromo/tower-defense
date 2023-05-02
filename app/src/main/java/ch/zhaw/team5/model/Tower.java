@@ -1,6 +1,8 @@
 package ch.zhaw.team5.model;
 
 import javafx.geometry.Point2D;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
@@ -24,8 +26,8 @@ public class Tower extends StaticGameObject {
     }
 
     @Override
-    public void render() {
-
+    public void render(Canvas canvas) {
+        System.out.println("rendering tower");
         arrows.removeIf(arrow -> arrow.hasHitTarget());
 
         //TODO call render on each arrow 

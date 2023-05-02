@@ -5,6 +5,8 @@ import java.util.List;
 import ch.zhaw.team5.model.util.ImageLoader;
 import ch.zhaw.team5.model.util.RandomUtil;
 import javafx.geometry.Point2D;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class TowerPosition extends StaticGameObject {
@@ -19,9 +21,10 @@ public class TowerPosition extends StaticGameObject {
     }
 
     @Override
-    public void render() {
+    public void render(Canvas canvas) {
+        System.out.println("rendering tower position");
         if (hasTower()) {
-            tower.render();
+            tower.render(canvas);
         }
 
         //TODO implement render method

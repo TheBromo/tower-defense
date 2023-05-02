@@ -1,19 +1,34 @@
 package ch.zhaw.team5;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import ch.zhaw.team5.model.Game;
 import ch.zhaw.team5.model.Player;
+import ch.zhaw.team5.model.Wall;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Point2D;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class GameViewController {
 
     private GameState playerDecorator;
+    private Game game;
+    private ExecutorService gameThread;
     // private GameDecorator gameDecorator;
 
     @FXML
     private Label moneyLabel;
+    @FXML
+    private Canvas canvas;
 
     @FXML
     private ProgressBar healthBar;
@@ -33,8 +48,9 @@ public class GameViewController {
     @FXML
     private Button buttonTower6;
 
-    public void initializeListeners(Player player) {
+    public void initializeListeners(Player player, Stage parent) {
         GameState gameState = new GameState(player);
+        this.game = new Game(player, gameState, new Wall(new Point2D(canvas.getWidth()-100, 0)));
         gameState.moneyProperty().addListener((observable, oldValue, newValue) -> {
             moneyLabel.setText(newValue + "$");
         });
@@ -43,6 +59,26 @@ public class GameViewController {
         });
         gameState.setHealth(player.getHealth());
         gameState.setMoney(player.getMoney());
+        gameState.renderNeededProperty().addListener((observable, oldValue, newValue) -> {
+            Platform.runLater(() -> {
+                System.out.println("platformrender render");
+                game.render(canvas);
+                gameState.setRenderNeeded(false);
+            });
+        });
+
+        gameThread = Executors.newCachedThreadPool();
+        gameThread.submit(() -> game.loop());
+
+        parent.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent e) {
+                gameThread.shutdown();
+                Platform.exit();
+                System.exit(0);
+            }
+        });
+
     }
 
     public void onBuildTower(ActionEvent event) {
