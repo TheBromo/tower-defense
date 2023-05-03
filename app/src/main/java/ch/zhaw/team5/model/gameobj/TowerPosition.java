@@ -1,38 +1,47 @@
-package ch.zhaw.team5.model;
+package ch.zhaw.team5.model.gameobj;
 
 import java.util.List;
 
+
+import ch.zhaw.team5.model.gameobj.definitions.StaticGameObject;
 import ch.zhaw.team5.model.util.ImageLoader;
 import ch.zhaw.team5.model.util.RandomUtil;
 import javafx.geometry.Point2D;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 public class TowerPosition extends StaticGameObject {
 
     private Tower tower;
+    private boolean built;
     private int positionNumber;
     private final List<String> towerImageNames = List.of("Tower1", "Tower2", "Tower3");
 
     public TowerPosition(Point2D position, int number) {
         super(position, ImageLoader.getInstance().getByName("Hole"));
+        tower = new Tower(position, getRandomSprite());
         positionNumber = number;
+        height = 100;
+        width = 100;
+        built = false;
     }
 
     @Override
-    public void render() {
+    public void render(Canvas canvas) {
+        // TODO make the position depend on path
+        var g2d = canvas.getGraphicsContext2D();
         if (hasTower()) {
-            tower.render();
+            tower.render(canvas);
+        } else {
+            g2d.drawImage(sprite, position.getX(), position.getY(), height, width);
+            g2d.setStroke(Color.GRAY);
+            g2d.strokeText("" + positionNumber, position.getX(), position.getY() + height / 2);
         }
-
-        //TODO implement render method
     }
 
-    public boolean BuildTower() {
-        if (!hasTower()) {
-            tower = new Tower(position, getRandomSprite());
-            return true;
-        }
-        return false;
+    public void BuildTower() {
+        built = true;
     }
 
     private Image getRandomSprite() {
@@ -46,7 +55,7 @@ public class TowerPosition extends StaticGameObject {
     }
 
     public boolean hasTower() {
-        return tower != null;
+        return built;
     }
 
     public int getNumber() {

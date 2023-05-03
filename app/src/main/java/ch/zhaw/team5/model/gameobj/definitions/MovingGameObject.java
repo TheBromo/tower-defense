@@ -1,9 +1,9 @@
-package ch.zhaw.team5.model;
+package ch.zhaw.team5.model.gameobj.definitions;
 
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 
-public abstract class MovingGameObject extends StaticGameObject{
+public abstract class MovingGameObject extends StaticGameObject {
 
     private Point2D velocity;
     private Point2D rotation;

@@ -1,6 +1,8 @@
 package ch.zhaw.team5.model;
 
-import java.util.ArrayList; // import the ArrayList class
+import ch.zhaw.team5.model.gameobj.Tower;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Player {

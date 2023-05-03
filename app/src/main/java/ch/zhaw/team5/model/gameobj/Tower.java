@@ -1,10 +1,11 @@
-package ch.zhaw.team5.model;
+package ch.zhaw.team5.model.gameobj;
 
+import ch.zhaw.team5.model.gameobj.definitions.StaticGameObject;
 import javafx.geometry.Point2D;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -19,18 +20,20 @@ public class Tower extends StaticGameObject {
     public Tower(Point2D position, Image sprite) {
         super(position, sprite);
         arrows = new ArrayList<>();
-
+        height = 100;
+        width = 100;
         //TODO load texture for tower
     }
 
     @Override
-    public void render() {
-
+    public void render(Canvas canvas) {
+        //TODO maybe remove this and move it to an update function
         arrows.removeIf(arrow -> arrow.hasHitTarget());
+
+        canvas.getGraphicsContext2D().drawImage(sprite,position.getX(),position.getY(),height,width);
 
         //TODO call render on each arrow 
 
-        //TODO call render on this tower
 
     }
 

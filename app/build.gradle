@@ -35,7 +35,7 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = 'ch.zhaw.team5.App'
+    mainClass = 'ch.zhaw.team5.controller.App'
 }
 
 javafx {
