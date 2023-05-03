@@ -71,6 +71,8 @@ public class GameViewController {
     }
 
     private ChangeListener<Boolean> render() {
+        // Sephamore is used so the game thread only runs after rendering (used for not
+        // overusing the game thread)
         return (observable, oldValue, renderNeeded) -> {
             Semaphore semaphore = new Semaphore(0);
             Platform.runLater(() -> {
