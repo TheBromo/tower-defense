@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/19"
-    xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.zhaw.team5.GameViewController">
+    xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.zhaw.team5.controller.GameViewController">
     <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="688.0" prefWidth="999.0"
         xmlns="http://javafx.com/javafx/19">
         <children>

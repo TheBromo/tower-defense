@@ -1,13 +1,14 @@
-package ch.zhaw.team5.model;
+package ch.zhaw.team5.model.gameobj;
 
+import ch.zhaw.team5.model.gameobj.definitions.StaticGameObject;
 import ch.zhaw.team5.model.util.ImageLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class Wall extends StaticGameObject {
-    private Image wallTop, wallBottom;
+    private final Image wallTop;
+    private final Image wallBottom;
 
     public Wall(Point2D position) {
         super(position, null);

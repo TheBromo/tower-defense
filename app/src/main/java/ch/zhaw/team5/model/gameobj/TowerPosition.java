@@ -1,8 +1,9 @@
-package ch.zhaw.team5.model;
+package ch.zhaw.team5.model.gameobj;
 
 import java.util.List;
 
 
+import ch.zhaw.team5.model.gameobj.definitions.StaticGameObject;
 import ch.zhaw.team5.model.util.ImageLoader;
 import ch.zhaw.team5.model.util.RandomUtil;
 import javafx.geometry.Point2D;

@@ -1,5 +1,7 @@
 package ch.zhaw.team5.model;
 
+import ch.zhaw.team5.model.gameobj.Tower;
+
 import java.util.ArrayList;
 import java.util.List;
 

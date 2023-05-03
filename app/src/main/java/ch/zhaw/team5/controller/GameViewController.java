@@ -1,23 +1,21 @@
-package ch.zhaw.team5;
+package ch.zhaw.team5.controller;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 
+import ch.zhaw.team5.GameState;
 import ch.zhaw.team5.model.Game;
 import ch.zhaw.team5.model.Player;
-import ch.zhaw.team5.model.Wall;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 public class GameViewController {
 
@@ -52,6 +50,15 @@ public class GameViewController {
     public void initializeListeners(Player player, Stage parent) {
         GameState gameState = new GameState(player);
         this.game = new Game(player, gameState, canvas);
+        initGameState(player, gameState);
+
+        gameThread = Executors.newCachedThreadPool();
+        gameThread.submit(() -> game.loop());
+
+        setOnClose(parent);
+    }
+
+    private void initGameState(Player player, GameState gameState) {
         gameState.moneyProperty().addListener((observable, oldValue, newValue) -> {
             moneyLabel.setText(newValue + "$");
         });
@@ -60,10 +67,14 @@ public class GameViewController {
         });
         gameState.setHealth(player.getHealth());
         gameState.setMoney(player.getMoney());
-        gameState.renderNeededProperty().addListener((observable, oldValue, newValue) -> {
+        gameState.renderNeededProperty().addListener(render());
+    }
+
+    private ChangeListener<Boolean> render() {
+        return (observable, oldValue, renderNeeded) -> {
             Semaphore semaphore = new Semaphore(0);
             Platform.runLater(() -> {
-                if (newValue) {
+                if (renderNeeded) {
                     game.render(canvas);
                 }
                 semaphore.release();
@@ -73,20 +84,15 @@ public class GameViewController {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        };
+    }
+
+    private void setOnClose(Stage parent) {
+        parent.setOnCloseRequest(event -> {
+            gameThread.shutdown();
+            Platform.exit();
+            System.exit(0);
         });
-
-        gameThread = Executors.newCachedThreadPool();
-        gameThread.submit(() -> game.loop());
-
-        parent.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent e) {
-                gameThread.shutdown();
-                Platform.exit();
-                System.exit(0);
-            }
-        });
-
     }
 
     public void onBuildTower(ActionEvent event) {
@@ -99,10 +105,10 @@ public class GameViewController {
             case "buttonTower4" -> game.buildTower(4);
             case "buttonTower5" -> game.buildTower(5);
             case "buttonTower6" -> game.buildTower(6);
+            default -> System.err.println("unknown action");
         }
 
         pressedButton.setDisable(true);
         pressedButton.setText("Bought");
     }
-
 }

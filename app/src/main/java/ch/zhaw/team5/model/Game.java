@@ -5,6 +5,12 @@ import java.util.List;
 
 
 import ch.zhaw.team5.GameState;
+import ch.zhaw.team5.model.gameobj.Enemy;
+import ch.zhaw.team5.model.gameobj.definitions.Renderable;
+import ch.zhaw.team5.model.gameobj.TowerPosition;
+import ch.zhaw.team5.model.gameobj.Wall;
+import ch.zhaw.team5.model.phases.Phase;
+import ch.zhaw.team5.model.phases.PhaseCurrent;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
@@ -57,7 +63,6 @@ public class Game implements Renderable {
             gameState.setRenderNeeded(false);
             double current = System.currentTimeMillis();
             double elapsed = current - previous;
-            System.out.println("elapsed: " + elapsed);
             previous = current;
             lag += elapsed;
 
@@ -68,7 +73,6 @@ public class Game implements Renderable {
                 lag -= MS_PER_UPDATE;
             }
             gameState.setRenderNeeded(true);
-
         }
     }
 

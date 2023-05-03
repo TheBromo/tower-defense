@@ -1,4 +1,4 @@
-package ch.zhaw.team5.model;
+package ch.zhaw.team5.model.gameobj;
 
 
 import javafx.geometry.Point2D;

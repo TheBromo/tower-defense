@@ -1,5 +1,6 @@
-package ch.zhaw.team5.model;
+package ch.zhaw.team5.model.gameobj;
 
+import ch.zhaw.team5.model.gameobj.definitions.StaticGameObject;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
