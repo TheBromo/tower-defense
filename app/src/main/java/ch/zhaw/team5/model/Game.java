@@ -3,8 +3,6 @@ package ch.zhaw.team5.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.checkerframework.checker.units.qual.g;
-import org.checkerframework.checker.units.qual.h;
 
 import ch.zhaw.team5.GameState;
 import javafx.geometry.Point2D;
@@ -63,14 +61,12 @@ public class Game implements Renderable {
             previous = current;
             lag += elapsed;
 
-            // TODO processInput();
-            double MS_PER_UPDATE = 100.0; // TODO question: idk how we determine this. Found nothing online.
+            double MS_PER_UPDATE = 100.0;
 
             while (lag >= MS_PER_UPDATE) {
                 // TODO update();
                 lag -= MS_PER_UPDATE;
             }
-            // frame limit
             gameState.setRenderNeeded(true);
 
         }

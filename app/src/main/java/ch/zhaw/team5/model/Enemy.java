@@ -18,7 +18,6 @@ public class Enemy extends MovingGameObject {
         width = 50;
         height = 50;
         sprite = ImageLoader.getInstance().getByName(RandomUtil.getInstance().getRandomCollectionElement(enemyImageNames));
-        //TODO Auto-generated constructor stub
     }
 
     public void hit() {

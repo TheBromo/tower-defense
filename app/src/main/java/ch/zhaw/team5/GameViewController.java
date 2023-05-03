@@ -71,7 +71,6 @@ public class GameViewController {
             try {
                 semaphore.acquire();
             } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         });

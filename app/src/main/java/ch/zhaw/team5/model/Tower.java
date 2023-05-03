@@ -2,11 +2,9 @@ package ch.zhaw.team5.model;
 
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -35,7 +33,6 @@ public class Tower extends StaticGameObject {
 
         //TODO call render on each arrow 
 
-        //TODO call render on this tower
 
     }
 
