@@ -21,7 +21,8 @@ public class Tower extends StaticGameObject {
     public Tower(Point2D position, Image sprite) {
         super(position, sprite);
         arrows = new ArrayList<>();
-
+        height = 100;
+        width = 100;
         //TODO load texture for tower
     }
 
@@ -29,6 +30,8 @@ public class Tower extends StaticGameObject {
     public void render(Canvas canvas) {
         //TODO maybe remove this and move it to an update function
         arrows.removeIf(arrow -> arrow.hasHitTarget());
+
+        canvas.getGraphicsContext2D().drawImage(sprite,position.getX(),position.getY(),height,width);
 
         //TODO call render on each arrow 
 

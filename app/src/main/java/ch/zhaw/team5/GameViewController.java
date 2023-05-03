@@ -2,6 +2,7 @@ package ch.zhaw.team5;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
 
 import ch.zhaw.team5.model.Game;
 import ch.zhaw.team5.model.Player;
@@ -50,7 +51,7 @@ public class GameViewController {
 
     public void initializeListeners(Player player, Stage parent) {
         GameState gameState = new GameState(player);
-        this.game = new Game(player, gameState,canvas);
+        this.game = new Game(player, gameState, canvas);
         gameState.moneyProperty().addListener((observable, oldValue, newValue) -> {
             moneyLabel.setText(newValue + "$");
         });
@@ -60,10 +61,19 @@ public class GameViewController {
         gameState.setHealth(player.getHealth());
         gameState.setMoney(player.getMoney());
         gameState.renderNeededProperty().addListener((observable, oldValue, newValue) -> {
+            Semaphore semaphore = new Semaphore(0);
             Platform.runLater(() -> {
-                game.render(canvas);
-                gameState.setRenderNeeded(false);
+                if (newValue) {
+                    game.render(canvas);
+                }
+                semaphore.release();
             });
+            try {
+                semaphore.acquire();
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         });
 
         gameThread = Executors.newCachedThreadPool();
@@ -84,7 +94,7 @@ public class GameViewController {
         Button pressedButton = (Button) event.getSource();
 
         switch (pressedButton.getId()) {
-            case "buttonTower1" -> System.out.println("here will tower 1 be built"); // TODO game.buildTower(1);
+            case "buttonTower1" -> game.buildTower(1);
             case "buttonTower2" -> System.out.println("here will tower 2 be built"); // TODO game.buildTower(2);
             case "buttonTower3" -> System.out.println("here will tower 3 be built"); // TODO game.buildTower(3);
             case "buttonTower4" -> System.out.println("here will tower 4 be built"); // TODO game.buildTower(4);

@@ -52,23 +52,27 @@ public class Game implements Renderable {
     public void loop() {
         boolean running = true;
 
-        double previous = System.nanoTime();
+        double previous = System.currentTimeMillis();
         double lag = 0.0;
+
         while (true) {
-            double current = System.nanoTime();
+            gameState.setRenderNeeded(false);
+            double current = System.currentTimeMillis();
             double elapsed = current - previous;
+            System.out.println("elapsed: " + elapsed);
             previous = current;
             lag += elapsed;
 
             // TODO processInput();
-            double MS_PER_UPDATE = 500.0; // TODO question: idk how we determine this. Found nothing online.
+            double MS_PER_UPDATE = 100.0; // TODO question: idk how we determine this. Found nothing online.
 
             while (lag >= MS_PER_UPDATE) {
                 // TODO update();
                 lag -= MS_PER_UPDATE;
-                gameState.setRenderNeeded(true);
-
             }
+            // frame limit
+            gameState.setRenderNeeded(true);
+
         }
     }
 
@@ -87,5 +91,9 @@ public class Game implements Renderable {
         }
 
         wall.render(canvas);
+    }
+
+    public void buildTower(int i) {
+        towerPositions.get(i - 1).BuildTower();
     }
 }
