@@ -1,6 +1,5 @@
 package ch.zhaw.team5.model.gameobj;
 
-
 import java.util.List;
 
 import ch.zhaw.team5.model.gameobj.definitions.MovingGameObject;
@@ -14,14 +13,20 @@ public class Enemy extends MovingGameObject {
     private final List<String> enemyImageNames = List.of("Enemy1", "Enemy2", "Enemy3", "Enemy4", "Enemy5");
 
     public Enemy(Point2D position) {
-        //TODO update constructor
-        super(position, null, new Point2D(1, 1), null);
+        // TODO update constructor
+        super(position, null);
         width = 50;
         height = 50;
-        sprite = ImageLoader.getInstance().getByName(RandomUtil.getInstance().getRandomCollectionElement(enemyImageNames));
+        sprite = ImageLoader.getInstance()
+                .getByName(RandomUtil.getInstance().getRandomCollectionElement(enemyImageNames));
+        velocity = new Point2D(10, 0);
     }
 
     public void hit() {
+    }
+
+    public void update() {
+        this.position = position.add(velocity);
     }
 
     public Point2D getPosition() {

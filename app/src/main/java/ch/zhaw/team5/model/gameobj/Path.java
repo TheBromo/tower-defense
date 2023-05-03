@@ -13,13 +13,16 @@ import javafx.scene.image.Image;
 public class Path extends StaticGameObject {
     private final List<String> pathImageNames = List.of("Street1", "Street2");
     private final List<Image> sprites;
+    private final int radius;
+    private final Point2D end;
 
     public Path(Point2D start, Point2D end) {
         super(start, null);
         sprites = new ArrayList<>();
         height = 100;
         width = 100;
-
+        radius = height / 2;
+        this.end = end;
         int parts = (int) start.distance(end) / width;
         var imageLoader = ImageLoader.getInstance();
         var randomUtil = RandomUtil.getInstance();
@@ -33,11 +36,20 @@ public class Path extends StaticGameObject {
         int boundryX = 0;
         var g2d = canvas.getGraphicsContext2D();
         for (Image sprite : sprites) {
-            g2d.drawImage(sprite, position.getX() + boundryX, position.getY() - (height / 2), width,height);
+            g2d.drawImage(sprite, position.getX() + boundryX, position.getY() - radius, width, height);
             boundryX += width;
         }
-        renderDebugLines(canvas.getGraphicsContext2D());
-        
     }
 
+    public Point2D getStart() {
+        return position;
+    }
+
+    public Point2D getEnd() {
+        return end;
+    }
+
+    public int getRadius() {
+        return radius;
+    }
 }

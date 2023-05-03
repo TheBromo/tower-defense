@@ -73,10 +73,16 @@ public class Game implements Renderable {
             double MS_PER_UPDATE = 100.0;
 
             while (lag >= MS_PER_UPDATE) {
-                // TODO update();
+                update();
                 lag -= MS_PER_UPDATE;
             }
             gameState.setRenderNeeded(true);
+        }
+    }
+
+    private void update() {
+        for (Enemy enemy : enemies) {
+            enemy.update();
         }
     }
 
@@ -85,7 +91,7 @@ public class Game implements Renderable {
         var g2d = canvas.getGraphicsContext2D();
         g2d.setFill(Color.WHITE);
         g2d.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        
+
         path.render(canvas);
         for (Enemy enemy : enemies) {
             enemy.render(canvas);
