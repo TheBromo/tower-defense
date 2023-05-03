@@ -6,6 +6,7 @@ import java.util.List;
 
 import ch.zhaw.team5.GameState;
 import ch.zhaw.team5.model.gameobj.Enemy;
+import ch.zhaw.team5.model.gameobj.Path;
 import ch.zhaw.team5.model.gameobj.definitions.Renderable;
 import ch.zhaw.team5.model.gameobj.TowerPosition;
 import ch.zhaw.team5.model.gameobj.Wall;
@@ -25,6 +26,7 @@ public class Game implements Renderable {
     private List<Phase> phases = new ArrayList<>();
     private PhaseCurrent phaseCurrent;
     private GameState gameState;
+    private Path path;
 
     public Game(Player player, GameState gameState, Canvas canvas) {
         this.player = player;
@@ -32,6 +34,8 @@ public class Game implements Renderable {
         this.phase = new PhaseCurrent();
         this.phaseCurrent = new PhaseCurrent();
         this.gameState = gameState;
+        path = new Path(new Point2D(0, canvas.getHeight()/2), new Point2D(canvas.getWidth(), canvas.getHeight()/2));
+
         initTestEnv();
         initTowers(canvas.getWidth(), canvas.getHeight());
     }
@@ -81,7 +85,8 @@ public class Game implements Renderable {
         var g2d = canvas.getGraphicsContext2D();
         g2d.setFill(Color.WHITE);
         g2d.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-
+        
+        path.render(canvas);
         for (Enemy enemy : enemies) {
             enemy.render(canvas);
         }
