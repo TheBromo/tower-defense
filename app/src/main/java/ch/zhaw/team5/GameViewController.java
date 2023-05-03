@@ -95,11 +95,11 @@ public class GameViewController {
 
         switch (pressedButton.getId()) {
             case "buttonTower1" -> game.buildTower(1);
-            case "buttonTower2" -> System.out.println("here will tower 2 be built"); // TODO game.buildTower(2);
-            case "buttonTower3" -> System.out.println("here will tower 3 be built"); // TODO game.buildTower(3);
-            case "buttonTower4" -> System.out.println("here will tower 4 be built"); // TODO game.buildTower(4);
-            case "buttonTower5" -> System.out.println("here will tower 5 be built"); // TODO game.buildTower(5);
-            case "buttonTower6" -> System.out.println("here will tower 6 be built"); // TODO game.buildTower(6);
+            case "buttonTower2" -> game.buildTower(2);
+            case "buttonTower3" -> game.buildTower(3);
+            case "buttonTower4" -> game.buildTower(4);
+            case "buttonTower5" -> game.buildTower(5);
+            case "buttonTower6" -> game.buildTower(6);
         }
 
         pressedButton.setDisable(true);
