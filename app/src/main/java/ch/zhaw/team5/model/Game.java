@@ -56,7 +56,7 @@ public class Game implements Renderable {
         int radius = path.getRadius();
         int y = (int) path.getStart().getY();
         var startY = RandomUtil.getInstance().getRandomInRange(y - radius, y + radius);
-        var startX = RandomUtil.getInstance().getRandomInRange(-10, 5);
+        var startX = RandomUtil.getInstance().getRandomInRange(-200, 5);
         enemies.add(new Enemy(new Point2D(startX, startY), path));
     }
 
@@ -85,7 +85,7 @@ public class Game implements Renderable {
 
     private void update() {
         for (Enemy enemy : enemies) {
-            enemy.update();
+            enemy.update(enemies);
         }
         if (enemies.size() < wantedEnemies) {
             spawnEnemy();

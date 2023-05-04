@@ -1,5 +1,8 @@
 package ch.zhaw.team5.model.gameobj.definitions;
 
+import java.util.List;
+
+import ch.zhaw.team5.model.gameobj.Enemy;
 import ch.zhaw.team5.model.gameobj.Path;
 import ch.zhaw.team5.model.util.RandomUtil;
 import javafx.geometry.Point2D;
@@ -59,7 +62,19 @@ public abstract class PathFollowingGameObject extends MovingGameObject {
 
     }
 
-    public void update() {
+    private Point2D getCollisionPoint2d(List<Enemy> enemies) {
+        for (Enemy enemy : enemies) {
+            if (enemy.getPosition().distance(position) <= radius*2) {
+                var vec = position.subtract(enemy.position);
+                System.out.println("reeee");
+                return vec.multiply(0.01);
+            }
+        }
+        return new Point2D(0, 0);
+    }
+
+    public void update(List<Enemy> enemies) {
+        accelleration = accelleration.add(getCollisionPoint2d(enemies));
         velocity = velocity.add(accelleration);
         velocity = limit(velocity, maxSpeed);
         position = position.add(velocity);

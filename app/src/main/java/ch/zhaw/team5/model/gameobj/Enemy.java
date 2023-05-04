@@ -27,9 +27,11 @@ public class Enemy extends PathFollowingGameObject {
     }
 
     @Override
-    public void update() {
+    public void update(List<Enemy> enemies) {
+        var force = followPath(path);
 
-        super.update();
+        applyForce(force);
+        super.update(enemies);
     }
 
     public Point2D getPosition() {
