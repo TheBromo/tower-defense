@@ -66,7 +66,7 @@ public abstract class PathFollowingGameObject extends MovingGameObject {
         for (Enemy enemy : enemies) {
             if (enemy.getPosition().distance(position) <= radius) {
                 var vec = position.subtract(enemy.position);
-                return vec.normalize().multiply(.001);
+                return vec.normalize().multiply(.02);
             }
         }
         return new Point2D(0, 0);

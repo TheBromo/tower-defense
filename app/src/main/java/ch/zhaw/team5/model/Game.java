@@ -27,7 +27,7 @@ public class Game implements Renderable {
     private PhaseCurrent phaseCurrent;
     private GameState gameState;
     private Path path;
-    private int wantedEnemies = 10;
+    private int wantedEnemies = 5;
 
     public Game(Player player, GameState gameState, Canvas canvas) {
         this.player = player;
@@ -47,7 +47,7 @@ public class Game implements Renderable {
         for (int i = 0; i < 6; i++) {
             towerPositions.add(new TowerPosition(new Point2D(distanceW, distanceH), i + 1));
             i++;
-            towerPositions.add(new TowerPosition(new Point2D(distanceW,  3 * distanceH), i + 1));
+            towerPositions.add(new TowerPosition(new Point2D(distanceW, 3 * distanceH), i + 1));
             distanceW += deltaW * 1.5;
         }
     }
@@ -56,7 +56,7 @@ public class Game implements Renderable {
         int radius = path.getRadius();
         int y = (int) path.getStart().getY();
         var startY = RandomUtil.getInstance().getRandomInRange(y - radius, y + radius);
-        var startX = RandomUtil.getInstance().getRandomInRange(-0, 5);
+        var startX = RandomUtil.getInstance().getRandomInRange(-200, 5);
         enemies.add(new Enemy(new Point2D(startX, startY), path));
     }
 
@@ -86,7 +86,12 @@ public class Game implements Renderable {
     private void update() {
         for (Enemy enemy : enemies) {
             enemy.update(enemies);
+            if (enemy.outOfScreen((int) wall.getPosition().getX())) {
+                // TODO add Damage
+            }
         }
+        enemies.removeIf(e -> e.outOfScreen((int) wall.getPosition().getX()));
+        
         if (enemies.size() < wantedEnemies) {
             spawnEnemy();
         }

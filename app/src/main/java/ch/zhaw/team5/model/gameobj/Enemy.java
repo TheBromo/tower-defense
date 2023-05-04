@@ -21,7 +21,7 @@ public class Enemy extends PathFollowingGameObject {
         width = 50;
         height = 50;
         this.path = path;
-        velocity = new Point2D(10, 0);
+        velocity = new Point2D(1, 0);
     }
 
     public void hit() {
@@ -37,6 +37,10 @@ public class Enemy extends PathFollowingGameObject {
 
     public Point2D getPosition() {
         return position;
+    }
+
+    public boolean outOfScreen(int threshhold) {
+        return position.getX() > threshhold;
     }
 
     @Override
