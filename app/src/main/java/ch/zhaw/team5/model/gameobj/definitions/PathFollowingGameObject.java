@@ -8,16 +8,16 @@ public abstract class PathFollowingGameObject extends MovingGameObject {
 
     private int radius;
     private double maxForce;
-    private int maxSpeed;
+    private double maxSpeed;
     private Point2D accelleration;
 
     public PathFollowingGameObject(Point2D position, Image sprite) {
         super(position, sprite);
         this.velocity = new Point2D(0, 0);
         this.accelleration = new Point2D(0, 0);
-        this.maxSpeed = 6;
+        this.maxSpeed = 3;
         this.maxForce = 0.1;
-        this.radius = 16;
+        this.radius = 3;
     }
 
     public Point2D findProjection(Point2D pos, Point2D a, Point2D b) {
@@ -51,21 +51,55 @@ public abstract class PathFollowingGameObject extends MovingGameObject {
 
     public Point2D seek(Point2D target, boolean arrival) {
         var force = target.subtract(position);
-        var desiredSpeed = this.maxSpeed;
+        var desiredSpeed = maxSpeed;
         if (arrival) {
             var slowRadius = 100;
             var distance = force.magnitude();
-            /*
-             * if (distance < slowRadius) {
-             * desiredSpeed = map(distance, 0, slowRadius, 0, this.maxSpeed);
-             * }
-             * }
-             * force.setMag(desiredSpeed);
-             * force.sub(this.vel);
-             * force.limit(this.maxForce);
-             */
+
+            if (distance < slowRadius) {
+                desiredSpeed = map(distance, 0, slowRadius, 0, maxSpeed, false);
+            }
         }
+        force = setMagnitude(force, desiredSpeed);
+        force = force.subtract(velocity);
+        force = limit(force, this.maxForce);
         return force;
+
+    }
+
+    public void update() {
+        velocity = velocity.add(accelleration);
+        velocity = limit(velocity, maxSpeed);
+        position = position.add(velocity);
+        accelleration = new Point2D(0, 0);
+    }
+
+    public void applyForce(Point2D force) {
+        accelleration = accelleration.add(force);
+    }
+
+    public Point2D setMagnitude(Point2D vector, double newMagnitude) {
+        return vector.normalize().multiply(newMagnitude);
+    }
+
+    public Point2D limit(Point2D vector, double max) {
+        if (vector.magnitude() > max) {
+            return setMagnitude(vector, max);
+        } else {
+            return vector;
+        }
+    }
+
+    public double map(double n, double start1, double stop1, double start2, double stop2, boolean withinBounds) {
+        var newval = (n - start1) / (stop1 - start1) * (stop2 - start2) + start2;
+        if (!withinBounds) {
+            return newval;
+        }
+        if (start2 < stop2) {
+            return Math.max(Math.min(newval, start2), stop2);
+        } else {
+            return Math.max(Math.min(newval, stop2), start2);
+        }
     }
 
 }

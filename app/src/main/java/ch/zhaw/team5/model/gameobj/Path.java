@@ -42,11 +42,11 @@ public class Path extends StaticGameObject {
     }
 
     public Point2D getStart() {
-        return position;
+        return position.subtract(0, radius);
     }
 
     public Point2D getEnd() {
-        return end;
+        return end.subtract(0, radius);
     }
 
     public int getRadius() {

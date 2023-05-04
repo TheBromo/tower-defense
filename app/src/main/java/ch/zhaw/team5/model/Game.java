@@ -53,7 +53,7 @@ public class Game implements Renderable {
     }
 
     public void initTestEnv() {
-        enemies.add(new Enemy(new Point2D(100, 100)));
+        enemies.add(new Enemy(new Point2D(100, 100),path));
 
     }
 
