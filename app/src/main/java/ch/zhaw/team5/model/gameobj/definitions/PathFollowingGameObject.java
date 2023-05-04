@@ -55,13 +55,16 @@ public abstract class PathFollowingGameObject extends MovingGameObject {
         if (arrival) {
             var slowRadius = 100;
             var distance = force.magnitude();
-            if (distance < slowRadius) {
-                desiredSpeed = map(distance, 0, slowRadius, 0, this.maxSpeed);
-            }
+            /*
+             * if (distance < slowRadius) {
+             * desiredSpeed = map(distance, 0, slowRadius, 0, this.maxSpeed);
+             * }
+             * }
+             * force.setMag(desiredSpeed);
+             * force.sub(this.vel);
+             * force.limit(this.maxForce);
+             */
         }
-        force.setMag(desiredSpeed);
-        force.sub(this.vel);
-        force.limit(this.maxForce);
         return force;
     }
 

@@ -16,10 +16,10 @@ public class TowerPosition extends StaticGameObject {
     private Tower tower;
     private boolean built;
     private int positionNumber;
-    private final List<String> towerImageNames = List.of("Tower1", "Tower2", "Tower3");
+    private final List<String> towerImageNames = List.of("Tower1_small", "Tower2_small", "Tower3_small");
 
     public TowerPosition(Point2D position, int number) {
-        super(position, ImageLoader.getInstance().getByName("Hole"));
+        super(position, ImageLoader.getInstance().getByName("Hole_small"));
         tower = new Tower(position, getRandomSprite());
         positionNumber = number;
         height = 100;

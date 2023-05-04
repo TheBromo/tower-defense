@@ -11,7 +11,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 
 public class Path extends StaticGameObject {
-    private final List<String> pathImageNames = List.of("Street1", "Street2");
+    private final List<String> pathImageNames = List.of("Street1_small", "Street2_small");
     private final List<Image> sprites;
     private final int radius;
     private final Point2D end;
