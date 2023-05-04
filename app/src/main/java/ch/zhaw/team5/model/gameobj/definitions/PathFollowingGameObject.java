@@ -1,6 +1,7 @@
 package ch.zhaw.team5.model.gameobj.definitions;
 
 import ch.zhaw.team5.model.gameobj.Path;
+import ch.zhaw.team5.model.util.RandomUtil;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 
@@ -13,21 +14,12 @@ public abstract class PathFollowingGameObject extends MovingGameObject {
 
     public PathFollowingGameObject(Point2D position, Image sprite) {
         super(position, sprite);
+        var randomUtil = RandomUtil.getInstance();
         this.velocity = new Point2D(0, 0);
         this.accelleration = new Point2D(0, 0);
-        this.maxSpeed = 3;
+        this.maxSpeed = randomUtil.getRandomInRangeDouble(1, 2);
         this.maxForce = 0.1;
-        this.radius = 3;
-    }
-
-    public Point2D findProjection(Point2D pos, Point2D a, Point2D b) {
-        var v1 = a.subtract(pos);
-        var v2 = b.subtract(pos);
-        v2 = v2.normalize();
-        var sp = v1.dotProduct(v2);
-        v2 = v2.multiply(sp);
-        v2 = v2.add(pos);
-        return v2;
+        this.radius = 5;
     }
 
     public Point2D followPath(Path path) {
@@ -88,6 +80,16 @@ public abstract class PathFollowingGameObject extends MovingGameObject {
         } else {
             return vector;
         }
+    }
+
+    public Point2D findProjection(Point2D pos, Point2D a, Point2D b) {
+        var v1 = a.subtract(pos);
+        var v2 = b.subtract(pos);
+        v2 = v2.normalize();
+        var sp = v1.dotProduct(v2);
+        v2 = v2.multiply(sp);
+        v2 = v2.add(pos);
+        return v2;
     }
 
     public double map(double n, double start1, double stop1, double start2, double stop2, boolean withinBounds) {

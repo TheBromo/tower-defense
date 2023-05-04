@@ -3,7 +3,6 @@ package ch.zhaw.team5.model;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import ch.zhaw.team5.GameState;
 import ch.zhaw.team5.model.gameobj.Enemy;
 import ch.zhaw.team5.model.gameobj.Path;
@@ -12,6 +11,7 @@ import ch.zhaw.team5.model.gameobj.TowerPosition;
 import ch.zhaw.team5.model.gameobj.Wall;
 import ch.zhaw.team5.model.phases.Phase;
 import ch.zhaw.team5.model.phases.PhaseCurrent;
+import ch.zhaw.team5.model.util.RandomUtil;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
@@ -27,6 +27,7 @@ public class Game implements Renderable {
     private PhaseCurrent phaseCurrent;
     private GameState gameState;
     private Path path;
+    private int wantedEnemies = 5;
 
     public Game(Player player, GameState gameState, Canvas canvas) {
         this.player = player;
@@ -34,9 +35,8 @@ public class Game implements Renderable {
         this.phase = new PhaseCurrent();
         this.phaseCurrent = new PhaseCurrent();
         this.gameState = gameState;
-        path = new Path(new Point2D(0, canvas.getHeight()/2), new Point2D(canvas.getWidth(), canvas.getHeight()/2));
+        path = new Path(new Point2D(0, canvas.getHeight() / 2), new Point2D(canvas.getWidth(), canvas.getHeight() / 2));
 
-        initTestEnv();
         initTowers(canvas.getWidth(), canvas.getHeight());
     }
 
@@ -52,9 +52,12 @@ public class Game implements Renderable {
         }
     }
 
-    public void initTestEnv() {
-        enemies.add(new Enemy(new Point2D(100, 100),path));
-
+    private void spawnEnemy() {
+        int radius = path.getRadius();
+        int y = (int) path.getStart().getY();
+        var startY = RandomUtil.getInstance().getRandomInRange(y - radius, y + radius);
+        var startX = RandomUtil.getInstance().getRandomInRange(-10, 5);
+        enemies.add(new Enemy(new Point2D(startX, startY), path));
     }
 
     public void loop() {
@@ -83,6 +86,9 @@ public class Game implements Renderable {
     private void update() {
         for (Enemy enemy : enemies) {
             enemy.update();
+        }
+        if (enemies.size() < wantedEnemies) {
+            spawnEnemy();
         }
     }
 

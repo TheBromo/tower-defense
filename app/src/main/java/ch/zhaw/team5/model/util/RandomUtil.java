@@ -22,4 +22,11 @@ public class RandomUtil {
     public <T> T getRandomCollectionElement(List<T> list){
         return  list.get(generator.nextInt(list.size()));
     }
+
+    public int getRandomInRange(int bottom, int top){
+        return generator.nextInt(bottom,top);
+    }
+    public double getRandomInRangeDouble(double bottom, double top){
+        return generator.nextDouble(bottom, top);
+    }
 }

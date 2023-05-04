@@ -42,14 +42,18 @@ public class Path extends StaticGameObject {
     }
 
     public Point2D getStart() {
-        return position.subtract(0, radius);
+        return position;
     }
 
     public Point2D getEnd() {
-        return end.subtract(0, radius);
+        return end;
     }
 
     public int getRadius() {
         return radius;
+    }
+
+    public List<Point2D> getPointsAList(){
+        return List.of(position, end);
     }
 }

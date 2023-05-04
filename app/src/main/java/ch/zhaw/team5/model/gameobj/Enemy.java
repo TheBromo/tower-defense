@@ -2,7 +2,6 @@ package ch.zhaw.team5.model.gameobj;
 
 import java.util.List;
 
-import ch.zhaw.team5.model.gameobj.definitions.MovingGameObject;
 import ch.zhaw.team5.model.gameobj.definitions.PathFollowingGameObject;
 import ch.zhaw.team5.model.util.ImageLoader;
 import ch.zhaw.team5.model.util.RandomUtil;
@@ -29,8 +28,7 @@ public class Enemy extends PathFollowingGameObject {
 
     @Override
     public void update() {
-        var force = followPath(path);
-        applyForce(force);
+
         super.update();
     }
 
@@ -40,7 +38,8 @@ public class Enemy extends PathFollowingGameObject {
 
     @Override
     public void render(Canvas canvas) {
-        canvas.getGraphicsContext2D().drawImage(sprite, position.getX() - width/2, position.getY()- height/2, width, height);
+         canvas.getGraphicsContext2D().drawImage(sprite, position.getX() - width / 2,
+         position.getY() - height / 2,width, height);
     }
 
 }
