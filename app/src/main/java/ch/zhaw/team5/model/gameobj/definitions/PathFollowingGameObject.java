@@ -20,9 +20,9 @@ public abstract class PathFollowingGameObject extends MovingGameObject {
         var randomUtil = RandomUtil.getInstance();
         this.velocity = new Point2D(0, 0);
         this.accelleration = new Point2D(0, 0);
-        this.maxSpeed = randomUtil.getRandomInRangeDouble(1, 2);
-        this.maxForce = 0.1;
-        this.radius = 5;
+        this.maxSpeed = randomUtil.getRandomInRangeDouble(.5, 1.5);
+        this.maxForce = .3;
+        this.radius = 25;
     }
 
     public Point2D followPath(Path path) {
@@ -64,17 +64,16 @@ public abstract class PathFollowingGameObject extends MovingGameObject {
 
     private Point2D getCollisionPoint2d(List<Enemy> enemies) {
         for (Enemy enemy : enemies) {
-            if (enemy.getPosition().distance(position) <= radius*2) {
+            if (enemy.getPosition().distance(position) <= radius) {
                 var vec = position.subtract(enemy.position);
-                System.out.println("reeee");
-                return vec.multiply(0.01);
+                return vec.normalize().multiply(.001);
             }
         }
         return new Point2D(0, 0);
     }
 
     public void update(List<Enemy> enemies) {
-        accelleration = accelleration.add(getCollisionPoint2d(enemies));
+        velocity = velocity.add(getCollisionPoint2d(enemies));
         velocity = velocity.add(accelleration);
         velocity = limit(velocity, maxSpeed);
         position = position.add(velocity);

@@ -10,7 +10,8 @@ import javafx.scene.canvas.Canvas;
 
 public class Enemy extends PathFollowingGameObject {
 
-    private final static List<String> enemyImageNames = List.of("Enemy1", "Enemy2", "Enemy3", "Enemy4", "Enemy5");
+    private final static List<String> enemyImageNames = List.of("Enemy1_small", "Enemy2_small", "Enemy3_small",
+            "Enemy4_small", "Enemy5_small");
     private final Path path;
 
     public Enemy(Point2D position, Path path) {
@@ -40,8 +41,9 @@ public class Enemy extends PathFollowingGameObject {
 
     @Override
     public void render(Canvas canvas) {
-         canvas.getGraphicsContext2D().drawImage(sprite, position.getX() - width / 2,
-         position.getY() - height / 2,width, height);
+        canvas.getGraphicsContext2D().drawImage(sprite, position.getX() - width / 2, position.getY() - height / 2,
+                width, height);
+
     }
 
 }

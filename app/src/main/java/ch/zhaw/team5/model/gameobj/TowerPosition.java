@@ -34,9 +34,10 @@ public class TowerPosition extends StaticGameObject {
         if (hasTower()) {
             tower.render(canvas);
         } else {
-            g2d.drawImage(sprite, position.getX(), position.getY(), height, width);
+            g2d.drawImage(sprite,position.getX() - width / 2, position.getY() - height / 2,
+            width, height);
             g2d.setStroke(Color.GRAY);
-            g2d.strokeText("" + positionNumber, position.getX(), position.getY() + height / 2);
+            g2d.strokeText("" + positionNumber, position.getX(), position.getY());
         }
     }
 
