@@ -15,6 +15,8 @@ public class Sprite {
         var randomUtil = RandomUtil.getInstance();
         var imageLoader = ImageLoader.getInstance();
         sprites = new ArrayList<>();
+        intervalMs = randomUtil.getRandomInRange(300, 500);
+        lastUpdate = randomUtil.getRandomInRange(300, 500);
         
         int variant = 1;
         if (sprite.variants != 1) {
@@ -27,7 +29,7 @@ public class Sprite {
     }
 
     public Image getSprite() {
-        if (System.currentTimeMillis() - lastUpdate > intervalMs) {
+        if (System.currentTimeMillis() - lastUpdate >= intervalMs) {
             continueIndex();
             lastUpdate = System.currentTimeMillis();
         }
@@ -51,7 +53,7 @@ public class Sprite {
         DECO(3, List.of("Deco")),
         TOWER(3, List.of("Tower")),
         HOLE(1, List.of("Hole")),
-        ENEMY(5, List.of("Enemy")),
+        ENEMY(5, List.of("Enemy","Enemyb","Enemyc")),
         STREET(2, List.of("Street")),
         WALLBOTTOM(1, List.of("WallBottom")),
         WALLTOP(1, List.of("WallTop"));

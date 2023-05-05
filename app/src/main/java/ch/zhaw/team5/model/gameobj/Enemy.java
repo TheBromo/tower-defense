@@ -41,7 +41,6 @@ public class Enemy extends PathFollowingGameObject {
         var g2d = canvas.getGraphicsContext2D();
         g2d.drawImage(sprite.getSprite(), position.getX() - width / 2, position.getY() - height / 2,
                 width, height);
-
     }
 
     private void debugEnemy(GraphicsContext g2d) {
