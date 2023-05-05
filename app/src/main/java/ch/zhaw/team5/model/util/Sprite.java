@@ -20,7 +20,7 @@ public class Sprite {
         
         int variant = 1;
         if (sprite.variants != 1) {
-            variant = randomUtil.getRandomInRange(1, sprite.variants);
+            variant = randomUtil.getRandomInRange(1, sprite.variants+1);
         }
 
         for (String path : sprite.animationName) {
@@ -53,7 +53,7 @@ public class Sprite {
         DECO(3, List.of("Deco")),
         TOWER(3, List.of("Tower")),
         HOLE(1, List.of("Hole")),
-        ENEMY(5, List.of("Enemy","Enemyb","Enemyc")),
+        ENEMY(2, List.of("Enemy","Enemyb","Enemyc")),
         STREET(2, List.of("Street")),
         WALLBOTTOM(1, List.of("WallBottom")),
         WALLTOP(1, List.of("WallTop"));

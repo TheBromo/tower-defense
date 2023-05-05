@@ -8,7 +8,6 @@ import ch.zhaw.team5.model.gameobj.Path;
 import ch.zhaw.team5.model.util.RandomUtil;
 import ch.zhaw.team5.model.util.Sprite.SpritePath;
 import javafx.geometry.Point2D;
-import javafx.scene.image.Image;
 
 public abstract class PathFollowingGameObject extends MovingGameObject {
 
