@@ -9,7 +9,6 @@ public class Arrow {
 
     }
 
-
     public boolean hasHitTarget(){
         return false;
     }

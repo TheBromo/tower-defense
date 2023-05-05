@@ -8,14 +8,10 @@ public abstract class MovingGameObject extends StaticGameObject {
     protected Point2D velocity;
     private Point2D rotation;
 
-
-
-
     public MovingGameObject(Point2D position, Image sprite) {
         super(position, sprite);
 
     }
-
 
     public Point2D getRotation(){return rotation;};
 

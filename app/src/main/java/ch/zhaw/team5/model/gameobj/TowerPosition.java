@@ -29,7 +29,6 @@ public class TowerPosition extends StaticGameObject {
 
     @Override
     public void render(Canvas canvas) {
-        // TODO make the position depend on path
         var g2d = canvas.getGraphicsContext2D();
         if (hasTower()) {
             tower.render(canvas);

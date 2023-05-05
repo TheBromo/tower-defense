@@ -2,7 +2,6 @@ package ch.zhaw.team5.model.gameobj.definitions;
 
 import java.util.List;
 
-import org.checkerframework.checker.units.qual.s;
 
 import ch.zhaw.team5.model.gameobj.Enemy;
 import ch.zhaw.team5.model.gameobj.Path;
@@ -27,14 +26,9 @@ public abstract class PathFollowingGameObject extends MovingGameObject {
         this.radius = 20;
     }
 
-    public int getRadius(){
-        return radius;
-    } 
-
 
     public void update(List<Enemy> enemies, Path path) {
         applyBehaviours(enemies, path);
-        // velocity = velocity.add(getCollisionPoint2d(enemies));
         velocity = velocity.add(accelleration);
         velocity = limit(velocity, maxSpeed);
         position = position.add(velocity);
@@ -103,25 +97,7 @@ public abstract class PathFollowingGameObject extends MovingGameObject {
         }
     }
 
-    private Point2D findProjection(Point2D pos, Point2D a, Point2D b) {
-        var v1 = a.subtract(pos);
-        var v2 = b.subtract(pos);
-        v2 = v2.normalize();
-        var sp = v1.dotProduct(v2);
-        v2 = v2.multiply(sp);
-        v2 = v2.add(pos);
-        return v2;
-    }
-
-    private double map(double n, double start1, double stop1, double start2, double stop2, boolean withinBounds) {
-        var newval = (n - start1) / (stop1 - start1) * (stop2 - start2) + start2;
-        if (!withinBounds) {
-            return newval;
-        }
-        if (start2 < stop2) {
-            return Math.max(Math.min(newval, start2), stop2);
-        } else {
-            return Math.max(Math.min(newval, stop2), start2);
-        }
+    public int getRadius() {
+        return radius;
     }
 }

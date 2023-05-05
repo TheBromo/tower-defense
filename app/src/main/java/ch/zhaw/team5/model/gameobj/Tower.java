@@ -21,18 +21,17 @@ public class Tower extends StaticGameObject {
         arrows = new ArrayList<>();
         height = 100;
         width = 100;
-        // TODO load texture for tower
     }
 
     @Override
     public void render(Canvas canvas) {
-        // TODO maybe remove this and move it to an update function
+        //TODO maybe remove this and move it to an update function
         arrows.removeIf(arrow -> arrow.hasHitTarget());
 
         canvas.getGraphicsContext2D().drawImage(sprite, position.getX() - width / 2, position.getY() - height / 2,
                 width, height);
 
-        // TODO call render on each arrow
+        //TODO call render on each arrow
 
     }
 
