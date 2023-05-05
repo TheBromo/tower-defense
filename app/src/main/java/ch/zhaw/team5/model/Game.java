@@ -103,7 +103,7 @@ public class Game implements Renderable {
                 // TODO add Damage
             }
         }
-        enemies.removeIf(e -> e.outOfScreen((int) wall.getPosition().getX()));
+        enemies.removeIf(e -> e.outOfScreen((int) path.getEnd().getX()));
 
         while (enemies.size() < wantedEnemies) {
             spawnEnemy();
@@ -117,6 +117,7 @@ public class Game implements Renderable {
         g2d.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
         path.render(canvas);
+        
         for (Enemy enemy : enemies) {
             enemy.render(canvas);
         }
