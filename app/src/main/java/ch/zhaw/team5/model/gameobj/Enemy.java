@@ -34,6 +34,8 @@ public class Enemy extends PathFollowingGameObject {
         return position;
     }
 
+
+
     public boolean outOfScreen(int threshhold) {
         return position.getX() > threshhold;
     }
@@ -44,7 +46,7 @@ public class Enemy extends PathFollowingGameObject {
         g2d.drawImage(sprite, position.getX() - width / 2, position.getY() - height / 2,
                 width, height);
 
-        //debugEnemy(g2d);
+      //  debugEnemy(g2d);
     }
 
     private void debugEnemy(GraphicsContext g2d) {

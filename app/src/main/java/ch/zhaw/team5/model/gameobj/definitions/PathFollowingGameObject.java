@@ -2,6 +2,8 @@ package ch.zhaw.team5.model.gameobj.definitions;
 
 import java.util.List;
 
+import org.checkerframework.checker.units.qual.s;
+
 import ch.zhaw.team5.model.gameobj.Enemy;
 import ch.zhaw.team5.model.gameobj.Path;
 import ch.zhaw.team5.model.util.RandomUtil;
@@ -20,10 +22,15 @@ public abstract class PathFollowingGameObject extends MovingGameObject {
         var randomUtil = RandomUtil.getInstance();
         this.velocity = new Point2D(0, 0);
         this.accelleration = new Point2D(0, 0);
-        this.maxSpeed = randomUtil.getRandomInRangeDouble(2, 4);
-        this.maxForce = 5;
-        this.radius = 10;
+        this.maxSpeed = randomUtil.getRandomInRangeDouble(1, 2);
+        this.maxForce = 3;
+        this.radius = 20;
     }
+
+    public int getRadius(){
+        return radius;
+    } 
+
 
     public void update(List<Enemy> enemies, Path path) {
         applyBehaviours(enemies, path);
@@ -38,7 +45,9 @@ public abstract class PathFollowingGameObject extends MovingGameObject {
         Point2D seperate = seperate(enemies);
         Point2D seek = seek(path.getEnd());
 
+        seperate = seperate.multiply(1.5);
         seek = seek.multiply(0.5);
+
         applyForce(seperate);
         applyForce(seek);
     }
@@ -48,7 +57,7 @@ public abstract class PathFollowingGameObject extends MovingGameObject {
     }
 
     private Point2D seperate(List<Enemy> enemies) {
-        double desiredSeparation = radius * 4;
+        double desiredSeparation = radius * 2;
         Point2D sum = new Point2D(0, 0);
         int count = 0;
         for (Enemy enemy : enemies) {
@@ -56,14 +65,14 @@ public abstract class PathFollowingGameObject extends MovingGameObject {
             if ((distance < desiredSeparation) && (distance > 0)) {
                 Point2D diff = position.subtract(enemy.getPosition());
                 diff = diff.normalize();
-                diff = diff.multiply(1 / distance);
+                diff = diff.multiply(1.0 / distance);
                 sum = sum.add(diff);
                 count++;
             }
         }
 
         if (count > 0) {
-            sum = sum.multiply(1 / count);
+            sum = sum.multiply(1.0 / count);
             sum = setMagnitude(sum, maxSpeed);
             Point2D steer = sum.subtract(velocity);
 

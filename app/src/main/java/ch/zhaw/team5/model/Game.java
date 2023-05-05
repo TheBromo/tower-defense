@@ -55,9 +55,22 @@ public class Game implements Renderable {
     private void spawnEnemy() {
         int radius = path.getRadius();
         int y = (int) path.getStart().getY();
-        var startY = RandomUtil.getInstance().getRandomInRange(100, 500);
-        var startX = RandomUtil.getInstance().getRandomInRange(100, 300);
-        enemies.add(new Enemy(new Point2D(startX, startY)));
+        var startY = RandomUtil.getInstance().getRandomInRange(y - radius, y + radius);
+        var startX = RandomUtil.getInstance().getRandomInRange(-200, 0);
+        var newPost = new Point2D(startX, startY);
+        while (interSects(newPost)) {
+            newPost = newPost.add(-50, 0);
+        }
+        enemies.add(new Enemy(newPost));
+    }
+
+    private boolean interSects(Point2D newPos) {
+        for (Enemy enemy : enemies) {
+            if (enemy.getPosition().distance(newPos) <= enemy.getRadius() * 2) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void loop() {
@@ -91,7 +104,7 @@ public class Game implements Renderable {
             }
         }
         enemies.removeIf(e -> e.outOfScreen((int) wall.getPosition().getX()));
-        
+
         while (enemies.size() < wantedEnemies) {
             spawnEnemy();
         }
