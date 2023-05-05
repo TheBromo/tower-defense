@@ -7,6 +7,8 @@ import ch.zhaw.team5.model.util.ImageLoader;
 import ch.zhaw.team5.model.util.RandomUtil;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 public class Enemy extends PathFollowingGameObject {
 
@@ -21,7 +23,6 @@ public class Enemy extends PathFollowingGameObject {
         width = 50;
         height = 50;
         this.path = path;
-        velocity = new Point2D(1, 0);
     }
 
     public void hit() {
@@ -45,9 +46,16 @@ public class Enemy extends PathFollowingGameObject {
 
     @Override
     public void render(Canvas canvas) {
-        canvas.getGraphicsContext2D().drawImage(sprite, position.getX() - width / 2, position.getY() - height / 2,
+        var g2d = canvas.getGraphicsContext2D();
+        g2d.drawImage(sprite, position.getX() - width / 2, position.getY() - height / 2,
                 width, height);
-
     }
 
+    private void debugEnemy(GraphicsContext g2d) {
+        g2d.setFill(Color.RED);
+        g2d.fillOval(position.getX() + velocity.getX(), position.getY() + velocity.getY(),
+                5, 5);
+
+        g2d.strokeText("" + velocity, position.getX() - width / 2, position.getY() - height / 2);
+    }
 }

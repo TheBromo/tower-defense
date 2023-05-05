@@ -18,10 +18,10 @@ public abstract class PathFollowingGameObject extends MovingGameObject {
     public PathFollowingGameObject(Point2D position, Image sprite) {
         super(position, sprite);
         var randomUtil = RandomUtil.getInstance();
-        this.velocity = new Point2D(0, 0);
+        this.velocity = new Point2D(1, 0);
         this.accelleration = new Point2D(0, 0);
-        this.maxSpeed = randomUtil.getRandomInRangeDouble(.5, 1.5);
-        this.maxForce = .3;
+        this.maxSpeed = randomUtil.getRandomInRangeDouble(4, 6);
+        this.maxForce = .01;
         this.radius = 25;
     }
 
@@ -44,7 +44,7 @@ public abstract class PathFollowingGameObject extends MovingGameObject {
         }
     }
 
-    public Point2D seek(Point2D target, boolean arrival) {
+    private Point2D seek(Point2D target, boolean arrival) {
         var force = target.subtract(position);
         var desiredSpeed = maxSpeed;
         if (arrival) {
@@ -73,7 +73,7 @@ public abstract class PathFollowingGameObject extends MovingGameObject {
     }
 
     public void update(List<Enemy> enemies) {
-        velocity = velocity.add(getCollisionPoint2d(enemies));
+        //velocity = velocity.add(getCollisionPoint2d(enemies));
         velocity = velocity.add(accelleration);
         velocity = limit(velocity, maxSpeed);
         position = position.add(velocity);
@@ -84,11 +84,11 @@ public abstract class PathFollowingGameObject extends MovingGameObject {
         accelleration = accelleration.add(force);
     }
 
-    public Point2D setMagnitude(Point2D vector, double newMagnitude) {
+    private Point2D setMagnitude(Point2D vector, double newMagnitude) {
         return vector.normalize().multiply(newMagnitude);
     }
 
-    public Point2D limit(Point2D vector, double max) {
+    private Point2D limit(Point2D vector, double max) {
         if (vector.magnitude() > max) {
             return setMagnitude(vector, max);
         } else {
@@ -96,7 +96,7 @@ public abstract class PathFollowingGameObject extends MovingGameObject {
         }
     }
 
-    public Point2D findProjection(Point2D pos, Point2D a, Point2D b) {
+    private Point2D findProjection(Point2D pos, Point2D a, Point2D b) {
         var v1 = a.subtract(pos);
         var v2 = b.subtract(pos);
         v2 = v2.normalize();
@@ -106,7 +106,7 @@ public abstract class PathFollowingGameObject extends MovingGameObject {
         return v2;
     }
 
-    public double map(double n, double start1, double stop1, double start2, double stop2, boolean withinBounds) {
+    private double map(double n, double start1, double stop1, double start2, double stop2, boolean withinBounds) {
         var newval = (n - start1) / (stop1 - start1) * (stop2 - start2) + start2;
         if (!withinBounds) {
             return newval;
@@ -117,5 +117,4 @@ public abstract class PathFollowingGameObject extends MovingGameObject {
             return Math.max(Math.min(newval, stop2), start2);
         }
     }
-
 }

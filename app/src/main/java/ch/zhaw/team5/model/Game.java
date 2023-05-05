@@ -27,7 +27,7 @@ public class Game implements Renderable {
     private PhaseCurrent phaseCurrent;
     private GameState gameState;
     private Path path;
-    private int wantedEnemies = 5;
+    private int wantedEnemies = 20;
 
     public Game(Player player, GameState gameState, Canvas canvas) {
         this.player = player;
@@ -56,7 +56,7 @@ public class Game implements Renderable {
         int radius = path.getRadius();
         int y = (int) path.getStart().getY();
         var startY = RandomUtil.getInstance().getRandomInRange(y - radius, y + radius);
-        var startX = RandomUtil.getInstance().getRandomInRange(-200, 5);
+        var startX = RandomUtil.getInstance().getRandomInRange(100, 300);
         enemies.add(new Enemy(new Point2D(startX, startY), path));
     }
 
