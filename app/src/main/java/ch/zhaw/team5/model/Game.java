@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ch.zhaw.team5.GameState;
+import ch.zhaw.team5.model.gameobj.Decorations;
 import ch.zhaw.team5.model.gameobj.Enemy;
 import ch.zhaw.team5.model.gameobj.Path;
 import ch.zhaw.team5.model.gameobj.definitions.Renderable;
@@ -19,6 +20,7 @@ import javafx.scene.paint.Color;
 public class Game implements Renderable {
     private List<TowerPosition> towerPositions = new ArrayList<>();
     private List<Enemy> enemies = new ArrayList<>();
+    private List<Decorations> decorations = new ArrayList<>();
     private Wall wall;
 
     private Player player;
@@ -36,6 +38,10 @@ public class Game implements Renderable {
         this.phaseCurrent = new PhaseCurrent();
         this.gameState = gameState;
         path = new Path(new Point2D(0, canvas.getHeight() / 2), new Point2D(canvas.getWidth(), canvas.getHeight() / 2));
+
+        decorations.add(new Decorations(5, 0, 0, (int) canvas.getWidth() - 100, (int) canvas.getHeight() / 2));
+        decorations.add(new Decorations(5, 0, (int) canvas.getHeight() / 2, (int) canvas.getWidth() - 100,
+                (int) canvas.getHeight()));
 
         initTowers(canvas.getWidth(), canvas.getHeight());
     }
@@ -116,8 +122,13 @@ public class Game implements Renderable {
         g2d.setFill(Color.WHITE);
         g2d.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
+        for (Decorations decoration : decorations) {
+            decoration.render(canvas);
+        }
+
         path.render(canvas);
-        
+
+
         for (Enemy enemy : enemies) {
             enemy.render(canvas);
         }
