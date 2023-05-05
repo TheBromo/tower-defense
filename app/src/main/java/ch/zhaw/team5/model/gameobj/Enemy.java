@@ -14,26 +14,20 @@ public class Enemy extends PathFollowingGameObject {
 
     private final static List<String> enemyImageNames = List.of("Enemy1_small", "Enemy2_small", "Enemy3_small",
             "Enemy4_small", "Enemy5_small");
-    private final Path path;
 
-    public Enemy(Point2D position, Path path) {
-        // TODO update constructor
+    public Enemy(Point2D position) {
         super(position, ImageLoader.getInstance()
                 .getByName(RandomUtil.getInstance().getRandomCollectionElement(enemyImageNames)));
         width = 50;
         height = 50;
-        this.path = path;
     }
 
     public void hit() {
     }
 
     @Override
-    public void update(List<Enemy> enemies) {
-        var force = followPath(path);
-
-        applyForce(force);
-        super.update(enemies);
+    public void update(List<Enemy> enemies, Path path) {
+        super.update(enemies, path);
     }
 
     public Point2D getPosition() {
@@ -49,6 +43,8 @@ public class Enemy extends PathFollowingGameObject {
         var g2d = canvas.getGraphicsContext2D();
         g2d.drawImage(sprite, position.getX() - width / 2, position.getY() - height / 2,
                 width, height);
+
+        //debugEnemy(g2d);
     }
 
     private void debugEnemy(GraphicsContext g2d) {

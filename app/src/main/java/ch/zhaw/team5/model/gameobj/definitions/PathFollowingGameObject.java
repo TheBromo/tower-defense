@@ -18,70 +18,68 @@ public abstract class PathFollowingGameObject extends MovingGameObject {
     public PathFollowingGameObject(Point2D position, Image sprite) {
         super(position, sprite);
         var randomUtil = RandomUtil.getInstance();
-        this.velocity = new Point2D(1, 0);
+        this.velocity = new Point2D(0, 0);
         this.accelleration = new Point2D(0, 0);
-        this.maxSpeed = randomUtil.getRandomInRangeDouble(4, 6);
-        this.maxForce = .01;
-        this.radius = 25;
+        this.maxSpeed = randomUtil.getRandomInRangeDouble(2, 4);
+        this.maxForce = 5;
+        this.radius = 10;
     }
 
-    public Point2D followPath(Path path) {
-        // Path following algorithm here!!
-
-        // Step 1 calculate future position
-        var future = new Point2D(velocity.getX(), velocity.getY());
-        future = future.multiply(20);
-        future = future.add(position);
-
-        // Step 2 Is future on path?
-        var target = findProjection(path.getStart(), future, path.getEnd());
-
-        var d = future.distance(target);
-        if (d > path.getRadius()) {
-            return seek(target, false);
-        } else {
-            return new Point2D(0, 0);
-        }
-    }
-
-    private Point2D seek(Point2D target, boolean arrival) {
-        var force = target.subtract(position);
-        var desiredSpeed = maxSpeed;
-        if (arrival) {
-            var slowRadius = 100;
-            var distance = force.magnitude();
-
-            if (distance < slowRadius) {
-                desiredSpeed = map(distance, 0, slowRadius, 0, maxSpeed, false);
-            }
-        }
-        force = setMagnitude(force, desiredSpeed);
-        force = force.subtract(velocity);
-        force = limit(force, this.maxForce);
-        return force;
-
-    }
-
-    private Point2D getCollisionPoint2d(List<Enemy> enemies) {
-        for (Enemy enemy : enemies) {
-            if (enemy.getPosition().distance(position) <= radius) {
-                var vec = position.subtract(enemy.position);
-                return vec.normalize().multiply(.02);
-            }
-        }
-        return new Point2D(0, 0);
-    }
-
-    public void update(List<Enemy> enemies) {
-        //velocity = velocity.add(getCollisionPoint2d(enemies));
+    public void update(List<Enemy> enemies, Path path) {
+        applyBehaviours(enemies, path);
+        // velocity = velocity.add(getCollisionPoint2d(enemies));
         velocity = velocity.add(accelleration);
         velocity = limit(velocity, maxSpeed);
         position = position.add(velocity);
-        accelleration = new Point2D(0, 0);
+        accelleration = accelleration.multiply(0);
+    }
+
+    public void applyBehaviours(List<Enemy> enemies, Path path) {
+        Point2D seperate = seperate(enemies);
+        Point2D seek = seek(path.getEnd());
+
+        seek = seek.multiply(0.5);
+        applyForce(seperate);
+        applyForce(seek);
     }
 
     public void applyForce(Point2D force) {
         accelleration = accelleration.add(force);
+    }
+
+    private Point2D seperate(List<Enemy> enemies) {
+        double desiredSeparation = radius * 4;
+        Point2D sum = new Point2D(0, 0);
+        int count = 0;
+        for (Enemy enemy : enemies) {
+            double distance = position.distance(enemy.getPosition());
+            if ((distance < desiredSeparation) && (distance > 0)) {
+                Point2D diff = position.subtract(enemy.getPosition());
+                diff = diff.normalize();
+                diff = diff.multiply(1 / distance);
+                sum = sum.add(diff);
+                count++;
+            }
+        }
+
+        if (count > 0) {
+            sum = sum.multiply(1 / count);
+            sum = setMagnitude(sum, maxSpeed);
+            Point2D steer = sum.subtract(velocity);
+
+            steer = limit(steer, maxSpeed);
+            return steer;
+        }
+        return new Point2D(0, 0);
+    }
+
+    private Point2D seek(Point2D target) {
+        Point2D desiredLocaction = target.subtract(position);
+        desiredLocaction = desiredLocaction.normalize();
+        desiredLocaction = desiredLocaction.multiply(maxSpeed);
+        Point2D steer = desiredLocaction.subtract(velocity);
+        steer = limit(steer, maxForce);
+        return steer;
     }
 
     private Point2D setMagnitude(Point2D vector, double newMagnitude) {
