@@ -16,10 +16,10 @@ public class TowerPosition extends StaticGameObject {
     private Tower tower;
     private boolean built;
     private int positionNumber;
-    private final List<String> towerImageNames = List.of("Tower1", "Tower2", "Tower3");
+    private final List<String> towerImageNames = List.of("Tower1_small", "Tower2_small", "Tower3_small");
 
     public TowerPosition(Point2D position, int number) {
-        super(position, ImageLoader.getInstance().getByName("Hole"));
+        super(position, ImageLoader.getInstance().getByName("Hole_small"));
         tower = new Tower(position, getRandomSprite());
         positionNumber = number;
         height = 100;
@@ -29,14 +29,14 @@ public class TowerPosition extends StaticGameObject {
 
     @Override
     public void render(Canvas canvas) {
-        // TODO make the position depend on path
         var g2d = canvas.getGraphicsContext2D();
         if (hasTower()) {
             tower.render(canvas);
         } else {
-            g2d.drawImage(sprite, position.getX(), position.getY(), height, width);
+            g2d.drawImage(sprite,position.getX() - width / 2, position.getY() - height / 2,
+            width, height);
             g2d.setStroke(Color.GRAY);
-            g2d.strokeText("" + positionNumber, position.getX(), position.getY() + height / 2);
+            g2d.strokeText("" + positionNumber, position.getX(), position.getY());
         }
     }
 

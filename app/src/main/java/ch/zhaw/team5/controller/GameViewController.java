@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 
 public class GameViewController {
 
-    private GameState playerDecorator;
+    private GameState gameState;
     private Game game;
     private ExecutorService gameThread;
     // private GameDecorator gameDecorator;
@@ -48,7 +48,7 @@ public class GameViewController {
     private Button buttonTower6;
 
     public void initializeListeners(Player player, Stage parent) {
-        GameState gameState = new GameState(player);
+        gameState = new GameState(player);
         this.game = new Game(player, gameState, canvas);
         initGameState(player, gameState);
 

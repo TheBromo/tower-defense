@@ -16,13 +16,11 @@ public class Tower extends StaticGameObject {
 
     private List<Arrow> arrows;
 
-
     public Tower(Point2D position, Image sprite) {
         super(position, sprite);
         arrows = new ArrayList<>();
         height = 100;
         width = 100;
-        //TODO load texture for tower
     }
 
     @Override
@@ -30,24 +28,24 @@ public class Tower extends StaticGameObject {
         //TODO maybe remove this and move it to an update function
         arrows.removeIf(arrow -> arrow.hasHitTarget());
 
-        canvas.getGraphicsContext2D().drawImage(sprite,position.getX(),position.getY(),height,width);
+        canvas.getGraphicsContext2D().drawImage(sprite, position.getX() - width / 2, position.getY() - height / 2,
+                width, height);
 
-        //TODO call render on each arrow 
-
+        //TODO call render on each arrow
 
     }
 
-    private boolean outOfRange(Enemy enemy){
+    private boolean outOfRange(Enemy enemy) {
         return position.distance(enemy.getPosition()) > range;
     }
 
-    public Enemy shootAtEnemies(List<Enemy> enemies){
-        var possibleTargets= new ArrayList<>(enemies);
+    public Enemy shootAtEnemies(List<Enemy> enemies) {
+        var possibleTargets = new ArrayList<>(enemies);
         possibleTargets.removeIf(enemy -> outOfRange(enemy));
-        
+
         Random rand = new Random();
         var target = possibleTargets.get(rand.nextInt(possibleTargets.size()));
-        
+
         arrows.add(new Arrow(target, this.position));
 
         return target;
