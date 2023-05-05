@@ -6,6 +6,7 @@ import java.util.List;
 import ch.zhaw.team5.model.gameobj.Enemy;
 import ch.zhaw.team5.model.gameobj.Path;
 import ch.zhaw.team5.model.util.RandomUtil;
+import ch.zhaw.team5.model.util.Sprite.SpritePath;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 
@@ -16,8 +17,8 @@ public abstract class PathFollowingGameObject extends MovingGameObject {
     private double maxSpeed;
     private Point2D accelleration;
 
-    public PathFollowingGameObject(Point2D position, Image sprite) {
-        super(position, sprite);
+    public PathFollowingGameObject(Point2D position, SpritePath spritePath) {
+        super(position, spritePath);
         var randomUtil = RandomUtil.getInstance();
         this.velocity = new Point2D(0, 0);
         this.accelleration = new Point2D(0, 0);
