@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 
 public class Sprite {
     private List<Image> sprites;
-    private int intervalMs = 500;
+    private int intervalMs = 300;
     private int index = 0;
     private long lastUpdate = 0;
 
@@ -15,8 +15,8 @@ public class Sprite {
         var randomUtil = RandomUtil.getInstance();
         var imageLoader = ImageLoader.getInstance();
         sprites = new ArrayList<>();
-        intervalMs = randomUtil.getRandomInRange(300, 500);
-        lastUpdate = randomUtil.getRandomInRange(300, 500);
+        intervalMs = randomUtil.getRandomInRange(100, 300);
+        lastUpdate = randomUtil.getRandomInRange(100, 300);
         
         int variant = 1;
         if (sprite.variants != 1) {
@@ -53,7 +53,7 @@ public class Sprite {
         DECO(3, List.of("Deco")),
         TOWER(3, List.of("Tower")),
         HOLE(1, List.of("Hole")),
-        ENEMY(2, List.of("Enemy","Enemyb","Enemyc")),
+        ENEMY(5, List.of("Enemy","Enemyb","Enemyc")),
         STREET(2, List.of("Street")),
         WALLBOTTOM(1, List.of("WallBottom")),
         WALLTOP(1, List.of("WallTop"));
