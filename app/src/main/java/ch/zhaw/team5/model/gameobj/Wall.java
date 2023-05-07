@@ -1,21 +1,21 @@
 package ch.zhaw.team5.model.gameobj;
 
 import ch.zhaw.team5.model.gameobj.definitions.StaticGameObject;
-import ch.zhaw.team5.model.util.ImageLoader;
+import ch.zhaw.team5.model.util.Sprite;
+import ch.zhaw.team5.model.util.Sprite.SpritePath;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.image.Image;
 
 public class Wall extends StaticGameObject {
-    private final Image wallTop;
-    private final Image wallBottom;
+    private final Sprite wallTop;
+    private final Sprite wallBottom;
 
     public Wall(Point2D position) {
-        super(position, null);
+        super(position);
         health = initialHealth;
         hasWallPositiveHealth = true;
-        wallTop = ImageLoader.getInstance().getByName("WallTop");
-        wallBottom = ImageLoader.getInstance().getByName("WallBottom");
+        wallTop = new Sprite(SpritePath.WALLTOP);
+        wallBottom = new Sprite(SpritePath.WALLBOTTOM);
         height =200;
         width = 100;
     }
@@ -48,7 +48,7 @@ public class Wall extends StaticGameObject {
 
     @Override
     public void render(Canvas canvas) {
-        canvas.getGraphicsContext2D().drawImage(wallTop, position.getX(), position.getY(), width, height);
-        canvas.getGraphicsContext2D().drawImage(wallBottom, position.getX(), position.getY() + canvas.getHeight() / 2 + 50, width, height);
+        canvas.getGraphicsContext2D().drawImage(wallTop.getSprite(), position.getX(), position.getY(), width, height);
+        canvas.getGraphicsContext2D().drawImage(wallBottom.getSprite(), position.getX(), position.getY() + canvas.getHeight() / 2 + 50, width, height);
     }
 }

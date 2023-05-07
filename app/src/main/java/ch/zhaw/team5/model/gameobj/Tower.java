@@ -1,9 +1,9 @@
 package ch.zhaw.team5.model.gameobj;
 
 import ch.zhaw.team5.model.gameobj.definitions.StaticGameObject;
+import ch.zhaw.team5.model.util.Sprite;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +16,8 @@ public class Tower extends StaticGameObject {
 
     private List<Arrow> arrows;
 
-    public Tower(Point2D position, Image sprite) {
-        super(position, sprite);
+    public Tower(Point2D position) {
+        super(position, Sprite.SpritePath.TOWER);
         arrows = new ArrayList<>();
         height = 100;
         width = 100;
@@ -28,7 +28,7 @@ public class Tower extends StaticGameObject {
         //TODO maybe remove this and move it to an update function
         arrows.removeIf(arrow -> arrow.hasHitTarget());
 
-        canvas.getGraphicsContext2D().drawImage(sprite, position.getX() - width / 2, position.getY() - height / 2,
+        canvas.getGraphicsContext2D().drawImage(sprite.getSprite(), position.getX() - width / 2, position.getY() - height / 2,
                 width, height);
 
         //TODO call render on each arrow

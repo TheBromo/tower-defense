@@ -6,18 +6,19 @@ import java.util.List;
 import ch.zhaw.team5.model.gameobj.definitions.StaticGameObject;
 import ch.zhaw.team5.model.util.ImageLoader;
 import ch.zhaw.team5.model.util.RandomUtil;
+import ch.zhaw.team5.model.util.Sprite;
+import ch.zhaw.team5.model.util.Sprite.SpritePath;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 
 public class Path extends StaticGameObject {
-    private final List<String> pathImageNames = List.of("Street1_small", "Street2_small");
-    private final List<Image> sprites;
+    private final List<Sprite> sprites;
     private final int radius;
     private final Point2D end;
 
     public Path(Point2D start, Point2D end) {
-        super(start, null);
+        super(start);
         sprites = new ArrayList<>();
         height = 100;
         width = 100;
@@ -27,7 +28,7 @@ public class Path extends StaticGameObject {
         var imageLoader = ImageLoader.getInstance();
         var randomUtil = RandomUtil.getInstance();
         for (int i = 0; i < parts; i++) {
-            sprites.add(imageLoader.getByName(randomUtil.getRandomCollectionElement(pathImageNames)));
+            sprites.add(new Sprite(SpritePath.STREET));
         }
     }
 
@@ -35,8 +36,8 @@ public class Path extends StaticGameObject {
     public void render(Canvas canvas) {
         int boundryX = 0;
         var g2d = canvas.getGraphicsContext2D();
-        for (Image sprite : sprites) {
-            g2d.drawImage(sprite, position.getX() + boundryX, position.getY() - radius, width, height);
+        for (Sprite sprite : sprites) {
+            g2d.drawImage(sprite.getSprite(), position.getX() + boundryX, position.getY() - radius, width, height);
             boundryX += width;
         }
     }
