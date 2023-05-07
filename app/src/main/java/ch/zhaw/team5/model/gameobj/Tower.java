@@ -26,12 +26,14 @@ public class Tower extends StaticGameObject {
     @Override
     public void render(Canvas canvas) {
         //TODO maybe remove this and move it to an update function
-        arrows.removeIf(arrow -> arrow.hasHitTarget());
+        arrows.removeIf(Arrow::hasHitTarget);
 
         canvas.getGraphicsContext2D().drawImage(sprite.getSprite(), position.getX() - width / 2, position.getY() - height / 2,
                 width, height);
 
-        //TODO call render on each arrow
+        //TODO arrow sprite is still tbd I suppose
+        canvas.getGraphicsContext2D().drawImage(sprite.getSprite(), position.getX() - width / 2, position.getY() - height / 2,
+            width, height);
 
     }
 

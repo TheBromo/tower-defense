@@ -1,21 +1,17 @@
 package ch.zhaw.team5.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import ch.zhaw.team5.GameState;
-import ch.zhaw.team5.model.gameobj.Decorations;
-import ch.zhaw.team5.model.gameobj.Enemy;
-import ch.zhaw.team5.model.gameobj.Path;
+import ch.zhaw.team5.model.gameobj.*;
 import ch.zhaw.team5.model.gameobj.definitions.Renderable;
-import ch.zhaw.team5.model.gameobj.TowerPosition;
-import ch.zhaw.team5.model.gameobj.Wall;
 import ch.zhaw.team5.model.phases.Phase;
 import ch.zhaw.team5.model.phases.PhaseCurrent;
 import ch.zhaw.team5.model.util.RandomUtil;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Game implements Renderable {
     private List<TowerPosition> towerPositions = new ArrayList<>();
@@ -30,6 +26,8 @@ public class Game implements Renderable {
     private GameState gameState;
     private Path path;
     private int wantedEnemies = 50;
+
+    double MS_COUNTER = 100.0;
 
     public Game(Player player, GameState gameState, Canvas canvas) {
         this.player = player;
@@ -80,8 +78,6 @@ public class Game implements Renderable {
     }
 
     public void loop() {
-        boolean running = true;
-
         double previous = System.currentTimeMillis();
         double lag = 0.0;
 
@@ -97,6 +93,7 @@ public class Game implements Renderable {
             while (lag >= MS_PER_UPDATE) {
                 update();
                 lag -= MS_PER_UPDATE;
+                MS_COUNTER += MS_PER_UPDATE;
             }
             gameState.setRenderNeeded(true);
         }
@@ -110,6 +107,12 @@ public class Game implements Renderable {
             }
         }
         enemies.removeIf(e -> e.outOfScreen((int) path.getEnd().getX()));
+        
+        for (Tower tower: player.getTowers()) {
+            if (MS_COUNTER % 1000.0 == 0) { //shoot at enemies every second (
+                tower.shootAtEnemies(enemies);
+            }
+        }
 
         while (enemies.size() < wantedEnemies) {
             spawnEnemy();
@@ -125,7 +128,6 @@ public class Game implements Renderable {
         for (Decorations decoration : decorations) {
             decoration.render(canvas);
         }
-
         path.render(canvas);
 
 
@@ -142,5 +144,6 @@ public class Game implements Renderable {
 
     public void buildTower(int i) {
         towerPositions.get(i - 1).BuildTower();
+        player.addTower(towerPositions.get(i - 1).getTower());
     }
 }

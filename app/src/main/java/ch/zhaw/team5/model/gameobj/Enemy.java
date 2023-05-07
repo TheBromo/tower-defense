@@ -1,18 +1,18 @@
 package ch.zhaw.team5.model.gameobj;
 
-import java.util.List;
-
 import ch.zhaw.team5.model.gameobj.definitions.PathFollowingGameObject;
-import ch.zhaw.team5.model.util.ImageLoader;
-import ch.zhaw.team5.model.util.RandomUtil;
 import ch.zhaw.team5.model.util.Sprite;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
+import java.util.List;
+
 public class Enemy extends PathFollowingGameObject {
 
+    private boolean isAlive = true;
+    private int health = 100;
 
     public Enemy(Point2D position) {
         super(position, Sprite.SpritePath.ENEMY );
@@ -20,7 +20,13 @@ public class Enemy extends PathFollowingGameObject {
         height = 50;
     }
 
-    public void hit() {
+    public void hit(int damage) {
+        health -= damage;
+        isAlive = health > 0;
+    }
+
+    public boolean isAlive() {
+        return isAlive;
     }
 
     @Override
