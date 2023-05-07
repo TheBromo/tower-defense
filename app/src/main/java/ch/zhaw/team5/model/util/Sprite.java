@@ -53,7 +53,11 @@ public class Sprite {
     public enum SpritePath {
 
         DECO(3, List.of("Deco")),
-        TOWER(3, List.of("Tower", "Towerb"), 1000, 9000),
+        SMALLTOWER(3, List.of("SmallTower", "SmallTowerb"), 1000, 9000),
+        WOODTOWER(3, List.of("WoodTower", "WoodTowerb"), 1000, 9000),
+        ROCKTOWER(3, List.of("RockTower", "RockTowerb"), 1000, 9000),
+        BIGTOWER(3, List.of("BigTower", "BigTowerb"), 1000, 9000),
+        ARROWTOWER(3, List.of("ArrowTower", "ArrowTowerb"), 1000, 9000),
         HOLE(1, List.of("Hole")),
         ENEMY(5, List.of("Enemy", "Enemyb", "Enemyc"), 100, 300),
         STREET(2, List.of("Street")),

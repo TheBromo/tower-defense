@@ -17,7 +17,7 @@ public class Tower extends StaticGameObject {
     private List<Arrow> arrows;
 
     public Tower(Point2D position) {
-        super(position, Sprite.SpritePath.TOWER);
+        super(position, Sprite.SpritePath.SMALLTOWER);
         arrows = new ArrayList<>();
         height = 100;
         width = 100;
