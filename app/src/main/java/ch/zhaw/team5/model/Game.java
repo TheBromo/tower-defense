@@ -135,6 +135,10 @@ public class Game implements Renderable {
             enemy.render(canvas);
         }
 
+        for (Tower tower : player.getTowers()) {
+            tower.render(canvas);
+        }
+
         for (TowerPosition towerPosition : towerPositions) {
             towerPosition.render(canvas);
         }

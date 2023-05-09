@@ -32,8 +32,9 @@ public class Tower extends StaticGameObject {
                 width, height);
 
         //TODO arrow sprite is still tbd I suppose
-        canvas.getGraphicsContext2D().drawImage(sprite.getSprite(), position.getX() - width / 2, position.getY() - height / 2,
-            width, height);
+        for (Arrow arrow : arrows) {
+            arrow.render(canvas);
+        }
 
     }
 

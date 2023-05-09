@@ -31,7 +31,9 @@ public abstract class StaticGameObject implements Renderable {
         return position;
     }
 
-
+    public Sprite getSprite() {
+        return sprite;
+    }
 
     public void renderDebugLines(GraphicsContext g2d){
         g2d.setFill(new Color(1, 0,0, 0.2));

@@ -1,10 +1,11 @@
 package ch.zhaw.team5.model.gameobj;
 
-import ch.zhaw.team5.model.gameobj.definitions.Renderable;
+import ch.zhaw.team5.model.gameobj.definitions.MovingGameObject;
+import ch.zhaw.team5.model.util.Sprite;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 
-public class Arrow implements Renderable {
+public class Arrow extends MovingGameObject {
 
     Enemy enemy;
     Point2D position;
@@ -13,11 +14,10 @@ public class Arrow implements Renderable {
     float speed = 1.2f;
     Point2D velocity;
 
-
     public Arrow(Enemy target, Point2D startPosition) {
-        super();
+        super(startPosition, Sprite.SpritePath.DECO); //TODO insert Arrow Sprite here
         this.position = startPosition;
-        this.target = target.getPosition();
+        this.target = target.getPosition(); //TODO get destination position of tower
         this.enemy = target;
 
         //compute the difference vector (start to end) = direction
@@ -26,13 +26,21 @@ public class Arrow implements Renderable {
         velocity.normalize();
         velocity.multiply(speed);
     }
+    
+    public void update() {
+        position = position.add(velocity);
+        if (position.equals(target)) {
+            enemy.hit(20); //TODO magic number
+        }
+    }
 
-    public boolean hasHitTarget(){
-        return enemy.isAlive();
+    public boolean hasHitTarget() {
+        return position.equals(target);
     }
 
     @Override
     public void render(Canvas canvas) {
-        //TODO ??
+        canvas.getGraphicsContext2D().drawImage(sprite.getSprite(), position.getX() - width / 2, position.getY() - height / 2,
+            width, height);
     }
 }
