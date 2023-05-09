@@ -14,18 +14,18 @@
         </image>
     </ImageView>
 
-    <AnchorPane id="bg-pane"maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+    <AnchorPane id="bg-pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
                 prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
         <children>
             <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="30.0">
                 <children>
-                    <Button fx:id="startButton" mnemonicParsing="false" onAction="#onStartButtonClicked"prefHeight="50.0" prefWidth="150.0" text="Start"
+                    <Button fx:id="startButton" mnemonicParsing="false" onAction="#onStartButtonClicked" prefHeight="50.0" prefWidth="150.0" text="Start"
                             >
                         <font>
                             <Font name="System Bold" size="13.0"/>
                         </font>
                     </Button>
-                    <Button fx:id="quitButton" mnemonicParsing="false" onAction="#onQuitButtonClicked"prefHeight="50.0" prefWidth="150.0" text="Quit"
+                    <Button fx:id="quitButton" mnemonicParsing="false" onAction="#onQuitButtonClicked" prefHeight="50.0" prefWidth="150.0" text="Quit"
                             >
                         <VBox.margin>
                             <Insets/>
