@@ -14,34 +14,35 @@
         </image>
     </ImageView>
 
-    <AnchorPane id="bg-pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
-   
-       
-       
+    <AnchorPane id="bg-pane"maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+                prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
         <children>
             <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="30.0">
                 <children>
-                    <Button fx:id="startButton" mnemonicParsing="false" onAction="#onStartButtonClicked" prefHeight="50.0" prefWidth="150.0" text="Start">
+                    <Button fx:id="startButton" mnemonicParsing="false" onAction="#onStartButtonClicked"prefHeight="50.0" prefWidth="150.0" text="Start"
+                            >
                         <font>
-                            <Font name="System Bold" size="13.0" />
+                            <Font name="System Bold" size="13.0"/>
                         </font>
                     </Button>
-                    <Button fx:id="quitButton" mnemonicParsing="false" onAction="#onQuitButtonClicked" prefHeight="50.0" prefWidth="150.0" text="Quit">
+                    <Button fx:id="quitButton" mnemonicParsing="false" onAction="#onQuitButtonClicked"prefHeight="50.0" prefWidth="150.0" text="Quit"
+                            >
                         <VBox.margin>
-                            <Insets />
+                            <Insets/>
                         </VBox.margin>
                     </Button>
                 </children>
                 <padding>
-                    <Insets top="100.0" />
+                    <Insets top="100.0"/>
                 </padding>
             </VBox>
-            <Label alignment="CENTER" prefHeight="129.0" prefWidth="609.0" text="Tower Defense" textAlignment="CENTER" AnchorPane.topAnchor="0.0">
+            <Label alignment="CENTER" prefHeight="129.0" prefWidth="609.0" text="Tower Defense" textAlignment="CENTER"
+                   AnchorPane.topAnchor="0.0">
                 <font>
-                    <Font name="System Bold" size="62.0" />
+                    <Font name="System Bold" size="62.0"/>
                 </font>
                 <padding>
-                    <Insets left="80.0" right="80.0" top="40.0" />
+                    <Insets left="80.0" right="80.0" top="40.0"/>
                 </padding>
             </Label>
         </children>

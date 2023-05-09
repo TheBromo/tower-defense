@@ -21,7 +21,6 @@ import javafx.stage.Stage;
 public class GameViewController {
 
     private GameState gameState;
-    private Player player;
     private Game game;
     private Wall wall;
     private ExecutorService gameThread;
@@ -121,6 +120,6 @@ public class GameViewController {
 
     public void onBuyHealth() {
         gameState.setBuyHealth();
-    
+
     }
 }
