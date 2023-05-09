@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 public class GameViewController {
 
     private GameState gameState;
+    private Player player;
     private Game game;
     private Wall wall;
     private ExecutorService gameThread;
@@ -53,7 +54,6 @@ public class GameViewController {
 
     public void initializeListeners(Player player, Stage parent) {
         gameState = new GameState(player);
-//        wall = new Wall(???)
         this.game = new Game(player, gameState, canvas);
         initGameState(player, gameState);
 
@@ -120,7 +120,7 @@ public class GameViewController {
     }
 
     public void onBuyHealth() {
-        wall.buyHealth();
+        player.buyHealth();
     
     }
 }

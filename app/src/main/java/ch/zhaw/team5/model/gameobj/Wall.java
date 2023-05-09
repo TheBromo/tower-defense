@@ -25,7 +25,7 @@ public class Wall extends StaticGameObject {
     private int health;
     private final int reductionOfHealth = 5;
     private final int increaseOfHealth = 5;
-    private final int purchaseHealth = 50;
+
 
     private final int initialHealth = 100;
     private boolean hasWallPositiveHealth;
@@ -48,13 +48,7 @@ public class Wall extends StaticGameObject {
         }
         return hasWallPositiveHealth;
     }
-
-    public void buyHealth() {
-        if (player.getMoney() >= 50) {
-            health += purchaseHealth;
-            player.setMoney(player.getMoney() - 50);
-        }
-    }
+    
 
     @Override
     public void render(Canvas canvas) {
