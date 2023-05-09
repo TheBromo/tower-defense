@@ -14,6 +14,11 @@ public class Tower extends StaticGameObject {
     public final int range = 900;
     public final int price = 50;
 
+    private int level = 0;
+    
+    private int damageLevelOne = 20; //TODO prob needs improvement
+    private int damageLevelTwo= 50;
+
     private List<Arrow> arrows;
 
     public Tower(Point2D position) {
@@ -29,13 +34,17 @@ public class Tower extends StaticGameObject {
         arrows.removeIf(Arrow::hasHitTarget);
 
         canvas.getGraphicsContext2D().drawImage(sprite.getSprite(), position.getX() - width / 2, position.getY() - height / 2,
-                width, height);
+            width, height);
 
         //TODO arrow sprite is still tbd I suppose
         for (Arrow arrow : arrows) {
             arrow.render(canvas);
         }
 
+    }
+
+    public void upgrade() {
+        level++;
     }
 
     private boolean outOfRange(Enemy enemy) {
@@ -49,7 +58,7 @@ public class Tower extends StaticGameObject {
         Random rand = new Random();
         var target = possibleTargets.get(rand.nextInt(possibleTargets.size()));
 
-        arrows.add(new Arrow(target, this.position));
+        arrows.add(new Arrow(target, this.position, level == 0 ? damageLevelOne : damageLevelTwo));
 
         return target;
     }

@@ -39,8 +39,12 @@ public class TowerPosition extends StaticGameObject {
         }
     }
 
-    public void BuildTower() {
+    public void buildTower() {
         built = true;
+    }
+
+    public void upgradeTower() {
+       tower.upgrade();
     }
 
     public Tower getTower() {

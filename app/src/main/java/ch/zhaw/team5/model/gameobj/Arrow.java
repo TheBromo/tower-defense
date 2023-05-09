@@ -7,14 +7,16 @@ import javafx.scene.canvas.Canvas;
 
 public class Arrow extends MovingGameObject {
 
-    Enemy enemy;
-    Point2D position;
-    Point2D target;
-    
-    float speed = 1.2f;
-    Point2D velocity;
+    private Enemy enemy;
+    private Point2D position;
+    private Point2D target;
 
-    public Arrow(Enemy target, Point2D startPosition) {
+    private float speed = 1.2f;
+    private Point2D velocity;
+    
+    int damage;
+
+    public Arrow(Enemy target, Point2D startPosition, int damage) {
         super(startPosition, Sprite.SpritePath.DECO); //TODO insert Arrow Sprite here
         this.position = startPosition;
         this.target = target.getPosition(); //TODO get destination position of tower

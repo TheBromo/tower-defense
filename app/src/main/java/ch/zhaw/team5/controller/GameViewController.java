@@ -51,6 +51,13 @@ public class GameViewController {
     @FXML
     private Button buttonTower6;
 
+    private boolean tower1built = false;
+    private boolean tower2built = false;
+    private boolean tower3built = false;
+    private boolean tower4built = false;
+    private boolean tower5built = false;
+    private boolean tower6built = false;
+
     public void initializeListeners(Player player, Stage parent) {
         gameState = new GameState(player);
         this.game = new Game(player, gameState, canvas);
@@ -105,17 +112,78 @@ public class GameViewController {
         Button pressedButton = (Button) event.getSource();
 
         switch (pressedButton.getId()) {
-            case "buttonTower1" -> game.buildTower(1);
-            case "buttonTower2" -> game.buildTower(2);
-            case "buttonTower3" -> game.buildTower(3);
-            case "buttonTower4" -> game.buildTower(4);
-            case "buttonTower5" -> game.buildTower(5);
-            case "buttonTower6" -> game.buildTower(6);
-            default -> System.err.println("unknown action");
-        }
+            case "buttonTower1" -> {
+                if (!tower1built) {
+                    game.buildTower(1);
+                    tower1built = true;
+                    pressedButton.setText("Upgrade Tower 1");
+                } else {
+                    game.upgradeTower(1);
+                    pressedButton.setText("Built");
+                    pressedButton.setDisable(true);
+                }
+            }
+            case "buttonTower2" -> {
+                if (!tower2built) {
+                    game.buildTower(2);
+                    tower2built = true;
+                    pressedButton.setText("Upgrade Tower 2");
+                } else {
+                    game.upgradeTower(2);
+                    pressedButton.setText("Built");
+                    pressedButton.setDisable(true);
+                }
+            }
+            case "buttonTower3" -> {
+                if (!tower3built) {
+                    game.buildTower(3);
+                    tower3built = true;
+                    pressedButton.setText("Upgrade Tower 3");
+                } else {
+                    game.upgradeTower(3);
+                    pressedButton.setText("Built");
+                    pressedButton.setDisable(true);
+                }
+            }
+            case "buttonTower4" -> {
+                if (!tower4built) {
+                    game.buildTower(4);
+                    tower4built = true;
+                    pressedButton.setText("Upgrade Tower 4");
+                } else {
+                    game.upgradeTower(4);
+                    pressedButton.setText("Built");
+                    pressedButton.setDisable(true);
 
-        pressedButton.setDisable(true);
-        pressedButton.setText("Bought");
+                }
+            }
+            case "buttonTower5" -> {
+                if (!tower5built) {
+                    game.buildTower(5);
+                    tower5built = true;
+                    pressedButton.setText("Upgrade Tower 5");
+                } else {
+                    game.upgradeTower(5);
+                    pressedButton.setText("Built");
+                    pressedButton.setDisable(true);
+
+                }
+            }
+            case "buttonTower6" -> {
+                if (!tower6built) {
+                    game.buildTower(6);
+                    tower6built = true;
+                    pressedButton.setText("Upgrade Tower 6");
+                } else {
+                    game.upgradeTower(6);
+                    pressedButton.setText("Built");
+                    pressedButton.setDisable(true);
+                }
+            }
+            default -> {
+                System.err.println("unknown action");
+            }
+        }
     }
 
     public void onBuyHealth() {

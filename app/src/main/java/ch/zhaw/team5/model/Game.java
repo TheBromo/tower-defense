@@ -147,7 +147,11 @@ public class Game implements Renderable {
     }
 
     public void buildTower(int i) {
-        towerPositions.get(i - 1).BuildTower();
+        towerPositions.get(i - 1).buildTower();
         player.addTower(towerPositions.get(i - 1).getTower());
+    }
+
+    public void upgradeTower(int i) {
+        towerPositions.get(i - 1).upgradeTower();
     }
 }
