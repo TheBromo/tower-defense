@@ -40,7 +40,7 @@
                                 <children>
                                     <Pane prefHeight="102.0" prefWidth="471.0">
                               <children>
-                                 <Button layoutX="10.0" layoutY="7.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="464.0" text="Buy Health (after each round)" />
+                                 <Button fx:id="buyHealthButton" layoutX="10.0" layoutY="7.0" mnemonicParsing="false" onAction="#onBuyHealth" prefHeight="41.0" prefWidth="464.0" text="Buy Health (after each round)" />
                               </children></Pane>
                                     <GridPane prefHeight="163.0" prefWidth="471.0">
                                         <columnConstraints>
