@@ -119,10 +119,8 @@ public class GameViewController {
         pressedButton.setText("Bought");
     }
 
-    public void onBuyHealth(ActionEvent event) {
-        Button pressedButton = (Button) event.getSource();
+    public void onBuyHealth() {
         wall.buyHealth();
-        pressedButton.setDisable(true);
-        pressedButton.setText("Bought");
+    
     }
 }

@@ -60,22 +60,22 @@
                                             </Pane>
                                             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
                                     <children>
-                                                    <Button fx:id="buttonTower2" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="7.0" mnemonicParsing="false" onAction="#onBuildTower" prefHeight="41.0" prefWidth="150.0" text="Buy Tower 2" />
+                                                    <Button fx:id="buttonTower3" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="7.0" mnemonicParsing="false" onAction="#onBuildTower" prefHeight="41.0" prefWidth="150.0" text="Buy Tower 3" />
                                     </children>
                                             </Pane>
                                             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                                     <children>
-                                                    <Button fx:id="buttonTower3" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="7.0" mnemonicParsing="false" onAction="#onBuildTower" prefHeight="41.0" prefWidth="150.0" text="Buy Tower 3" />
+                                                    <Button fx:id="buttonTower5" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="7.0" mnemonicParsing="false" onAction="#onBuildTower" prefHeight="41.0" prefWidth="150.0" text="Buy Tower 5" />
                                     </children>
                                             </Pane>
                                             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                                     <children>
-                                                    <Button fx:id="buttonTower4" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="7.0" mnemonicParsing="false" onAction="#onBuildTower" prefHeight="41.0" prefWidth="150.0" text="Buy Tower 4" />
+                                                    <Button fx:id="buttonTower2" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="7.0" mnemonicParsing="false" onAction="#onBuildTower" prefHeight="41.0" prefWidth="150.0" text="Buy Tower 2" />
                                     </children>
                                             </Pane>
                                             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                     <children>
-                                                    <Button fx:id="buttonTower5" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="7.0" mnemonicParsing="false" onAction="#onBuildTower" prefHeight="41.0" prefWidth="150.0" text="Buy Tower 5" />
+                                                    <Button fx:id="buttonTower4" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="7.0" mnemonicParsing="false" onAction="#onBuildTower" prefHeight="41.0" prefWidth="150.0" text="Buy Tower 4" />
                                     </children>
                                             </Pane>
                                             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
@@ -83,7 +83,6 @@
                                                     <Button fx:id="buttonTower6" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="7.0" mnemonicParsing="false" onAction="#onBuildTower" prefHeight="41.0" prefWidth="150.0" text="Buy Tower 6" />
                                                 </children>
                                             </Pane>
-                                 <Pane prefHeight="51.0" prefWidth="161.0" />
                                         </children>
                                     </GridPane>
                                 </children>

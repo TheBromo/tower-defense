@@ -53,8 +53,6 @@ public class Wall extends StaticGameObject {
         if (player.getMoney() >= 50) {
             health += purchaseHealth;
             player.setMoney(player.getMoney() - 50);
-        } else {
-            //TODO: Was passiert dann?
         }
     }
 
