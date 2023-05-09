@@ -45,6 +45,7 @@ public class TowerPosition extends StaticGameObject {
 
     public void upgradeTower() {
        tower.upgrade();
+       tower.setSprite(Sprite.SpritePath.BIGTOWER);
     }
 
     public Tower getTower() {
