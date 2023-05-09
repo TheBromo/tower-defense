@@ -21,6 +21,9 @@ public class StartScreenController {
     public Button quitButton;
 
     public void onStartButtonClicked(ActionEvent event) throws IOException {
+
+  
+        
         FXMLLoader gameViewLoader = new FXMLLoader(getClass().getResource("GameView.fxml"));
         Parent root = (Parent) gameViewLoader.load();
 
