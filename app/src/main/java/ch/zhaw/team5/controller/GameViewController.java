@@ -7,6 +7,7 @@ import java.util.concurrent.Semaphore;
 import ch.zhaw.team5.GameState;
 import ch.zhaw.team5.model.Game;
 import ch.zhaw.team5.model.Player;
+import ch.zhaw.team5.model.gameobj.Wall;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
@@ -21,6 +22,7 @@ public class GameViewController {
 
     private GameState gameState;
     private Game game;
+    private Wall wall;
     private ExecutorService gameThread;
     // private GameDecorator gameDecorator;
 
@@ -34,6 +36,8 @@ public class GameViewController {
     @FXML
     private ProgressBar progressBar;
 
+    @FXML
+    private Button buyHealthButton;
     @FXML
     private Button buttonTower1;
     @FXML
@@ -112,5 +116,10 @@ public class GameViewController {
 
         pressedButton.setDisable(true);
         pressedButton.setText("Bought");
+    }
+
+    public void onBuyHealth() {
+        gameState.setBuyHealth();
+
     }
 }

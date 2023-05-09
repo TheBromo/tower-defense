@@ -41,7 +41,7 @@ public class Game implements Renderable {
 
         decorations.add(new Decorations(5, 0, 0, (int) canvas.getWidth() - 100, (int) canvas.getHeight() / 2));
         decorations.add(new Decorations(5, 0, (int) canvas.getHeight() / 2, (int) canvas.getWidth() - 100,
-                (int) canvas.getHeight()));
+            (int) canvas.getHeight()));
 
         initTowers(canvas.getWidth(), canvas.getHeight());
     }

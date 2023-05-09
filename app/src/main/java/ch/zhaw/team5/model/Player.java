@@ -9,6 +9,9 @@ public class Player {
 
     public int health;
     private int money;
+    private final int priceOfHealthLoading = 20;
+    private final int healthDose = 20;
+    
 
     List<Tower> towerList = new ArrayList<Tower>();
 
@@ -18,6 +21,13 @@ public class Player {
         this.money = money;
         this.towerList = towers;
 
+    }
+
+    public void buyHealth() {
+        if (money>= 20) {
+            health += healthDose;
+            money-=priceOfHealthLoading;
+        }
     }
 
     public int getHealth() {

@@ -5,31 +5,39 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.zhaw.team5.controller.GameViewController">
-    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="688.0" prefWidth="999.0" xmlns="http://javafx.com/javafx/19">
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ch.zhaw.team5.controller.GameViewController">
+    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="688.0"
+                prefWidth="999.0" xmlns="http://javafx.com/javafx/19">
         <children>
             <VBox layoutX="14.0" layoutY="14.0" prefHeight="665.0" prefWidth="976.0">
                 <children>
-                    <Canvas fx:id="canvas" height="500.0" width="1000.0" />
+                    <Canvas fx:id="canvas" height="500.0" width="1000.0"/>
                     <HBox prefHeight="207.0" prefWidth="978.0">
                         <children>
                             <VBox prefHeight="190.0" prefWidth="507.0">
                                 <children>
                                     <Label text="Status">
                                         <font>
-                                            <Font name="System Bold" size="18.0" />
+                                            <Font name="System Bold" size="18.0"/>
                                         </font>
                                     </Label>
                                     <Pane prefHeight="164.0" prefWidth="507.0" style="-fx-border-color: black;">
                                         <children>
                                             <FlowPane layoutY="-1.0" prefHeight="163.0" prefWidth="507.0">
                                                 <children>
-                                                    <Label prefHeight="50.0" prefWidth="150.0" style="-fx-padding: 10px" text="Money" />
-                                                    <Label fx:id="moneyLabel" prefHeight="50.0" prefWidth="350.0" text="" />
-                                                    <Label prefHeight="50.0" prefWidth="150.0" style="-fx-padding: 10px" text="Health" />
-                                                    <ProgressBar fx:id="healthBar" prefHeight="35.0" prefWidth="350.0" progress="0.61" style="-fx-accent: #A1EA6E;" />
-                                                    <Label prefHeight="50.0" prefWidth="150.0" style="-fx-padding: 10px" text="Progress" />
-                                                    <ProgressBar fx:id="progressBar" prefHeight="35.0" prefWidth="350.0" progress="0.0" />
+                                                    <Label prefHeight="50.0" prefWidth="150.0" style="-fx-padding: 10px"
+                                                           text="Money"/>
+                                                    <Label fx:id="moneyLabel" prefHeight="50.0" prefWidth="350.0"
+                                                           text=""/>
+                                                    <Label prefHeight="50.0" prefWidth="150.0" style="-fx-padding: 10px"
+                                                           text="Health"/>
+                                                    <ProgressBar fx:id="healthBar" prefHeight="35.0" prefWidth="350.0"
+                                                                 progress="0.61" style="-fx-accent: #A1EA6E;"/>
+                                                    <Label prefHeight="50.0" prefWidth="150.0" style="-fx-padding: 10px"
+                                                           text="Progress"/>
+                                                    <ProgressBar fx:id="progressBar" prefHeight="35.0" prefWidth="350.0"
+                                                                 progress="0.0"/>
                                                 </children>
                                             </FlowPane>
                                         </children>
@@ -38,46 +46,74 @@
                             </VBox>
                             <VBox prefHeight="189.0" prefWidth="471.0">
                                 <children>
-                                    <Pane prefHeight="30.0" prefWidth="471.0" />
+                                    <Pane prefHeight="102.0" prefWidth="471.0">
+                                        <children>
+                                            <Button fx:id="buyHealthButton" layoutX="10.0" layoutY="7.0"
+                                                    mnemonicParsing="false" onAction="#onBuyHealth" prefHeight="41.0"
+                                                    prefWidth="464.0" text="Buy Health (after each round)"/>
+                                        </children>
+                                    </Pane>
                                     <GridPane prefHeight="163.0" prefWidth="471.0">
                                         <columnConstraints>
-                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
                                         </columnConstraints>
                                         <rowConstraints>
-                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES"/>
+                                            <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES"/>
                                         </rowConstraints>
                                         <children>
-                                            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                                            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0"
+                                                  GridPane.rowIndex="0">
                                                 <children>
-                                                    <Button fx:id="buttonTower1" alignment="CENTER" contentDisplay="CENTER" disable="false" layoutX="9.0" layoutY="7.0" mnemonicParsing="false" onAction="#onBuildTower" prefHeight="41.0" prefWidth="217.0" text="Buy Tower 1" />
+                                                    <Button fx:id="buttonTower1" alignment="CENTER"
+                                                            contentDisplay="CENTER" layoutX="10.0" layoutY="7.0"
+                                                            mnemonicParsing="false" onAction="#onBuildTower"
+                                                            prefHeight="41.0" prefWidth="150.0" text="Buy Tower 1"/>
                                                 </children>
                                             </Pane>
-                                            <Pane prefHeight="189.0" prefWidth="339.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1"
+                                                  GridPane.rowIndex="0">
                                                 <children>
-                                                    <Button fx:id="buttonTower2" alignment="CENTER" contentDisplay="CENTER" layoutX="9.0" layoutY="7.0" mnemonicParsing="false" onAction="#onBuildTower" prefHeight="41.0" prefWidth="217.0" text="Buy Tower 2" />
+                                                    <Button fx:id="buttonTower3" alignment="CENTER"
+                                                            contentDisplay="CENTER" layoutX="10.0" layoutY="7.0"
+                                                            mnemonicParsing="false" onAction="#onBuildTower"
+                                                            prefHeight="41.0" prefWidth="150.0" text="Buy Tower 3"/>
                                                 </children>
                                             </Pane>
-                                            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                                            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                                                 <children>
-                                                    <Button fx:id="buttonTower3" alignment="CENTER" contentDisplay="CENTER" layoutX="9.0" layoutY="7.0" mnemonicParsing="false" onAction="#onBuildTower" prefHeight="41.0" prefWidth="217.0" text="Buy Tower 3" />
+                                                    <Button fx:id="buttonTower5" alignment="CENTER"
+                                                            contentDisplay="CENTER" layoutX="10.0" layoutY="7.0"
+                                                            mnemonicParsing="false" onAction="#onBuildTower"
+                                                            prefHeight="41.0" prefWidth="150.0" text="Buy Tower 5"/>
                                                 </children>
                                             </Pane>
-                                            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                                                 <children>
-                                                    <Button fx:id="buttonTower4" alignment="CENTER" contentDisplay="CENTER" layoutX="9.0" layoutY="7.0" mnemonicParsing="false" onAction="#onBuildTower" prefHeight="41.0" prefWidth="217.0" text="Buy Tower 4" />
+                                                    <Button fx:id="buttonTower2" alignment="CENTER"
+                                                            contentDisplay="CENTER" layoutX="10.0" layoutY="7.0"
+                                                            mnemonicParsing="false" onAction="#onBuildTower"
+                                                            prefHeight="41.0" prefWidth="150.0" text="Buy Tower 2"/>
                                                 </children>
                                             </Pane>
-                                            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                                            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1"
+                                                  GridPane.rowIndex="1">
                                                 <children>
-                                                    <Button fx:id="buttonTower5" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="7.0" mnemonicParsing="false" onAction="#onBuildTower" prefHeight="41.0" prefWidth="217.0" text="Buy Tower 5" />
+                                                    <Button fx:id="buttonTower4" alignment="CENTER"
+                                                            contentDisplay="CENTER" layoutX="10.0" layoutY="7.0"
+                                                            mnemonicParsing="false" onAction="#onBuildTower"
+                                                            prefHeight="41.0" prefWidth="150.0" text="Buy Tower 4"/>
                                                 </children>
                                             </Pane>
-                                            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2"
+                                                  GridPane.rowIndex="1">
                                                 <children>
-                                                    <Button fx:id="buttonTower6" alignment="CENTER" contentDisplay="CENTER" layoutX="9.0" layoutY="7.0" mnemonicParsing="false" onAction="#onBuildTower" prefHeight="41.0" prefWidth="217.0" text="Buy Tower 6" />
+                                                    <Button fx:id="buttonTower6" alignment="CENTER"
+                                                            contentDisplay="CENTER" layoutX="10.0" layoutY="7.0"
+                                                            mnemonicParsing="false" onAction="#onBuildTower"
+                                                            prefHeight="41.0" prefWidth="150.0" text="Buy Tower 6"/>
                                                 </children>
                                             </Pane>
                                         </children>

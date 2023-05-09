@@ -27,7 +27,7 @@ public class GameState {
         return health;
     }
 
-    public final BooleanProperty renderNeededProperty(){
+    public final BooleanProperty renderNeededProperty() {
         return renderNeeded;
     }
 
@@ -39,8 +39,11 @@ public class GameState {
         this.health.set(health);
     }
 
-    public void setRenderNeeded(boolean renderNeeded){
+    public void setRenderNeeded(boolean renderNeeded) {
         this.renderNeeded.set(renderNeeded);
     }
 
+    public void setBuyHealth() {
+        this.player.buyHealth();
+    }
 }
