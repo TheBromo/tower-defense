@@ -120,7 +120,7 @@ public class GameViewController {
     }
 
     public void onBuyHealth() {
-        player.buyHealth();
+        gameState.setBuyHealth();
     
     }
 }
