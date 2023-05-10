@@ -27,8 +27,6 @@ public class Game implements Renderable {
     private Path path;
     private int wantedEnemies = 50;
 
-    double MS_COUNTER = 100.0;
-
     public Game(Player player, GameState gameState, Canvas canvas) {
         this.player = player;
         this.wall = new Wall(new Point2D(canvas.getWidth() - 100, 0));
@@ -39,7 +37,7 @@ public class Game implements Renderable {
 
         decorations.add(new Decorations(5, 0, 0, (int) canvas.getWidth() - 100, (int) canvas.getHeight() / 2));
         decorations.add(new Decorations(5, 0, (int) canvas.getHeight() / 2, (int) canvas.getWidth() - 100,
-            (int) canvas.getHeight()));
+                (int) canvas.getHeight()));
 
         initTowers(canvas.getWidth(), canvas.getHeight());
     }
@@ -93,7 +91,6 @@ public class Game implements Renderable {
             while (lag >= MS_PER_UPDATE) {
                 update();
                 lag -= MS_PER_UPDATE;
-                MS_COUNTER += MS_PER_UPDATE;
             }
             gameState.setRenderNeeded(true);
         }
@@ -106,12 +103,11 @@ public class Game implements Renderable {
                 // TODO add Damage
             }
         }
-        enemies.removeIf(e -> e.outOfScreen((int) path.getEnd().getX()));
-        
-        for (Tower tower: player.getTowers()) {
-            if (MS_COUNTER % 1000.0 == 0) { //shoot at enemies every second (
-                tower.shootAtEnemies(enemies);
-            }
+        enemies.removeIf(e -> e.outOfScreen((int) path.getEnd().getX()) || !e.isAlive());
+
+        for (Tower tower : player.getTowers()) {
+            tower.update();
+            tower.shootAtEnemies(enemies);
         }
 
         while (enemies.size() < wantedEnemies) {
@@ -129,7 +125,6 @@ public class Game implements Renderable {
             decoration.render(canvas);
         }
         path.render(canvas);
-
 
         for (Enemy enemy : enemies) {
             enemy.render(canvas);

@@ -47,13 +47,15 @@ public class Enemy extends PathFollowingGameObject {
         var g2d = canvas.getGraphicsContext2D();
         g2d.drawImage(sprite.getSprite(), position.getX() - width / 2, position.getY() - height / 2,
                 width, height);
+                debugEnemy(canvas.getGraphicsContext2D());
     }
 
     private void debugEnemy(GraphicsContext g2d) {
         g2d.setFill(Color.RED);
-        g2d.fillOval(position.getX() + velocity.getX(), position.getY() + velocity.getY(),
-                5, 5);
+        g2d.strokeText("" + health, position.getX() - width / 2, position.getY() - height / 2);
+    }
 
-        g2d.strokeText("" + velocity, position.getX() - width / 2, position.getY() - height / 2);
+    public int getHealth() {
+        return health;
     }
 }

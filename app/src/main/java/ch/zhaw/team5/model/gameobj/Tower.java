@@ -11,13 +11,14 @@ import java.util.Random;
 
 public class Tower extends StaticGameObject {
 
-    public final int range = 900;
+    public final int range = 200;
     public final int price = 50;
 
     private int level = 0;
-    
-    private int damageLevelOne = 20; //TODO prob needs improvement
-    private int damageLevelTwo= 50;
+
+    private int damageLevelOne = 20; // TODO prob needs improvement
+    private int damageLevelTwo = 50;
+    private long interval = 5000, lastShot = 0;
 
     private List<Arrow> arrows;
 
@@ -30,13 +31,15 @@ public class Tower extends StaticGameObject {
 
     @Override
     public void render(Canvas canvas) {
-        //TODO maybe remove this and move it to an update function
-        arrows.removeIf(Arrow::hasHitTarget);
+        // TODO maybe remove this and move it to an update function
 
-        canvas.getGraphicsContext2D().drawImage(sprite.getSprite(), position.getX() - width / 2, position.getY() - height / 2,
-            width, height);
+        canvas.getGraphicsContext2D().drawImage(sprite.getSprite(), position.getX() - width / 2,
+                position.getY() - height / 2,
+                width, height);
 
-        //TODO arrow sprite is still tbd I suppose
+        canvas.getGraphicsContext2D().strokeOval((position.getX()) - range*2 / 2,
+                (position.getY()) - range*2 / 2, range * 2, range * 2);
+
         for (Arrow arrow : arrows) {
             arrow.render(canvas);
         }
@@ -51,16 +54,29 @@ public class Tower extends StaticGameObject {
         return position.distance(enemy.getPosition()) > range;
     }
 
-    public Enemy shootAtEnemies(List<Enemy> enemies) {
-        var possibleTargets = new ArrayList<>(enemies);
-        possibleTargets.removeIf(enemy -> outOfRange(enemy));
+    public void shootAtEnemies(List<Enemy> enemies) {
 
-        Random rand = new Random();
-        var target = possibleTargets.get(rand.nextInt(possibleTargets.size()));
+        if (enemies.size() > 0 && interval < System.currentTimeMillis() - lastShot) {
 
-        arrows.add(new Arrow(target, this.position, level == 0 ? damageLevelOne : damageLevelTwo));
+            var possibleTargets = new ArrayList<>(enemies);
+            possibleTargets.removeIf(enemy -> outOfRange(enemy));
 
-        return target;
+            if (possibleTargets.size() == 0)
+                return;
+
+            Random rand = new Random();
+            var target = possibleTargets.get(rand.nextInt(possibleTargets.size()));
+
+            arrows.add(new Arrow(target, this.position, level == 0 ? damageLevelOne : damageLevelTwo));
+            lastShot = System.currentTimeMillis();
+        }
+    }
+
+    public void update() {
+        arrows.removeIf(Arrow::hasHitTarget);
+        for (Arrow arrow : arrows) {
+            arrow.update();
+        }
     }
 
 }
