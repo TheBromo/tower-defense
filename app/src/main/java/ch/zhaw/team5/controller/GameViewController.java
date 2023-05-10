@@ -6,8 +6,6 @@ import java.util.concurrent.Semaphore;
 
 import ch.zhaw.team5.GameState;
 import ch.zhaw.team5.model.Game;
-import ch.zhaw.team5.model.Player;
-import ch.zhaw.team5.model.gameobj.Wall;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
@@ -22,7 +20,6 @@ public class GameViewController {
 
     private GameState gameState;
     private Game game;
-    private Wall wall;
     private ExecutorService gameThread;
     // private GameDecorator gameDecorator;
 
@@ -30,7 +27,6 @@ public class GameViewController {
     private Label moneyLabel;
     @FXML
     private Canvas canvas;
-
     @FXML
     private ProgressBar healthBar;
     @FXML
@@ -38,30 +34,11 @@ public class GameViewController {
 
     @FXML
     private Button buyHealthButton;
-    @FXML
-    private Button buttonTower1;
-    @FXML
-    private Button buttonTower2;
-    @FXML
-    private Button buttonTower3;
-    @FXML
-    private Button buttonTower4;
-    @FXML
-    private Button buttonTower5;
-    @FXML
-    private Button buttonTower6;
 
-    private boolean tower1built = false;
-    private boolean tower2built = false;
-    private boolean tower3built = false;
-    private boolean tower4built = false;
-    private boolean tower5built = false;
-    private boolean tower6built = false;
-
-    public void initializeListeners(Player player, Stage parent) {
-        gameState = new GameState(player);
-        this.game = new Game(player, gameState, canvas);
-        initGameState(player, gameState);
+    public void initializeListeners(Stage parent) {
+        gameState = new GameState();
+        this.game = new Game(gameState, canvas);
+        initGameState(gameState);
 
         gameThread = Executors.newCachedThreadPool();
         gameThread.submit(() -> game.loop());
@@ -69,15 +46,21 @@ public class GameViewController {
         setOnClose(parent);
     }
 
-    private void initGameState(Player player, GameState gameState) {
+    private void initGameState(GameState gameState) {
         gameState.moneyProperty().addListener((observable, oldValue, newValue) -> {
-            moneyLabel.setText(newValue + "$");
+            Platform.runLater(() -> moneyLabel.setText(newValue + "$"));
         });
         gameState.healthProperty().addListener((observable, oldValue, newValue) -> {
-            healthBar.setProgress((double) newValue);
+            System.out.println((double) newValue / 100);
+            System.out.println(newValue);
+            Platform.runLater(() -> healthBar.setProgress((double) newValue / 100));
         });
-        gameState.setHealth(player.getHealth());
-        gameState.setMoney(player.getMoney());
+        gameState.gameEndProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("we looosing !!!!!" + newValue);
+            if (newValue == true) {
+                closeGame();
+            }
+        });
         gameState.renderNeededProperty().addListener(render());
     }
 
@@ -102,10 +85,14 @@ public class GameViewController {
 
     private void setOnClose(Stage parent) {
         parent.setOnCloseRequest(event -> {
-            gameThread.shutdown();
-            Platform.exit();
-            System.exit(0);
+            closeGame();
         });
+    }
+
+    private void closeGame() {
+        gameThread.shutdown();
+        Platform.exit();
+        System.exit(0);
     }
 
     public void onBuildTower(ActionEvent event) {
@@ -113,72 +100,22 @@ public class GameViewController {
 
         switch (pressedButton.getId()) {
             case "buttonTower1" -> {
-                if (!tower1built) {
-                    game.buildTower(1);
-                    tower1built = true;
-                    pressedButton.setText("Upgrade Tower 1");
-                } else {
-                    game.upgradeTower(1);
-                    pressedButton.setText("Built");
-                    pressedButton.setDisable(true);
-                }
+                buildOrUpgradeTower(1, pressedButton);
             }
             case "buttonTower2" -> {
-                if (!tower2built) {
-                    game.buildTower(2);
-                    tower2built = true;
-                    pressedButton.setText("Upgrade Tower 2");
-                } else {
-                    game.upgradeTower(2);
-                    pressedButton.setText("Built");
-                    pressedButton.setDisable(true);
-                }
+                buildOrUpgradeTower(2, pressedButton);
             }
             case "buttonTower3" -> {
-                if (!tower3built) {
-                    game.buildTower(3);
-                    tower3built = true;
-                    pressedButton.setText("Upgrade Tower 3");
-                } else {
-                    game.upgradeTower(3);
-                    pressedButton.setText("Built");
-                    pressedButton.setDisable(true);
-                }
+                buildOrUpgradeTower(3, pressedButton);
             }
             case "buttonTower4" -> {
-                if (!tower4built) {
-                    game.buildTower(4);
-                    tower4built = true;
-                    pressedButton.setText("Upgrade Tower 4");
-                } else {
-                    game.upgradeTower(4);
-                    pressedButton.setText("Built");
-                    pressedButton.setDisable(true);
-
-                }
+                buildOrUpgradeTower(4, pressedButton);
             }
             case "buttonTower5" -> {
-                if (!tower5built) {
-                    game.buildTower(5);
-                    tower5built = true;
-                    pressedButton.setText("Upgrade Tower 5");
-                } else {
-                    game.upgradeTower(5);
-                    pressedButton.setText("Built");
-                    pressedButton.setDisable(true);
-
-                }
+                buildOrUpgradeTower(5, pressedButton);
             }
             case "buttonTower6" -> {
-                if (!tower6built) {
-                    game.buildTower(6);
-                    tower6built = true;
-                    pressedButton.setText("Upgrade Tower 6");
-                } else {
-                    game.upgradeTower(6);
-                    pressedButton.setText("Built");
-                    pressedButton.setDisable(true);
-                }
+                buildOrUpgradeTower(6, pressedButton);
             }
             default -> {
                 System.err.println("unknown action");
@@ -186,8 +123,15 @@ public class GameViewController {
         }
     }
 
-    public void onBuyHealth() {
-        gameState.setBuyHealth();
+    private void buildOrUpgradeTower(int id, Button pressedButton) {
+        if (game.canUpgradeOrBuildTower(id)) {
+            game.buildOrUpgradeTower(id);
+            pressedButton.setText("Upgrade Tower " + id + " (" + GameState.upgradeTowerCost + "$)");
+            pressedButton.setDisable(!game.canUpgradeOrBuildTower(id));
+        }
+    }
 
+    public void onBuyHealth() {
+        gameState.buyHealth();
     }
 }

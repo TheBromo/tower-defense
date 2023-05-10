@@ -23,8 +23,8 @@ public class Arrow extends MovingGameObject {
         super(startPosition, SpritePath.ARROW);
         this.enemy = target;
         this.damage = damage;
-        height = 10;
-        width = 10;
+        height = 20;
+        width = 20;
         // compute the difference vector (start to end) = direction
         velocity = this.enemy.getPosition().subtract(position);
 

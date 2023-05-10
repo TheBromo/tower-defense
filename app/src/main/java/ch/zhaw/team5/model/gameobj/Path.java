@@ -4,13 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ch.zhaw.team5.model.gameobj.definitions.StaticGameObject;
-import ch.zhaw.team5.model.util.ImageLoader;
-import ch.zhaw.team5.model.util.RandomUtil;
 import ch.zhaw.team5.model.util.Sprite;
 import ch.zhaw.team5.model.util.Sprite.SpritePath;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.image.Image;
 
 public class Path extends StaticGameObject {
     private final List<Sprite> sprites;
@@ -25,8 +22,6 @@ public class Path extends StaticGameObject {
         radius = height / 2;
         this.end = end;
         int parts = (int) start.distance(end) / width;
-        var imageLoader = ImageLoader.getInstance();
-        var randomUtil = RandomUtil.getInstance();
         for (int i = 0; i < parts; i++) {
             sprites.add(new Sprite(SpritePath.STREET));
         }
@@ -54,7 +49,7 @@ public class Path extends StaticGameObject {
         return radius;
     }
 
-    public List<Point2D> getPointsAList(){
+    public List<Point2D> getPointsAList() {
         return List.of(position, end);
     }
 }

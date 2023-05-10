@@ -17,22 +17,22 @@ public class Game implements Renderable {
     private List<TowerPosition> towerPositions = new ArrayList<>();
     private List<Enemy> enemies = new ArrayList<>();
     private List<Decorations> decorations = new ArrayList<>();
+    private Path path;
+    private int wantedEnemies = 50;
     private Wall wall;
 
-    private Player player;
+    private GameState gameState;
+
     private Phase phase;
     private List<Phase> phases = new ArrayList<>();
     private PhaseCurrent phaseCurrent;
-    private GameState gameState;
-    private Path path;
-    private int wantedEnemies = 50;
 
-    public Game(Player player, GameState gameState, Canvas canvas) {
-        this.player = player;
+    public Game(GameState gameState, Canvas canvas) {
         this.wall = new Wall(new Point2D(canvas.getWidth() - 100, 0));
         this.phase = new PhaseCurrent();
         this.phaseCurrent = new PhaseCurrent();
         this.gameState = gameState;
+
         path = new Path(new Point2D(0, canvas.getHeight() / 2), new Point2D(canvas.getWidth(), canvas.getHeight() / 2));
 
         decorations.add(new Decorations(5, 0, 0, (int) canvas.getWidth() - 100, (int) canvas.getHeight() / 2));
@@ -97,22 +97,31 @@ public class Game implements Renderable {
     }
 
     private void update() {
+
         for (Enemy enemy : enemies) {
             enemy.update(enemies, path);
-            if (enemy.outOfScreen((int) wall.getPosition().getX())) {
-                player.enemyInvaded(enemy);
+            if (enemy.outOfScreen((int) path.getEnd().getX())) {
+                gameState.enemyInvaded(enemy);
+            } else if (!enemy.isAlive()) {
+                gameState.addMoney(enemy.getReward());
             }
         }
         enemies.removeIf(e -> e.outOfScreen((int) path.getEnd().getX()) || !e.isAlive());
 
-        for (Tower tower : player.getTowers()) {
-            tower.update();
-            tower.shootAtEnemies(enemies);
+        for (TowerPosition towerPosition : towerPositions) {
+            if (towerPosition.hasTower()) {
+                var tower = towerPosition.getTower();
+                tower.update();
+                tower.shootAtEnemies(enemies);
+            }
         }
 
         while (enemies.size() < wantedEnemies) {
             spawnEnemy();
         }
+
+        if (gameState.healthProperty().get() <= 0)
+            gameState.setGameEnded(true);
     }
 
     @Override
@@ -130,23 +139,34 @@ public class Game implements Renderable {
             enemy.render(canvas);
         }
 
-        for (Tower tower : player.getTowers()) {
-            tower.render(canvas);
-        }
-
         for (TowerPosition towerPosition : towerPositions) {
-            towerPosition.render(canvas);
+            if (towerPosition.hasTower()) {
+                var tower = towerPosition.getTower();
+                tower.render(canvas);
+            } else {
+                towerPosition.render(canvas);
+            }
         }
 
         wall.render(canvas);
     }
 
-    public void buildTower(int i) {
-        towerPositions.get(i - 1).buildTower();
-        player.addTower(towerPositions.get(i - 1).getTower());
+    public void buildOrUpgradeTower(int id) {
+        var towerPosition = towerPositions.get(id - 1);
+        if (!towerPosition.hasTower()) {
+
+            if (gameState.buyTower()) {
+                towerPositions.get(id - 1).buildTower();
+
+            }
+        } else if (towerPosition.isUpgradable()) {
+            if (gameState.upgradeTower()) {
+                towerPositions.get(id - 1).upgradeTower();
+            }
+        }
     }
 
-    public void upgradeTower(int i) {
-        towerPositions.get(i - 1).upgradeTower();
+    public boolean canUpgradeOrBuildTower(int id) {
+        return !towerPositions.get(id - 1).hasTower() || towerPositions.get(id - 1).isUpgradable();
     }
 }

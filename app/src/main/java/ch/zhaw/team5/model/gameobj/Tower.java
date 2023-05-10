@@ -14,10 +14,7 @@ public class Tower extends StaticGameObject {
     public final int range = 200;
     public final int price = 50;
 
-    private int level = 0;
-
-    private int damageLevelOne = 20; // TODO prob needs improvement
-    private int damageLevelTwo = 50;
+    private int damge = 10;
     private long interval = 5000, lastShot = 0;
 
     private List<Arrow> arrows;
@@ -31,8 +28,6 @@ public class Tower extends StaticGameObject {
 
     @Override
     public void render(Canvas canvas) {
-        // TODO maybe remove this and move it to an update function
-
         canvas.getGraphicsContext2D().drawImage(sprite.getSprite(), position.getX() - width / 2,
                 position.getY() - height / 2,
                 width, height);
@@ -44,7 +39,8 @@ public class Tower extends StaticGameObject {
     }
 
     public void upgrade() {
-        level++;
+        damge += 10;
+        interval *= .75;
     }
 
     private boolean outOfRange(Enemy enemy) {
@@ -64,7 +60,7 @@ public class Tower extends StaticGameObject {
             Random rand = new Random();
             var target = possibleTargets.get(rand.nextInt(possibleTargets.size()));
 
-            arrows.add(new Arrow(target, this.position, level == 0 ? damageLevelOne : damageLevelTwo));
+            arrows.add(new Arrow(target, this.position, damge));
             lastShot = System.currentTimeMillis();
         }
     }

@@ -1,6 +1,5 @@
 package ch.zhaw.team5.model.gameobj;
 
-import ch.zhaw.team5.model.Player;
 import ch.zhaw.team5.model.gameobj.definitions.StaticGameObject;
 import ch.zhaw.team5.model.util.Sprite;
 import ch.zhaw.team5.model.util.Sprite.SpritePath;
@@ -8,7 +7,6 @@ import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 
 public class Wall extends StaticGameObject {
-    private Player player;
     private final Sprite wallTop;
     private final Sprite wallBottom;
 
@@ -25,7 +23,6 @@ public class Wall extends StaticGameObject {
     private int health;
     private final int reductionOfHealth = 5;
     private final int increaseOfHealth = 5;
-
 
     private final int initialHealth = 100;
     private boolean hasWallPositiveHealth;
@@ -48,11 +45,11 @@ public class Wall extends StaticGameObject {
         }
         return hasWallPositiveHealth;
     }
-    
 
     @Override
     public void render(Canvas canvas) {
         canvas.getGraphicsContext2D().drawImage(wallTop.getSprite(), position.getX(), position.getY(), width, height);
-        canvas.getGraphicsContext2D().drawImage(wallBottom.getSprite(), position.getX(), position.getY() + canvas.getHeight() / 2 + 50, width, height);
+        canvas.getGraphicsContext2D().drawImage(wallBottom.getSprite(), position.getX(),
+                position.getY() + canvas.getHeight() / 2 + 50, width, height);
     }
 }
