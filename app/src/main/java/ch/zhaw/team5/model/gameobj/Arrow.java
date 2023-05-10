@@ -5,6 +5,7 @@ import ch.zhaw.team5.model.util.Sprite.SpritePath;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.PickResult;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 
@@ -29,7 +30,7 @@ public class Arrow extends MovingGameObject {
 
         velocity = velocity.normalize();
         velocity = velocity.multiply(speed);
-        angle = Math.atan2(velocity.getY(), velocity.getX()) ;
+        angle = Math.atan2(velocity.getY(), velocity.getX()) + 1.5708;
         maxlifecycle = (int) (position.distance(this.enemy.getPosition()) / velocity.magnitude());
     }
 
@@ -47,17 +48,13 @@ public class Arrow extends MovingGameObject {
 
     @Override
     public void render(Canvas canvas) {
-        canvas.getGraphicsContext2D().save(); // saves the current state on stack, including the current transform
-
-        canvas.getGraphicsContext2D().setFill(Color.BLACK);
-        rotate(canvas.getGraphicsContext2D(), angle, width/2, height/2);
-        canvas.getGraphicsContext2D().drawImage(sprite.getSprite(), position.getX() - width / 2,
+        var gc = canvas.getGraphicsContext2D();
+        gc.save(); // saves the current state on stack, including the current transform
+        rotate(gc, Math.toDegrees(angle), position.getX(), position.getY());
+        gc.drawImage(sprite.getSprite(), position.getX() - width / 2,
                 position.getY() - height / 2,
                 width, height);
-        canvas.getGraphicsContext2D().restore(); // back to original state (before rotation)
-
-        canvas.getGraphicsContext2D().strokeText("" + enemy.getHealth(), enemy.getPosition().getX() - width / 2,
-                enemy.getPosition().getY() - height / 2);
+        gc.restore(); // back to original state (before rotation)
 
     }
 

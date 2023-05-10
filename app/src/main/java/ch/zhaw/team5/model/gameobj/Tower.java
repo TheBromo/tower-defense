@@ -37,9 +37,6 @@ public class Tower extends StaticGameObject {
                 position.getY() - height / 2,
                 width, height);
 
-        canvas.getGraphicsContext2D().strokeOval((position.getX()) - range*2 / 2,
-                (position.getY()) - range*2 / 2, range * 2, range * 2);
-
         for (Arrow arrow : arrows) {
             arrow.render(canvas);
         }

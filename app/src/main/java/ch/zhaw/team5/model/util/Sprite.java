@@ -3,7 +3,6 @@ package ch.zhaw.team5.model.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.animation.Animation;
 import javafx.scene.image.Image;
 
 public class Sprite {

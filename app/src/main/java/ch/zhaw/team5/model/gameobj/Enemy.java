@@ -16,7 +16,7 @@ public class Enemy extends PathFollowingGameObject {
     private int damage = 25;
 
     public Enemy(Point2D position) {
-        super(position, Sprite.SpritePath.ENEMY );
+        super(position, Sprite.SpritePath.ENEMY);
         width = 50;
         height = 50;
     }
@@ -48,7 +48,10 @@ public class Enemy extends PathFollowingGameObject {
         var g2d = canvas.getGraphicsContext2D();
         g2d.drawImage(sprite.getSprite(), position.getX() - width / 2, position.getY() - height / 2,
                 width, height);
-                debugEnemy(canvas.getGraphicsContext2D());
+        g2d.setFill(Color.LIGHTGREEN);
+        g2d.fillRect(position.getX() - width / 2, position.getY() - height / 2-10,
+                (((double) width / 100) * health), 2);
+        // debugEnemy(canvas.getGraphicsContext2D());
     }
 
     private void debugEnemy(GraphicsContext g2d) {
