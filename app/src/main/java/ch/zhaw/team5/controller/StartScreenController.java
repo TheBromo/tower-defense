@@ -1,11 +1,7 @@
 package ch.zhaw.team5.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-
-import ch.zhaw.team5.model.Player;
-import ch.zhaw.team5.model.gameobj.Tower;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,8 +18,6 @@ public class StartScreenController {
 
     public void onStartButtonClicked(ActionEvent event) throws IOException {
 
-  
-        
         FXMLLoader gameViewLoader = new FXMLLoader(getClass().getResource("GameView.fxml"));
         Parent root = (Parent) gameViewLoader.load();
 
@@ -34,7 +28,7 @@ public class StartScreenController {
         gameStage.show();
 
         GameViewController gameViewController = gameViewLoader.getController();
-        gameViewController.initializeListeners(new Player(100, 50, new ArrayList<Tower>()), gameStage);
+        gameViewController.initializeListeners(gameStage);
 
         Stage currentStage = (Stage) quitButton.getScene().getWindow();
         currentStage.close();

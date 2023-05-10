@@ -11,8 +11,11 @@ import java.util.Random;
 
 public class Tower extends StaticGameObject {
 
-    public final int range = 900;
+    public final int range = 200;
     public final int price = 50;
+
+    private int damge = 10;
+    private long interval = 5000, lastShot = 0;
 
     private List<Arrow> arrows;
 
@@ -25,30 +28,48 @@ public class Tower extends StaticGameObject {
 
     @Override
     public void render(Canvas canvas) {
-        //TODO maybe remove this and move it to an update function
-        arrows.removeIf(arrow -> arrow.hasHitTarget());
-
-        canvas.getGraphicsContext2D().drawImage(sprite.getSprite(), position.getX() - width / 2, position.getY() - height / 2,
+        canvas.getGraphicsContext2D().drawImage(sprite.getSprite(), position.getX() - width / 2,
+                position.getY() - height / 2,
                 width, height);
 
-        //TODO call render on each arrow
+        for (Arrow arrow : arrows) {
+            arrow.render(canvas);
+        }
 
+    }
+
+    public void upgrade() {
+        damge += 10;
+        interval *= .75;
     }
 
     private boolean outOfRange(Enemy enemy) {
         return position.distance(enemy.getPosition()) > range;
     }
 
-    public Enemy shootAtEnemies(List<Enemy> enemies) {
-        var possibleTargets = new ArrayList<>(enemies);
-        possibleTargets.removeIf(enemy -> outOfRange(enemy));
+    public void shootAtEnemies(List<Enemy> enemies) {
 
-        Random rand = new Random();
-        var target = possibleTargets.get(rand.nextInt(possibleTargets.size()));
+        if (enemies.size() > 0 && interval < System.currentTimeMillis() - lastShot) {
 
-        arrows.add(new Arrow(target, this.position));
+            var possibleTargets = new ArrayList<>(enemies);
+            possibleTargets.removeIf(enemy -> outOfRange(enemy));
 
-        return target;
+            if (possibleTargets.size() == 0)
+                return;
+
+            Random rand = new Random();
+            var target = possibleTargets.get(rand.nextInt(possibleTargets.size()));
+
+            arrows.add(new Arrow(target, this.position, damge));
+            lastShot = System.currentTimeMillis();
+        }
+    }
+
+    public void update() {
+        arrows.removeIf(Arrow::hasHitTarget);
+        for (Arrow arrow : arrows) {
+            arrow.update();
+        }
     }
 
 }
