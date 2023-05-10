@@ -1,5 +1,6 @@
 package ch.zhaw.team5.model;
 
+import ch.zhaw.team5.model.gameobj.Enemy;
 import ch.zhaw.team5.model.gameobj.Tower;
 
 import java.util.ArrayList;
@@ -52,6 +53,10 @@ public class Player {
 
     public void addTower(Tower towers) {
         towerList.add(towers);
+    }
+
+    public void enemyInvaded(Enemy enemy) {
+        health -= enemy.getDamage();
     }
 
 }

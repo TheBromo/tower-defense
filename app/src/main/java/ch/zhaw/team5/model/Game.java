@@ -100,7 +100,7 @@ public class Game implements Renderable {
         for (Enemy enemy : enemies) {
             enemy.update(enemies, path);
             if (enemy.outOfScreen((int) wall.getPosition().getX())) {
-                // TODO add Damage
+                player.enemyInvaded(enemy);
             }
         }
         enemies.removeIf(e -> e.outOfScreen((int) path.getEnd().getX()) || !e.isAlive());

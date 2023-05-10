@@ -13,6 +13,7 @@ public class Enemy extends PathFollowingGameObject {
 
     private boolean isAlive = true;
     private int health = 100;
+    private int damage = 25;
 
     public Enemy(Point2D position) {
         super(position, Sprite.SpritePath.ENEMY );
@@ -57,5 +58,9 @@ public class Enemy extends PathFollowingGameObject {
 
     public int getHealth() {
         return health;
+    }
+
+    public int getDamage() {
+        return damage;
     }
 }

@@ -51,7 +51,7 @@ public class Sprite {
 
 
     public enum SpritePath {
-
+        ARROW(1,List.of("Arrow")),
         DECO(3, List.of("Deco")),
         SMALLTOWER(3, List.of("SmallTower", "SmallTowerb"), 1000, 9000),
         WOODTOWER(3, List.of("WoodTower", "WoodTowerb"), 1000, 9000),
