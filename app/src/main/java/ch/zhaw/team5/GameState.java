@@ -7,6 +7,8 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 public class GameState {
     private final int priceOfHealthLoading = 20;
@@ -16,13 +18,15 @@ public class GameState {
 
     private IntegerProperty money = new SimpleIntegerProperty();
     private DoubleProperty health = new SimpleDoubleProperty();
+    private DoubleProperty progress = new SimpleDoubleProperty();
     private BooleanProperty renderNeeded = new SimpleBooleanProperty();
     private BooleanProperty gameEnded = new SimpleBooleanProperty();
+    private StringProperty gamePhaseName = new SimpleStringProperty();
 
     public GameState() {
         gameEnded.set(false);
         health.set(100);
-        money.set(50);
+        money.set(150);
     }
 
     public final IntegerProperty moneyProperty() {
@@ -33,12 +37,20 @@ public class GameState {
         return health;
     }
 
+    public final DoubleProperty progressProperty() {
+        return progress;
+    }
+
     public final BooleanProperty renderNeededProperty() {
         return renderNeeded;
     }
 
     public final BooleanProperty gameEndProperty() {
         return gameEnded;
+    }
+
+    public final StringProperty gamePhaseNameProperty() {
+        return gamePhaseName;
     }
 
     public void addMoney(int money) {
@@ -49,12 +61,20 @@ public class GameState {
         this.health.set(health);
     }
 
+    public void setProgress(double progress) {
+        this.progress.set(progress);
+    }
+
     public void setRenderNeeded(boolean renderNeeded) {
         this.renderNeeded.set(renderNeeded);
     }
 
     public void setGameEnded(boolean gameEnded) {
         this.gameEnded.set(gameEnded);
+    }
+
+    public void setGamePhaseName(String gamePhase) {
+        this.gamePhaseName.set(gamePhase);
     }
 
     public void buyHealth() {

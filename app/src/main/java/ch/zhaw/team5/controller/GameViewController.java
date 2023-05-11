@@ -21,10 +21,11 @@ public class GameViewController {
     private GameState gameState;
     private Game game;
     private ExecutorService gameThread;
-    // private GameDecorator gameDecorator;
 
     @FXML
     private Label moneyLabel;
+    @FXML
+    private Label phaseLabel;
     @FXML
     private Canvas canvas;
     @FXML
@@ -50,13 +51,16 @@ public class GameViewController {
         gameState.moneyProperty().addListener((observable, oldValue, newValue) -> {
             Platform.runLater(() -> moneyLabel.setText(newValue + "$"));
         });
+        gameState.gamePhaseNameProperty().addListener((observable, oldValue, newValue) -> {
+            Platform.runLater(() -> phaseLabel.setText(newValue));
+        });
         gameState.healthProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println((double) newValue / 100);
-            System.out.println(newValue);
             Platform.runLater(() -> healthBar.setProgress((double) newValue / 100));
         });
+        gameState.progressProperty().addListener((observable, oldValue, newValue) -> {
+            Platform.runLater(() -> progressBar.setProgress((double) newValue / 100));
+        });
         gameState.gameEndProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("we looosing !!!!!" + newValue);
             if (newValue == true) {
                 closeGame();
             }
