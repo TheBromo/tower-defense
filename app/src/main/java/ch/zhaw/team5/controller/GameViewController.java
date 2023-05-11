@@ -26,7 +26,7 @@ public class GameViewController {
     @FXML
     private Label moneyLabel;
     @FXML
-    private Label phasLabel;
+    private Label phaseLabel;
     @FXML
     private Canvas canvas;
     @FXML
@@ -53,7 +53,7 @@ public class GameViewController {
             Platform.runLater(() -> moneyLabel.setText(newValue + "$"));
         });
         gameState.gamePhaseNameProperty().addListener((observable, oldValue, newValue) -> {
-            Platform.runLater(() -> phasLabel.setText(newValue));
+            Platform.runLater(() -> phaseLabel.setText(newValue));
         });
         gameState.healthProperty().addListener((observable, oldValue, newValue) -> {
             Platform.runLater(() -> healthBar.setProgress((double) newValue / 100));
@@ -130,13 +130,15 @@ public class GameViewController {
 
     private void buildOrUpgradeTower(int id, Button pressedButton) {
         if (game.canUpgradeOrBuildTower(id)) {
-            game.buildOrUpgradeTower(id);
-            pressedButton.setText("Upgrade Tower " + id + " (" + GameState.upgradeTowerCost + "$)");
-            pressedButton.setDisable(!game.canUpgradeOrBuildTower(id));
+            if (game.buildOrUpgradeTower(id)) {
+                pressedButton.setText("Upgrade Tower " + id + " (" + GameState.upgradeTowerCost + "$)");
+                pressedButton.setDisable(!game.canUpgradeOrBuildTower(id));
+            }
         }
     }
 
     public void onBuyHealth() {
+
         gameState.buyHealth();
     }
 }

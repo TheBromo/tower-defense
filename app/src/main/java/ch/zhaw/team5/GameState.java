@@ -78,8 +78,8 @@ public class GameState {
     }
 
     public void buyHealth() {
-        if (money.get() >= 20) {
-            health.set(health.get() + healthDose);
+        if (money.get() >= 20 && health.get() < 100) {
+            health.set(Math.min(health.get() + healthDose, 100));
             money.set(money.get() - priceOfHealthLoading);
         }
     }

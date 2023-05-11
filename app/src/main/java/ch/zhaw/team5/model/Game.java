@@ -34,8 +34,8 @@ public class Game implements Renderable {
         this.wall = new Wall(new Point2D(canvas.getWidth() - 100, 0));
         this.gameState = gameState;
         phases = new ArrayDeque<>();
-        currentPhase = new PausePhase( 20);
-        phases.addFirst(new AttackPhase( 180));
+        currentPhase = new PausePhase(20);
+        phases.addFirst(new AttackPhase(180));
 
         initEnviroment(canvas);
         initTowers(canvas.getWidth(), canvas.getHeight());
@@ -175,19 +175,24 @@ public class Game implements Renderable {
         wall.render(canvas);
     }
 
-    public void buildOrUpgradeTower(int id) {
+    public boolean buildOrUpgradeTower(int id) {
         var towerPosition = towerPositions.get(id - 1);
         if (!towerPosition.hasTower()) {
-
             if (gameState.buyTower()) {
                 towerPositions.get(id - 1).buildTower();
-
+                return true;
+            } else {
+                return false;
             }
         } else if (towerPosition.isUpgradable()) {
             if (gameState.upgradeTower()) {
                 towerPositions.get(id - 1).upgradeTower();
+                return true;
+            } else {
+                return false;
             }
         }
+        return false;
     }
 
     public boolean canUpgradeOrBuildTower(int id) {
