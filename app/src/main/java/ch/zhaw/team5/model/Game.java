@@ -3,43 +3,50 @@ package ch.zhaw.team5.model;
 import ch.zhaw.team5.GameState;
 import ch.zhaw.team5.model.gameobj.*;
 import ch.zhaw.team5.model.gameobj.definitions.Renderable;
+import ch.zhaw.team5.model.phases.AttackPhase;
+import ch.zhaw.team5.model.phases.PausePhase;
 import ch.zhaw.team5.model.phases.Phase;
-import ch.zhaw.team5.model.phases.PhaseCurrent;
 import ch.zhaw.team5.model.util.RandomUtil;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.PriorityQueue;
 
 public class Game implements Renderable {
     private List<TowerPosition> towerPositions = new ArrayList<>();
     private List<Enemy> enemies = new ArrayList<>();
     private List<Decorations> decorations = new ArrayList<>();
     private Path path;
-    private int wantedEnemies = 50;
     private Wall wall;
 
     private GameState gameState;
 
-    private Phase phase;
-    private List<Phase> phases = new ArrayList<>();
-    private PhaseCurrent phaseCurrent;
+    private Phase currentPhase;
+    private Deque<Phase> phases;
 
     public Game(GameState gameState, Canvas canvas) {
         this.wall = new Wall(new Point2D(canvas.getWidth() - 100, 0));
-        this.phase = new PhaseCurrent();
-        this.phaseCurrent = new PhaseCurrent();
         this.gameState = gameState;
+        phases = new ArrayDeque<>();
+        currentPhase = new PausePhase(20);
+        phases.addFirst(new AttackPhase(180));
 
+        initEnviroment(canvas);
+        initTowers(canvas.getWidth(), canvas.getHeight());
+    }
+
+    public void initEnviroment(Canvas canvas) {
         path = new Path(new Point2D(0, canvas.getHeight() / 2), new Point2D(canvas.getWidth(), canvas.getHeight() / 2));
 
         decorations.add(new Decorations(5, 0, 0, (int) canvas.getWidth() - 100, (int) canvas.getHeight() / 2));
         decorations.add(new Decorations(5, 0, (int) canvas.getHeight() / 2, (int) canvas.getWidth() - 100,
                 (int) canvas.getHeight()));
-
-        initTowers(canvas.getWidth(), canvas.getHeight());
     }
 
     public void initTowers(double width, double height) {
@@ -96,6 +103,19 @@ public class Game implements Renderable {
         }
     }
 
+    private void updatePhases() {
+        if (currentPhase.hasEnded()) {
+            currentPhase.increaseDifficulty();
+            phases.addLast(currentPhase);
+            currentPhase = phases.removeFirst();
+            currentPhase.restartTimer();
+            gameState.setGamePhaseName(currentPhase.toString());
+        } else {
+            currentPhase.updatePhase();
+            gameState.setProgress(currentPhase.getPhaseProgress());
+        }
+    }
+
     private void update() {
 
         for (Enemy enemy : enemies) {
@@ -106,6 +126,7 @@ public class Game implements Renderable {
                 gameState.addMoney(enemy.getReward());
             }
         }
+
         enemies.removeIf(e -> e.outOfScreen((int) path.getEnd().getX()) || !e.isAlive());
 
         for (TowerPosition towerPosition : towerPositions) {
@@ -116,12 +137,15 @@ public class Game implements Renderable {
             }
         }
 
-        while (enemies.size() < wantedEnemies) {
+        while (enemies.size() < currentPhase.getEnemyAmount()) {
             spawnEnemy();
         }
 
-        if (gameState.healthProperty().get() <= 0)
+        if (gameState.healthProperty().get() <= 0) {
             gameState.setGameEnded(true);
+        }
+
+        updatePhases();
     }
 
     @Override
@@ -151,19 +175,24 @@ public class Game implements Renderable {
         wall.render(canvas);
     }
 
-    public void buildOrUpgradeTower(int id) {
+    public boolean buildOrUpgradeTower(int id) {
         var towerPosition = towerPositions.get(id - 1);
         if (!towerPosition.hasTower()) {
-
             if (gameState.buyTower()) {
                 towerPositions.get(id - 1).buildTower();
-
+                return true;
+            } else {
+                return false;
             }
         } else if (towerPosition.isUpgradable()) {
             if (gameState.upgradeTower()) {
                 towerPositions.get(id - 1).upgradeTower();
+                return true;
+            } else {
+                return false;
             }
         }
+        return false;
     }
 
     public boolean canUpgradeOrBuildTower(int id) {

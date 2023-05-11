@@ -31,13 +31,33 @@
                                     </Label>
                                     <Pane prefHeight="164.0" prefWidth="507.0" style="-fx-border-color: black;">
                                         <children>
-                                            <FlowPane layoutY="-1.0" prefHeight="163.0" prefWidth="507.0">
+                                            <FlowPane layoutY="-1.0" prefHeight="138.0" prefWidth="507.0">
                                                 <children>
-                                                    <Label prefHeight="50.0" prefWidth="150.0" style="-fx-padding: 10px" text="Money" />
-                                                    <Label fx:id="moneyLabel" prefHeight="50.0" prefWidth="350.0" text="50$" />
-                                                    <Label prefHeight="50.0" prefWidth="150.0" style="-fx-padding: 10px" text="Health" />
+                                                    <Label prefHeight="33.0" prefWidth="150.0" style="-fx-padding: 10px" text="Money">
+                                                        <font>
+                                                            <Font name="System Bold" size="12.0" />
+                                                        </font>
+                                                    </Label>
+                                                    <Label fx:id="moneyLabel" prefHeight="34.0" prefWidth="94.0" text="150$" />
+                                                    <Label layoutX="10.0" layoutY="10.0" prefHeight="35.0" prefWidth="73.0" style="-fx-padding: 10px" text="Phase">
+                                                        <font>
+                                                            <Font name="System Bold" size="12.0" />
+                                                        </font>
+                                                    </Label>
+                                                    <Label fx:id="phaseLabel" layoutX="160.0" layoutY="10.0" prefHeight="34.0" prefWidth="110.0" text="Pause" textFill="#464646">
+
+                                                    </Label>
+                                                    <Label prefHeight="33.0" prefWidth="150.0" style="-fx-padding: 10px" text="Health">
+                                                        <font>
+                                                            <Font name="System Bold" size="12.0" />
+                                                        </font>
+                                                    </Label>
                                                     <ProgressBar fx:id="healthBar" prefHeight="23.0" prefWidth="350.0" progress="1.0" style="-fx-accent: #A1EA6E;" />
-                                                    <Label prefHeight="50.0" prefWidth="150.0" style="-fx-padding: 10px" text="Progress" />
+                                                    <Label prefHeight="33.0" prefWidth="150.0" style="-fx-padding: 10px" text="Progress">
+                                                        <font>
+                                                            <Font name="System Bold" size="12.0" />
+                                                        </font>
+                                                    </Label>
                                                     <ProgressBar fx:id="progressBar" prefHeight="21.0" prefWidth="350.0" progress="0.0" />
                                                 </children>
                                             </FlowPane>
@@ -49,7 +69,7 @@
                                 <children>
                                     <Pane prefHeight="102.0" prefWidth="471.0">
                                         <children>
-                                            <Button fx:id="buyHealthButton" layoutX="10.0" layoutY="7.0" mnemonicParsing="false" onAction="#onBuyHealth" prefHeight="41.0" prefWidth="464.0" text="Buy Health (after each round) (20$)" />
+                                            <Button fx:id="buyHealthButton" layoutX="10.0" layoutY="27.0" mnemonicParsing="false" onAction="#onBuyHealth" prefHeight="21.0" prefWidth="464.0" text="Buy Health (after each round) (20$)" />
                                         </children>
                                     </Pane>
                                     <GridPane prefHeight="163.0" prefWidth="471.0">

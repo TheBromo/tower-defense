@@ -5,8 +5,6 @@ import ch.zhaw.team5.model.util.Sprite.SpritePath;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.PickResult;
-import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 
 public class Arrow extends MovingGameObject {

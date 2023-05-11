@@ -15,7 +15,7 @@ public class Tower extends StaticGameObject {
     public final int price = 50;
 
     private int damge = 10;
-    private long interval = 5000, lastShot = 0;
+    private long interval = 4000, lastShot = 0;
 
     private List<Arrow> arrows;
 
