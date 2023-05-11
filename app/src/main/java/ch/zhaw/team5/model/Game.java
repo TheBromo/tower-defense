@@ -23,7 +23,6 @@ public class Game implements Renderable {
     private List<Enemy> enemies = new ArrayList<>();
     private List<Decorations> decorations = new ArrayList<>();
     private Path path;
-    private int wantedEnemies = 50;
     private Wall wall;
 
     private GameState gameState;
@@ -35,8 +34,8 @@ public class Game implements Renderable {
         this.wall = new Wall(new Point2D(canvas.getWidth() - 100, 0));
         this.gameState = gameState;
         phases = new ArrayDeque<>();
-        currentPhase = new PausePhase(5, 20);
-        phases.addFirst(new AttackPhase(5, 120));
+        currentPhase = new PausePhase( 20);
+        phases.addFirst(new AttackPhase( 180));
 
         initEnviroment(canvas);
         initTowers(canvas.getWidth(), canvas.getHeight());

@@ -8,8 +8,8 @@ public abstract class Phase {
     protected long lastUpdate;
     protected long totalTimeMS;
 
-    public Phase(int intveralSeconds, long totalTimeSeconds) {
-        intveralMS = TimeUnit.SECONDS.toMillis(intveralSeconds);
+    public Phase(long totalTimeSeconds) {
+        intveralMS = 50;
         totalTimeMS = TimeUnit.SECONDS.toMillis(totalTimeSeconds);
         phaseStart = System.currentTimeMillis();
         lastUpdate = System.currentTimeMillis();
@@ -25,7 +25,6 @@ public abstract class Phase {
 
     public void updatePhase() {
         if (System.currentTimeMillis() - lastUpdate >= intveralMS && !hasEnded()) {
-            update();
             lastUpdate = System.currentTimeMillis();
         }
     }
@@ -34,8 +33,6 @@ public abstract class Phase {
         phaseStart = System.currentTimeMillis();
         lastUpdate = System.currentTimeMillis();
     }
-
-    abstract void update();
 
     public abstract void increaseDifficulty();
 

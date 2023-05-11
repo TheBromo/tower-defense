@@ -5,13 +5,8 @@ import java.util.concurrent.TimeUnit;
 public class PausePhase extends Phase {
     private int count = 0;
 
-    public PausePhase(int intveralSeconds, long totalTimeSeconds) {
-        super(intveralSeconds, totalTimeSeconds);
-    }
-
-    @Override
-    public void update() {
-
+    public PausePhase( long totalTimeSeconds) {
+        super( totalTimeSeconds);
     }
 
     @Override

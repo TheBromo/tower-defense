@@ -21,11 +21,12 @@ public class GameViewController {
     private GameState gameState;
     private Game game;
     private ExecutorService gameThread;
+    // private GameDecorator gameDecorator;
 
     @FXML
     private Label moneyLabel;
     @FXML
-    private Label phaseLabel;
+    private Label phasLabel;
     @FXML
     private Canvas canvas;
     @FXML
@@ -52,7 +53,7 @@ public class GameViewController {
             Platform.runLater(() -> moneyLabel.setText(newValue + "$"));
         });
         gameState.gamePhaseNameProperty().addListener((observable, oldValue, newValue) -> {
-            Platform.runLater(() -> phaseLabel.setText(newValue));
+            Platform.runLater(() -> phasLabel.setText(newValue));
         });
         gameState.healthProperty().addListener((observable, oldValue, newValue) -> {
             Platform.runLater(() -> healthBar.setProgress((double) newValue / 100));
