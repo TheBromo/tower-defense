@@ -67,7 +67,7 @@ public class AttackPhase extends Phase {
 
     /**
      * Inner Class AttackPatterns 
-     * Save the different patterns
+     * Provides the different attack patterns
      * @author strenman
      * @version 1.0.0
      */
