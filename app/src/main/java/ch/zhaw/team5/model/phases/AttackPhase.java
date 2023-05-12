@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 import ch.zhaw.team5.model.util.RandomUtil;
 
 /**
- * AttackPhase Class extends Phase. 
+ * AttackPhase Class extends Phase, and implements different attack phases with increasing level of difficulties. 
  *
  * @author strenman
  * @version 1.0.0
