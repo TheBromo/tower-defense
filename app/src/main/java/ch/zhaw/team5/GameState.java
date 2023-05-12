@@ -10,6 +10,12 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/**
+ * The GameState class is responsible for maintaining the state of the game.
+ * It includes information about the player's money, health, game progress, and other game state data.
+ * @author all
+ * @version 1.0.0
+ */
 public class GameState {
     private final int priceOfHealthLoading = 20;
     private final int healthDose = 20;
@@ -23,6 +29,9 @@ public class GameState {
     private BooleanProperty gameEnded = new SimpleBooleanProperty();
     private StringProperty gamePhaseName = new SimpleStringProperty();
 
+    /**
+     * Initializes a new GameState object.
+     */
     public GameState() {
         gameEnded.set(false);
         health.set(100);
@@ -53,6 +62,11 @@ public class GameState {
         return gamePhaseName;
     }
 
+    /**
+     * Adds a certain amount of money to the player's total money.
+     *
+     * @param money the amount of money to add
+     */
     public void addMoney(int money) {
         this.money.set(this.money.get() + money);
     }
@@ -76,18 +90,31 @@ public class GameState {
     public void setGamePhaseName(String gamePhase) {
         this.gamePhaseName.set(gamePhase);
     }
-
+    
+    /**
+     * Makes the player buy health if the player has enough money and the health is less than 100.
+     */
     public void buyHealth() {
         if (money.get() >= 20 && health.get() < 100) {
             health.set(Math.min(health.get() + healthDose, 100));
             money.set(money.get() - priceOfHealthLoading);
         }
     }
-
+    
+    /**
+     * Decreases the player's health based on the damage done by an enemy.
+     *
+     * @param enemy the enemy that invaded
+     */
     public void enemyInvaded(Enemy enemy) {
         health.set(health.get() - enemy.getDamage());
     }
 
+    /**
+     * Upgrades a tower if the player has enough money.
+     *
+     * @return true if the tower was upgraded, false otherwise
+     */
     public boolean upgradeTower() {
         if (money.get() >= upgradeTowerCost) {
             money.set(money.get() - upgradeTowerCost);
@@ -97,6 +124,11 @@ public class GameState {
         }
     }
 
+    /**
+     * Buys a tower if the player has enough money.
+     *
+     * @return true if the tower was bought, false otherwise
+     */
     public boolean buyTower() {
         if (money.get() >= buyTowerCost) {
             money.set(money.get() - buyTowerCost);
