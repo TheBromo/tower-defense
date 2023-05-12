@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 /**
  * This class represents the main application for a Tower Defense game.
  * It extends the JavaFX Application class to create a JavaFX application.
@@ -34,7 +36,7 @@ public class App extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("StartScreen.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("StartScreen.fxml")));
         primaryStage.setTitle("Tower Defense");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

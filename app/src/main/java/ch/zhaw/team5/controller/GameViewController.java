@@ -31,7 +31,6 @@ public class GameViewController {
     private GameState gameState;
     private Game game;
     private ExecutorService gameThread;
-    // private GameDecorator gameDecorator;
 
     @FXML
     private Label moneyLabel;
@@ -43,7 +42,6 @@ public class GameViewController {
     private ProgressBar healthBar;
     @FXML
     private ProgressBar progressBar;
-
     @FXML
     private Button buyHealthButton;
 
@@ -52,7 +50,6 @@ public class GameViewController {
      *
      * @param parent the parent stage of the application
      */
-
     public void initializeListeners(Stage parent) {
         gameState = new GameState();
         this.game = new Game(gameState, canvas);
@@ -65,19 +62,15 @@ public class GameViewController {
     }
 
     private void initGameState(GameState gameState) {
-        gameState.moneyProperty().addListener((observable, oldValue, newValue) -> {
-            Platform.runLater(() -> moneyLabel.setText(newValue + "$"));
-        });
-        gameState.gamePhaseNameProperty().addListener((observable, oldValue, newValue) -> {
-            Platform.runLater(() -> phaseLabel.setText(newValue));
-        });
-        gameState.healthProperty().addListener((observable, oldValue, newValue) -> {
-            Platform.runLater(() -> healthBar.setProgress((double) newValue / 100));
-        });
-        gameState.progressProperty().addListener((observable, oldValue, newValue) -> {
-            Platform.runLater(() -> progressBar.setProgress((double) newValue / 100));
-        });
-        gameState.gameEndProperty().addListener((observable, oldValue, newValue) -> {
+        gameState.moneyProperty().addListener((observable, oldValue, newValue) ->
+            Platform.runLater(() -> moneyLabel.setText(newValue + "$")));
+        gameState.gamePhaseNameProperty().addListener((observable, oldValue, newValue) ->
+            Platform.runLater(() -> phaseLabel.setText(newValue)));
+        gameState.healthProperty().addListener((observable, oldValue, newValue) ->
+            Platform.runLater(() -> healthBar.setProgress((double) newValue / 100)));
+        gameState.progressProperty().addListener((observable, oldValue, newValue) ->
+            Platform.runLater(() -> progressBar.setProgress((double) newValue / 100)));
+        gameState.gameEndProperty().addListener((observable, oldValue, newValue) ->
             Platform.runLater(() -> {
                 if (newValue) {
                     gameThread.shutdown();
@@ -89,13 +82,12 @@ public class GameViewController {
                     alert.showAndWait();
                     closeGame();
                 }
-            });
-        });
+            }));
         gameState.renderNeededProperty().addListener(render());
     }
 
     private ChangeListener<Boolean> render() {
-        // Sephamore is used so the game thread only runs after rendering (used for not
+        // Semaphore is used so the game thread only runs after rendering (used for not
         // overusing the game thread)
         return (observable, oldValue, renderNeeded) -> {
             Semaphore semaphore = new Semaphore(0);
@@ -114,9 +106,7 @@ public class GameViewController {
     }
 
     private void setOnClose(Stage parent) {
-        parent.setOnCloseRequest(event -> {
-            closeGame();
-        });
+        parent.setOnCloseRequest(event -> closeGame());
     }
 
     private void closeGame() {
@@ -134,27 +124,13 @@ public class GameViewController {
         Button pressedButton = (Button) event.getSource();
 
         switch (pressedButton.getId()) {
-            case "buttonTower1" -> {
-                buildOrUpgradeTower(1, pressedButton);
-            }
-            case "buttonTower2" -> {
-                buildOrUpgradeTower(2, pressedButton);
-            }
-            case "buttonTower3" -> {
-                buildOrUpgradeTower(3, pressedButton);
-            }
-            case "buttonTower4" -> {
-                buildOrUpgradeTower(4, pressedButton);
-            }
-            case "buttonTower5" -> {
-                buildOrUpgradeTower(5, pressedButton);
-            }
-            case "buttonTower6" -> {
-                buildOrUpgradeTower(6, pressedButton);
-            }
-            default -> {
-                System.err.println("unknown action");
-            }
+            case "buttonTower1" -> buildOrUpgradeTower(1, pressedButton);
+            case "buttonTower2" -> buildOrUpgradeTower(2, pressedButton);
+            case "buttonTower3" -> buildOrUpgradeTower(3, pressedButton);
+            case "buttonTower4" -> buildOrUpgradeTower(4, pressedButton);
+            case "buttonTower5" -> buildOrUpgradeTower(5, pressedButton);
+            case "buttonTower6" -> buildOrUpgradeTower(6, pressedButton);
+            default -> System.err.println("unknown action");
         }
     }
 
