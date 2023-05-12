@@ -37,7 +37,7 @@ public abstract class PathFollowingGameObject extends MovingGameObject {
     }
 
     /**
-     * Update method to save the attributes of the objects
+     * Update method to apply behaviours and add velocity
      * @param enemies - List of enemies
      * @param path - Path for submitting parameter to applyBehaviours()
      */
