@@ -7,7 +7,7 @@ import javafx.beans.property.*;
  * The GameState class is responsible for maintaining the state of the game.
  * It includes information about the player's money, health, game progress, and other game state data.
  *
- * @author all
+ * @author strenman, hartmdo1, paskueng, mettlmi1
  * @version 1.0.0
  */
 public class GameState {

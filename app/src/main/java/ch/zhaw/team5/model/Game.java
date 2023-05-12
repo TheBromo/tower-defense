@@ -20,7 +20,7 @@ import java.util.List;
  * The Game class represents the main structure of the game.
  * It is responsible for game object management and game logic.
  *
- * @author all
+ * @author strenman, hartmdo1, paskueng, mettlmi1
  * @version 1.0.0
  */
 public class Game implements Renderable {
@@ -48,7 +48,7 @@ public class Game implements Renderable {
         currentPhase = new PausePhase(20);
         phases.addFirst(new AttackPhase(180));
 
-        initEnviroment(canvas);
+        initEnvironment(canvas);
         initTowers(canvas.getWidth(), canvas.getHeight());
     }
 
@@ -74,7 +74,7 @@ public class Game implements Renderable {
      *
      * @param canvas the canvas to draw the environment on
      */
-    public void initEnviroment(Canvas canvas) {
+    public void initEnvironment(Canvas canvas) {
         path = new Path(new Point2D(0, canvas.getHeight() / 2), new Point2D(canvas.getWidth(), canvas.getHeight() / 2));
 
         decorations.add(new Decorations(5, 0, 0, (int) canvas.getWidth() - 100, (int) canvas.getHeight() / 2));
@@ -100,6 +100,9 @@ public class Game implements Renderable {
         }
     }
 
+    /**
+     * Method to spawn an enemy (also makes sure that its in a given range and not on top of another enemy).
+     */
     public void spawnEnemy() {
         int radius = path.getRadius();
         int y = (int) path.getStart().getY();
