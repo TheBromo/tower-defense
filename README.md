@@ -41,7 +41,137 @@ Tower Defense is a captivating game that challenges players to strategically pla
 ![exported_from_idea drawio-6](https://github.zhaw.ch/storage/user/4894/files/381468e5-5e27-4f28-82dd-e6f731f5b3ee)
 
 ### 🏗 Architecture & MVC
-TBD
+
+#### MVC Game 
+
+```
+ UI Thread                                                       GameThread
+
+
+┌────────────────────┐
+│                    │
+│ GameView.fxml      │
+│                    │
+└────────────────────┘
+          ▲
+          │ Displays
+          │
+┌─────────┴──────────┐          ┌─────────────────────┐         ┌─────────────────────┐
+│                    │          │                     │         │                     │
+│ GameViewController ├────┬────►│ GameState           │◄───┬────┤   Game              │
+│                    │    │     │                     │    │    │                     │
+└────────────────────┘    │     └─────────────────────┘    │    └─────────────────────┘
+                          │                                │
+                      Observes                          Updates
+```
+The MVC model communicates with the Observer Pattern. 
+
+- Game State hold all the properties that are needed to display in the UI
+- The Game class is the Game Thread it simulates the game rules and physics and updates the Gamestate accordingly
+- GameViewController displays the given Information of the GameState accordingly.
+
+> When Rendering on the canvas the UI Thread is awaited because otherwise to many requests would clog up the UI Thread with the `Platform.runLater(...)` function.
+
+#### Game Thread
+
+The Game Thread is structured like the following:
+
+```java
+double previous = getCurrentTime();
+double lag = 0.0;
+while (true)
+{
+  double current = getCurrentTime();
+  double elapsed = current - previous;
+  previous = current;
+  lag += elapsed;
+
+  processInput();
+
+  while (lag >= MS_PER_UPDATE)
+  {
+    update();
+    lag -= MS_PER_UPDATE;
+  }
+
+  render();
+}
+
+```
+
+1. The `update()` method is only called  when the given Time per Update (100ms) is elapsed.
+2. The `render()` method is always called and renders as many frames as possible
+
+> In our case the `render()` method sets the GameState to trigger a render and awaits for the render to finish.
+
+This was implemented in the following PR [#48](https://github.zhaw.ch/PM2-IT22tbWIN-scmy-bles-krea/Team05-java.lang.NullPointerException-projekt2-tower-defense/pull/48)
+
+#### Sprite System
+
+> **Sprite** means: In computer graphics, a sprite is a two-dimensional bitmap that is part of a larger scene (e.g., a 2D video game). Sprites can be static images or 
+> animated graphics. [source](https://www.educative.io/answers/definition-sprite) 
+
+The Sprite System loads images of for the given `SpritePath` enum. Here the number of variant of the same image and amount of images (more than 2 is animated). 
+
+It has its own timer which changes the current image to display in a given interval.
+
+> Through this system animations are enabled
+
+This is how the code works:
+```java
+public class Sprite {
+    private List<Image> sprites;
+    private int intervalMs = 300;
+    private int index = 0;
+    private long lastUpdate = 0;
+
+    public Sprite(SpritePath sprite) {
+    ...
+    intervalMs = randomUtil.getRandomInRange(sprite.minAnimationTimer, sprite.maxAnimationTimer); // not all animations play at the same speed
+    lastUpdate = randomUtil.getRandomInRange(sprite.minAnimationTimer, sprite.maxAnimationTimer); // they dont start synchronized
+    ...
+    }
+    
+    public Image getSprite() {
+        if (System.currentTimeMillis() - lastUpdate >= intervalMs) {
+            continueIndex();
+            lastUpdate = System.currentTimeMillis();
+        }
+        return sprites.get(index);
+    }
+    ...
+```
+
+`getSprite()` returns the Image which should be displayed of the whole set an is incremented if the interval was passed.
+
+
+#### Rendering System
+
+```
+                                                                                          ┌──────────────────┐
+                                                                                          │                  │
+                                                                                          │    Game.loop     │
+                                              ┌────────────────────┐                      │                  │
+                          Render in UI Thread │                    │                      │  update          │
+┌────────────────────┐                        │  Game State        │    Set Val and Waits │                  │
+│                    │                        │                    │                      │                  │
+│    UI Thread       ├────────────────────────┤ RenderNeeded:Bool  │ ◄────────────────────┼──setRender(True) │
+│                    │                        │                    │                      │                  │
+│                    │                        └────────────────────┘                      │                  │
+│                    │                                                                    │                  │
+│                    ├────────────────────────────────────────────────────────────────────┼───► continues..  │
+└────────────────────┘                         On finish                                  │                  │
+                                                                                          │                  │
+                                                                                          │                  │
+                                                                                          └──────────────────┘
+```
+
+#### Update System
+
+
+
+#### Phase System
+
 
 ### 🌳 Branching Modell 
 
@@ -52,7 +182,9 @@ A feature branch was generated for each task. If the feature was completed, a pu
 ### 👨‍🔧 Pull Requests
 Whenever there was a change, it was consequently merged via a pull request. Suggestions for improvements were either commented within the pull request or discussed in person. 
 
-Example: Pull-Request [#62](https://github.zhaw.ch/PM2-IT22tbWIN-scmy-bles-krea/Team05-java.lang.NullPointerException-projekt1-racetrack/pull/62)
+Example: Pull-Request 
+- [#62](https://github.zhaw.ch/PM2-IT22tbWIN-scmy-bles-krea/Team05-java.lang.NullPointerException-projekt1-racetrack/pull/62)
+- [#48](https://github.zhaw.ch/PM2-IT22tbWIN-scmy-bles-krea/Team05-java.lang.NullPointerException-projekt2-tower-defense/pull/48)
 
 Not every pull-requests have discussion/improvement points in it, as if the reviewer agreed with the proposed changes, he immediately approved it. 
 
