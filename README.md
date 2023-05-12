@@ -74,9 +74,9 @@ Tower Defense is a captivating game that challenges players to strategically pla
 ```
 The MVC model communicates with the Observer Pattern. 
 
-- Game State hold all the properties that are needed to display in the UI
-- The Game class is the Game Thread it simulates the game rules and physics and updates the Gamestate accordingly
-- GameViewController displays the given Information of the GameState accordingly.
+- GameState holds all the properties that are needed to display in the UI
+- The Game class is the Game Thread. It simulates the game rules and physics and updates the Gamestate accordingly
+- GameViewController displays the given information of the GameState accordingly.
 
 > When Rendering on the canvas the UI Thread is awaited because otherwise to many requests would clog up the UI Thread with the `Platform.runLater(...)` function.
 
@@ -117,7 +117,7 @@ while (true)
 
 ```
 
-1. The `update()` method is only called  when the given Time per Update (100ms) is elapsed.
+1. The `update()` method is only called  when the given time per update (100ms) is elapsed.
 2. The `render()` method is always called and renders as many frames as possible
 
 > In our case the `render()` method sets the GameState to trigger a render and awaits for the render to finish.
@@ -169,7 +169,7 @@ public class Sprite {
     ...
 ```
 
-`getSprite()` returns the Image which should be displayed of the whole set an is incremented if the interval was passed.
+`getSprite()` returns the image which should be displayed of the whole set and is incremented, if an interval was passed.
 
 **Example sprite of enemy walking**
 
@@ -187,7 +187,7 @@ public class Sprite {
 
 > The Rendering System is responsible for visualizing elements on the canvas. What classes can be renderd is defined by the `Rendreable` interface. 
 
-The rendering is called each `game.loop()`. As the Rendering has to be done in the UI Thread the GameThread( `game.loop()`) is waiting. This is so the rendering does not spam the UI Thread until it dies and the calling of the render function doesn't have to be locked to a fixed number. 
+The rendering is called each `game.loop()`. As the Rendering has to be done in the UI Thread the GameThread( `game.loop()`) is waiting. This is the case, so that the rendering does not spam the UI Thread until it dies and the calling of the render function doesn't have to be locked to a fixed number. 
 
 ```
                                                                                           ┌──────────────────┐
@@ -264,7 +264,7 @@ The update system has the following steps:
     
 </summary>
 
-> The system that dictates, when ,where and how many enemies are spawned and are on the game field. 
+> The system that dictates, when, where and how many enemies are spawned and are on the game field. 
 
 1. The `currentPhase` says how many enemies have to be on the field.
 
@@ -274,7 +274,7 @@ The update system has the following steps:
  }
 ```
 
-2. When spawning a random Point is selected where no enemy is  yet. If an Enemy is already on the generated Position the is shifted left (`position.x -= 40`) until no enemy is at the same position:
+2. When spawning a random Point is selected where no enemy is  yet. If an Enemy is already on the generated position the enemy is shifted left (`position.x -= 50`), if there is another enemy, the position is further shifted until no enemy is at the same position:
 
 ```java
     private void spawnEnemy() {
@@ -300,7 +300,7 @@ The update system has the following steps:
 
 </summary>
     
-The crowd behaviour is based on the task for the Book: **The Nature of code by Daniel Shiffman** [Exercise 6.14, Chapter 6.12 Combinations](https://natureofcode.com/book/chapter-6-autonomous-agents/)
+The crowd behaviour is based on a task of the book: **The Nature of code by Daniel Shiffman** [Exercise 6.14, Chapter 6.12 Combinations](https://natureofcode.com/book/chapter-6-autonomous-agents/)
         
 </details>
     
@@ -312,12 +312,12 @@ The crowd behaviour is based on the task for the Book: **The Nature of code by D
 </summary>
     
     
-> The system that defines how many enemies are present in the Game.
+> The system that defines how many enemies are present in the game.
 
 The phase system has two phases
 
-1. **Attack phase** here enemies spawns correpsonding to the attack pattern 
-2. **Pause phase**  no enemies spawn the player has a chance to recover
+1. **Attack phase** here enemies spawns corresponding to the attack pattern 
+2. **Pause phase**  no enemies spawn. The player has a chance to recover
 
 ##### Attack Patterns
 
