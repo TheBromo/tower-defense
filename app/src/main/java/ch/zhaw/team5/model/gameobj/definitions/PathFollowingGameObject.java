@@ -50,7 +50,7 @@ public abstract class PathFollowingGameObject extends MovingGameObject {
     }
 
     /**
-     * Apply behaviours to enemy objects. Is able to seperate enemies from each other.
+     * Seperates from other enemies and seeks the path end
      * @param enemies - List of enemies
      * @param path - Path for submitting parameter to applyBehaviours()
      */
