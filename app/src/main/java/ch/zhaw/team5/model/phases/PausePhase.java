@@ -28,7 +28,7 @@ public class PausePhase extends Phase {
     }
 
     /**
-     * Get the amount of the enemy
+     * Get the amount of enemies
      * @return 0
      */
     @Override

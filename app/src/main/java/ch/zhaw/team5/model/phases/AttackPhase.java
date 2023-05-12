@@ -18,7 +18,7 @@ public class AttackPhase extends Phase {
     private int[] currentPattern;
 
     /**
-     * Constructor for AttackPhase Class, get the param totalTimeSeconds
+     * Constructor for AttackPhase class
      * @param totalTimeSeconds represents the time the attack phase lasts
      */
     public AttackPhase( long totalTimeSeconds) {
@@ -38,7 +38,7 @@ public class AttackPhase extends Phase {
     }
 
     /**
-     * Return the amount of enemies
+     * Get the amount of enemies
      * @return the amount of enemies
      */
     @Override
@@ -58,7 +58,7 @@ public class AttackPhase extends Phase {
     /**
      * Get the current factor of the game state
      * @param pattern to provide the current pattern
-     * @return Index of Pattern
+     * @return value of pattern
      */
     public int getCurrentFactor(int[] pattern) {
         int index = (int) (Math.min((pattern.length - 1) / 100.0 * getPhaseProgress(), pattern.length - 1));

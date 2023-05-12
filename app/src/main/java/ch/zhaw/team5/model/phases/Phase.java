@@ -25,7 +25,7 @@ public abstract class Phase {
     }
 
     /**
-     * Method to get the progress of the phase.
+     * Method to get the progress of the phase between the value from 0 to 100.
      * @return the time in a double value of the current phase progress
      */
     public double getPhaseProgress() {
@@ -42,7 +42,7 @@ public abstract class Phase {
     }
 
     /**
-     * Updates the phase
+     * Updates the time of the phase
      */
     public void updatePhase() {
         if (System.currentTimeMillis() - lastUpdate >= intveralMS && !hasEnded()) {
