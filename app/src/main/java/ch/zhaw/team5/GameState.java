@@ -71,10 +71,6 @@ public class GameState {
         this.money.set(this.money.get() + money);
     }
 
-    public void setHealth(double health) {
-        this.health.set(health);
-    }
-
     public void setProgress(double progress) {
         this.progress.set(progress);
     }
@@ -144,5 +140,13 @@ public class GameState {
 
     public int getPriceOfHealthLoading() {
         return priceOfHealthLoading;
+    }
+    
+    public int getUpgradeTowerCost() {
+        return upgradeTowerCost;
+    }
+
+    public int getBuyTowerCost() {
+        return buyTowerCost;
     }
 }
