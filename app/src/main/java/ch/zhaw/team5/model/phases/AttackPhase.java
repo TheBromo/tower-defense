@@ -43,11 +43,11 @@ public class AttackPhase extends Phase {
         private final List<int[]> patterns = new ArrayList<>();
 
         public AttackPatterns() {
-            patterns.add(new int[] { 1, 2, 2, 3, 2, 2, 1 });
-            patterns.add(new int[] { 1, 1, 1, 4, 1, 1 });
-            patterns.add(new int[] { 2, 2, 2, 1, 1, 1 });
-            patterns.add(new int[] { 1, 2, 1, 1, 3, 1 });
-            patterns.add(new int[] { 1, 2, 2, 3, 1 });
+            patterns.add(new int[] { 2, 2, 3, 4, 3, 3, 2 });
+            patterns.add(new int[] { 2, 2, 2, 5, 2, 2 });
+            patterns.add(new int[] { 3, 3, 3, 2, 2, 2 });
+            patterns.add(new int[] { 2, 2, 2, 2, 4, 2 });
+            patterns.add(new int[] { 2, 3, 3, 4, 2 });
         }
 
         public int[] getRandomPattern() {
