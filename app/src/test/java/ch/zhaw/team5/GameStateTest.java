@@ -12,7 +12,7 @@ import static org.mockito.Mockito.when;
  * Test class to test the game state behaviour.
  *
  * @author mettlmi1
- * @version 1.0
+ * @version 1.0.0
  */
 public class GameStateTest {
 
