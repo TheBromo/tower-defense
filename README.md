@@ -42,8 +42,16 @@ Tower Defense is a captivating game that challenges players to strategically pla
 
 ### 🏗 Architecture & MVC
 
+<details>
+<summary>
+    
 #### MVC Game 
 
+</summary>
+    
+
+    
+    
 ```
  UI Thread                                                       GameThread
 
@@ -72,7 +80,15 @@ The MVC model communicates with the Observer Pattern.
 
 > When Rendering on the canvas the UI Thread is awaited because otherwise to many requests would clog up the UI Thread with the `Platform.runLater(...)` function.
 
+</details>
+
+
+<details>
+<summary>
+    
 #### Game Thread
+    
+</summary>
 
 > The Game Thread is the main loop of the game. It calls all the important function like `render()` and `update()`.
 
@@ -107,9 +123,18 @@ while (true)
 > In our case the `render()` method sets the GameState to trigger a render and awaits for the render to finish.
 
 This was implemented in the following PR [#48](https://github.zhaw.ch/PM2-IT22tbWIN-scmy-bles-krea/Team05-java.lang.NullPointerException-projekt2-tower-defense/pull/48)
+    
+    
+ 
+</details>
+    
+<details>
+<summary>
 
 #### Sprite System
 
+</summary>
+    
 > **Sprite** means: In computer graphics, a sprite is a two-dimensional bitmap that is part of a larger scene (e.g., a 2D video game). Sprites can be static images or 
 > animated graphics. [source](https://www.educative.io/answers/definition-sprite) 
 
@@ -150,7 +175,15 @@ public class Sprite {
 
 ![Sprite](https://github.zhaw.ch/storage/user/5886/files/c626a93f-6a99-4e08-bf5e-6ddf08d4db29)
 
+
+</details>    
+    
+<details>
+<summary>
+    
 #### Rendering System
+    
+</summary>
 
 > The Rendering System is responsible for visualizing elements on the canvas. What classes can be renderd is defined by the `Rendreable` interface. 
 
@@ -200,8 +233,18 @@ The health of the enemy is also represented by a green Rectangle drawn with it's
 The top element of the render chain is the Game class which starts the rendering. Here is the order and hierarchy of the rendering process. 
 
 ![exported_from_idea drawio (1)](https://github.zhaw.ch/storage/user/5886/files/59ae9acc-cdc8-4faa-803d-75f7e0fa848e)
+        
+        
+</details>
 
+
+    
+<details>
+<summary>
+    
 #### Update System
+    
+</summary>
 
 > The Update System is responsible for updating the physics and businessLogic of the Game in a predifined interval.
 
@@ -210,8 +253,16 @@ The update system has the following steps:
 ![exported_from_idea drawio (1)](https://github.zhaw.ch/storage/user/5886/files/4a18f4d6-b972-4c19-a27a-bc5497d9e89e)
 
 > His is a overview of all steps done in the `update()` method. Some of them will be explained further in the next points.
+        
+
+</details>
+    
+<details>
+<summary>
 
 #### Enemy Spawning
+    
+</summary>
 
 > The system that dictates, when ,where and how many enemies are spawned and are on the game field. 
 
@@ -239,13 +290,28 @@ The update system has the following steps:
     }
 ```
 > the spawn position is always of screen so the spawning of the enemy is not visible to the player.
-
+        
+</details>
+    
+<details>
+<summary>
+    
 #### Enemy Crowd Behaviour
 
+</summary>
+    
 The crowd behaviour is based on the task for the Book: **The Nature of code by Daniel Shiffman** [Exercise 6.14, Chapter 6.12 Combinations](https://natureofcode.com/book/chapter-6-autonomous-agents/)
+        
+</details>
+    
+<details>
+<summary>
 
 #### Phase System
 
+</summary>
+    
+    
 > The system that defines how many enemies are present in the Game.
 
 The phase system has two phases
@@ -253,7 +319,7 @@ The phase system has two phases
 1. **Attack phase** here enemies spawns correpsonding to the attack pattern 
 2. **Pause phase**  no enemies spawn the player has a chance to recover
 
-#### Attack Patterns
+##### Attack Patterns
 
 The patterns are defined through a base level of enemies that attack the player.
 
@@ -264,7 +330,10 @@ The patterns are defined through a base level of enemies that attack the player.
             patterns.add(new int[] { 2, 2, 2, 2, 4, 2 });
             patterns.add(new int[] { 2, 3, 3, 4, 2 });
 ```
+    
+</details>
 
+    
 ### 🌳 Branching Modell 
 
 A feature branch was generated for each task. If the feature was completed, a pull request was created.   This had to be reviewed and approved by another team member so that the code from the feature branch could be merged into the main branch.
