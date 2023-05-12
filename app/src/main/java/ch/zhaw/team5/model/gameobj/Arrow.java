@@ -7,6 +7,12 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.transform.Rotate;
 
+/**
+ * The Arrow class represents a moving arrow in the game.
+ * It extends the MovingGameObject class and contains methods for updating the arrow's position and rendering it.
+ * @author strenman mettlmi1
+ * @version 1.0.0
+ */
 public class Arrow extends MovingGameObject {
 
     private Enemy enemy;
@@ -17,6 +23,13 @@ public class Arrow extends MovingGameObject {
 
     int damage, maxlifecycle, countlifecycle;
 
+    /**
+     * Creates a new Arrow object that targets a specific enemy.
+     *
+     * @param target the enemy that the arrow is targeting
+     * @param startPosition the starting position of the arrow
+     * @param damage the damage value of the arrow
+     */
     public Arrow(Enemy target, Point2D startPosition, int damage) {
         super(startPosition, SpritePath.ARROW);
         this.enemy = target;
@@ -32,6 +45,9 @@ public class Arrow extends MovingGameObject {
         maxlifecycle = (int) (position.distance(this.enemy.getPosition()) / velocity.magnitude());
     }
 
+    /**
+     * Updates the arrow's position and checks if it has hit its target.
+     */
     public void update() {
         position = position.add(velocity);
         countlifecycle++;
@@ -40,10 +56,20 @@ public class Arrow extends MovingGameObject {
         }
     }
 
+    /**
+     * Checks if the arrow has hit its target.
+     *
+     * @return true if the arrow has hit its target, false otherwise
+     */
     public boolean hasHitTarget() {
         return countlifecycle >= maxlifecycle;
     }
 
+    /**
+     * Renders the arrow on the provided canvas.
+     *
+     * @param canvas the canvas to draw the arrow on
+     */
     @Override
     public void render(Canvas canvas) {
         var gc = canvas.getGraphicsContext2D();

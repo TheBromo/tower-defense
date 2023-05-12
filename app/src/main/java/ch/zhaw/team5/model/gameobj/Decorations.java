@@ -9,11 +9,26 @@ import ch.zhaw.team5.model.util.Sprite;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 
+/**
+ * The Decorations class represents a collection of decorations in the game.
+ * It extends the StaticGameObject class and contains methods for managing the decorations' positions and rendering.
+ * @author strenman
+ * @version 1.0.0
+ */
 public class Decorations extends StaticGameObject {
 
     List<Sprite> sprites = new ArrayList<>();
     List<Point2D> positions = new ArrayList<>();
 
+    /**
+     * Creates a new Decorations object with the specified amount of decorations within the specified boundaries.
+     *
+     * @param amount the number of decorations to generate
+     * @param topX the top boundary on the x-axis
+     * @param topY the top boundary on the y-axis
+     * @param bottomX the bottom boundary on the x-axis
+     * @param bottomY the bottom boundary on the y-axis
+     */
     public Decorations(int amount, int topX, int topY, int bottomX, int bottomY) {
         super();
         generatePositions(amount, topX, topY, bottomX, bottomY);
@@ -28,6 +43,11 @@ public class Decorations extends StaticGameObject {
         }
     }
 
+    /**
+     * Renders the decorations on the provided canvas.
+     *
+     * @param canvas the canvas to draw the decorations on
+     */
     @Override
     public void render(Canvas canvas) {
         var g2d = canvas.getGraphicsContext2D();

@@ -14,10 +14,14 @@ import javafx.scene.paint.Color;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.PriorityQueue;
 
+/**
+ * The Game class represents the main structure of the game.
+ * It is responsible for game object management and game logic.
+ * @author all
+ * @version 1.0.0
+ */
 public class Game implements Renderable {
     private List<TowerPosition> towerPositions = new ArrayList<>();
     private List<Enemy> enemies = new ArrayList<>();
@@ -30,6 +34,12 @@ public class Game implements Renderable {
     private Phase currentPhase;
     private Deque<Phase> phases;
 
+    /**
+     * Initializes a new Game object.
+     *
+     * @param gameState the state of the game
+     * @param canvas the canvas to draw the game on
+     */
     public Game(GameState gameState, Canvas canvas) {
         this.wall = new Wall(new Point2D(canvas.getWidth() - 100, 0));
         this.gameState = gameState;
@@ -41,6 +51,11 @@ public class Game implements Renderable {
         initTowers(canvas.getWidth(), canvas.getHeight());
     }
 
+    /**
+     * Initializes the game environment.
+     *
+     * @param canvas the canvas to draw the environment on
+     */
     public void initEnviroment(Canvas canvas) {
         path = new Path(new Point2D(0, canvas.getHeight() / 2), new Point2D(canvas.getWidth(), canvas.getHeight() / 2));
 
@@ -49,6 +64,12 @@ public class Game implements Renderable {
                 (int) canvas.getHeight()));
     }
 
+    /**
+     * Initializes the game towers.
+     *
+     * @param width the width of the canvas
+     * @param height the height of the canvas
+     */
     public void initTowers(double width, double height) {
         var distanceW = width / 6;
         var distanceH = height / 4;
@@ -82,6 +103,9 @@ public class Game implements Renderable {
         return false;
     }
 
+    /**
+     * The main game loop.
+     */
     public void loop() {
         double previous = System.currentTimeMillis();
         double lag = 0.0;
@@ -148,6 +172,11 @@ public class Game implements Renderable {
         updatePhases();
     }
 
+    /**
+     * Renders the game on the canvas.
+     *
+     * @param canvas the canvas to draw the game on
+     */
     @Override
     public void render(Canvas canvas) {
         var g2d = canvas.getGraphicsContext2D();
@@ -175,6 +204,12 @@ public class Game implements Renderable {
         wall.render(canvas);
     }
 
+    /**
+     * Builds or upgrades a tower.
+     *
+     * @param id the id of the tower position
+     * @return true if the tower was built or upgraded, false otherwise
+     */
     public boolean buildOrUpgradeTower(int id) {
         var towerPosition = towerPositions.get(id - 1);
         if (!towerPosition.hasTower()) {
@@ -195,6 +230,12 @@ public class Game implements Renderable {
         return false;
     }
 
+    /**
+     * Checks if a tower can be built or upgraded.
+     *
+     * @param id the id of the tower position
+     * @return true if the tower can be built or upgraded, false otherwise
+     */
     public boolean canUpgradeOrBuildTower(int id) {
         return !towerPositions.get(id - 1).hasTower() || towerPositions.get(id - 1).isUpgradable();
     }

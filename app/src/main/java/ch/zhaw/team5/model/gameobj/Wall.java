@@ -6,10 +6,21 @@ import ch.zhaw.team5.model.util.Sprite.SpritePath;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 
+/**
+ * The Wall class represents a wall in the game.
+ * It extends the StaticGameObject class and contains methods for managing the wall's health and rendering the wall.
+ * @author kuengpas
+ * @version 1.0.0
+ */
 public class Wall extends StaticGameObject {
     private final Sprite wallTop;
     private final Sprite wallBottom;
 
+    /**
+     * Creates a new Wall object at the specified position.
+     *
+     * @param position the position of the wall
+     */
     public Wall(Point2D position) {
         super(position);
         health = initialHealth;
@@ -27,16 +38,31 @@ public class Wall extends StaticGameObject {
     private final int initialHealth = 100;
     private boolean hasWallPositiveHealth;
 
+    /**
+     * Reduces the health of the wall.
+     *
+     * @return the current health of the wall after reduction
+     */
     public int reduceHealthOfWall() {
         health -= reductionOfHealth;
         return health;
     }
 
+    /**
+     * Recovers the health of the wall.
+     *
+     * @return the current health of the wall after recovery
+     */
     public int recoverHealthOfWall() {
         health += increaseOfHealth;
         return health;
     }
 
+    /**
+     * Checks the health of the wall.
+     *
+     * @return true if the wall has positive health, false otherwise
+     */
     public boolean checkHealthOfWall() {
         if (health < 0) {
             hasWallPositiveHealth = false;
@@ -46,6 +72,11 @@ public class Wall extends StaticGameObject {
         return hasWallPositiveHealth;
     }
 
+    /**
+     * Renders the wall on the provided canvas.
+     *
+     * @param canvas the canvas to draw the wall on
+     */
     @Override
     public void render(Canvas canvas) {
         canvas.getGraphicsContext2D().drawImage(wallTop.getSprite(), position.getX(), position.getY(), width, height);

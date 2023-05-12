@@ -5,12 +5,22 @@ import java.util.List;
 
 import javafx.scene.image.Image;
 
+/**
+ * Sprite class is used to manage the sprites used in the game.
+ * @author strenman
+ * @version 1.0.0
+ */
 public class Sprite {
     private List<Image> sprites;
     private int intervalMs = 300;
     private int index = 0;
     private long lastUpdate = 0;
 
+    /**
+     * Constructor initializes a new Sprite object.
+     *
+     * @param sprite the path to the sprite
+     */
     public Sprite(SpritePath sprite) {
         var randomUtil = RandomUtil.getInstance();
         var imageLoader = ImageLoader.getInstance();
@@ -28,6 +38,12 @@ public class Sprite {
         }
     }
 
+    /**
+     * Gets the current image of the sprite.
+     * The image that is returned is based on the current time and the sprite's animation interval.
+     *
+     * @return the current image of the sprite
+     */
     public Image getSprite() {
         if (System.currentTimeMillis() - lastUpdate >= intervalMs) {
             continueIndex();
@@ -48,7 +64,9 @@ public class Sprite {
         return intervalMs;
     }
 
-
+    /**
+     * Enum representing all sprite paths to images.
+     */
     public enum SpritePath {
         ARROW(1,List.of("Arrow")),
         DECO(3, List.of("Deco")),
