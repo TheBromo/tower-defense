@@ -74,6 +74,8 @@ The MVC model communicates with the Observer Pattern.
 
 #### Game Thread
 
+> The Game Thread is the main loop of the game. It calls all the important function like `render()` and `update()`.
+
 The Game Thread is structured like the following:
 
 ```java
@@ -211,14 +213,57 @@ The update system has the following steps:
 
 #### Enemy Spawning
 
+> The system that dictates, when ,where and how many enemies are spawned and are on the game field. 
 
+1. The `currentPhase` says how many enemies have to be on the field.
+
+```java
+ while (enemies.size() < currentPhase.getEnemyAmount()) {
+            spawnEnemy();
+ }
+```
+
+2. When spawning a random Point is selected where no enemy is  yet. If an Enemy is already on the generated Position the is shifted left (`position.x -= 40`) until no enemy is at the same position:
+
+```java
+    private void spawnEnemy() {
+        int radius = path.getRadius();
+        int y = (int) path.getStart().getY();
+        var startY = RandomUtil.getInstance().getRandomInRange(y - radius, y + radius);
+        var startX = RandomUtil.getInstance().getRandomInRange(-200, 0);
+        var newPost = new Point2D(startX, startY);
+        while (interSects(newPost)) {
+            newPost = newPost.add(-50, 0);
+        }
+        enemies.add(new Enemy(newPost));
+    }
+```
+> the spawn position is always of screen so the spawning of the enemy is not visible to the player.
 
 #### Enemy Crowd Behaviour
 
+The crowd behaviour is based on the task for the Book: **The Nature of code by Daniel Shiffman** [Exercise 6.14, Chapter 6.12 Combinations](https://natureofcode.com/book/chapter-6-autonomous-agents/)
+
 #### Phase System
 
+> The system that defines how many enemies are present in the Game.
+
+The phase system has two phases
+
+1. **Attack phase** here enemies spawns correpsonding to the attack pattern 
+2. **Pause phase**  no enemies spawn the player has a chance to recover
 
 #### Attack Patterns
+
+The patterns are defined through a base level of enemies that attack the player.
+
+```java
+            patterns.add(new int[] { 2, 2, 3, 4, 3, 3, 2 });
+            patterns.add(new int[] { 2, 2, 2, 5, 2, 2 });
+            patterns.add(new int[] { 3, 3, 3, 2, 2, 2 });
+            patterns.add(new int[] { 2, 2, 2, 2, 4, 2 });
+            patterns.add(new int[] { 2, 3, 3, 4, 2 });
+```
 
 ### 🌳 Branching Modell 
 
