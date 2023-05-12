@@ -34,7 +34,8 @@ public abstract class Phase {
 
     /**
      * Checks if the phase has ended
-     * @return boolean yes / no
+     * Check if the phase time is over the limit
+     * @return boolean if the phase has ended
      */
     public boolean hasEnded() {
         return lastUpdate - phaseStart > totalTimeMS;
