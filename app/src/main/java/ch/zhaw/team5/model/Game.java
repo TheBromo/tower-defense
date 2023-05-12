@@ -19,6 +19,7 @@ import java.util.List;
 /**
  * The Game class represents the main structure of the game.
  * It is responsible for game object management and game logic.
+ *
  * @author all
  * @version 1.0.0
  */
@@ -27,9 +28,9 @@ public class Game implements Renderable {
     private List<Enemy> enemies = new ArrayList<>();
     private List<Decorations> decorations = new ArrayList<>();
     private Path path;
-    private Wall wall;
+    private final Wall wall;
 
-    private GameState gameState;
+    private final GameState gameState;
 
     private Phase currentPhase;
     private Deque<Phase> phases;
@@ -38,7 +39,7 @@ public class Game implements Renderable {
      * Initializes a new Game object.
      *
      * @param gameState the state of the game
-     * @param canvas the canvas to draw the game on
+     * @param canvas    the canvas to draw the game on
      */
     public Game(GameState gameState, Canvas canvas) {
         this.wall = new Wall(new Point2D(canvas.getWidth() - 100, 0));
@@ -78,13 +79,13 @@ public class Game implements Renderable {
 
         decorations.add(new Decorations(5, 0, 0, (int) canvas.getWidth() - 100, (int) canvas.getHeight() / 2));
         decorations.add(new Decorations(5, 0, (int) canvas.getHeight() / 2, (int) canvas.getWidth() - 100,
-                (int) canvas.getHeight()));
+            (int) canvas.getHeight()));
     }
 
     /**
      * Initializes the game towers.
      *
-     * @param width the width of the canvas
+     * @param width  the width of the canvas
      * @param height the height of the canvas
      */
     public void initTowers(double width, double height) {

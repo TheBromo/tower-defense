@@ -1,17 +1,18 @@
 package ch.zhaw.team5.model.gameobj;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import ch.zhaw.team5.model.gameobj.definitions.StaticGameObject;
 import ch.zhaw.team5.model.util.RandomUtil;
 import ch.zhaw.team5.model.util.Sprite;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The Decorations class represents a collection of decorations in the game.
  * It extends the StaticGameObject class and contains methods for managing the decorations' positions and rendering.
+ *
  * @author strenman
  * @version 1.0.0
  */
@@ -23,9 +24,9 @@ public class Decorations extends StaticGameObject {
     /**
      * Creates a new Decorations object with the specified amount of decorations within the specified boundaries.
      *
-     * @param amount the number of decorations to generate
-     * @param topX the top boundary on the x-axis
-     * @param topY the top boundary on the y-axis
+     * @param amount  the number of decorations to generate
+     * @param topX    the top boundary on the x-axis
+     * @param topY    the top boundary on the y-axis
      * @param bottomX the bottom boundary on the x-axis
      * @param bottomY the bottom boundary on the y-axis
      */
@@ -39,7 +40,7 @@ public class Decorations extends StaticGameObject {
         for (int i = 0; i < amount; i++) {
             sprites.add(new Sprite(Sprite.SpritePath.DECO));
             positions.add(new Point2D(randomUtil.getRandomInRange(topX, bottomX),
-                    randomUtil.getRandomInRange(topY, bottomY)));
+                randomUtil.getRandomInRange(topY, bottomY)));
         }
     }
 

@@ -15,7 +15,7 @@ import static org.mockito.Mockito.*;
 
 /**
  * Test class to test the gameState behaviour.
- * 
+ *
  * @author mettlmi1
  * @version 1.0
  */

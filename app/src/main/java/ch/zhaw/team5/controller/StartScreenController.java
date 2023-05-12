@@ -1,7 +1,5 @@
 package ch.zhaw.team5.controller;
 
-import java.io.IOException;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,8 +8,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 /**
  * This class acts as a controller for the start screen in the Tower Defense game.
+ *
  * @author kuengpas
  * @version 1.0.0
  */
@@ -31,7 +32,7 @@ public class StartScreenController {
     public void onStartButtonClicked(ActionEvent event) throws IOException {
 
         FXMLLoader gameViewLoader = new FXMLLoader(getClass().getResource("GameView.fxml"));
-        Parent root = (Parent) gameViewLoader.load();
+        Parent root = gameViewLoader.load();
 
         Stage gameStage = new Stage();
         gameStage.setTitle("Tower Defense");

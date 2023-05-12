@@ -12,6 +12,7 @@ import java.util.Random;
 /**
  * The Tower class represents a tower in the game that can shoot at enemies.
  * It extends the StaticGameObject class and contains methods for upgrading the tower and shooting at enemies.
+ *
  * @author strenman mettlmi1
  * @version 1.0.0
  */
@@ -23,7 +24,7 @@ public class Tower extends StaticGameObject {
     private int damage = 20;
     private long interval = 4000, lastShot = 0;
 
-    private List<Arrow> arrows;
+    private final List<Arrow> arrows;
 
     /**
      * Creates a new Tower object at the specified position.
@@ -45,15 +46,15 @@ public class Tower extends StaticGameObject {
     @Override
     public void render(Canvas canvas) {
         canvas.getGraphicsContext2D().drawImage(sprite.getSprite(), position.getX() - width / 2,
-                position.getY() - height / 2,
-                width, height);
+            position.getY() - height / 2,
+            width, height);
 
         for (Arrow arrow : arrows) {
             arrow.render(canvas);
         }
 
     }
-    
+
     /**
      * Upgrades the tower, increasing its damage and decreasing the interval between shots.
      */

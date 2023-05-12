@@ -1,18 +1,19 @@
 package ch.zhaw.team5.model.gameobj;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import ch.zhaw.team5.model.gameobj.definitions.StaticGameObject;
 import ch.zhaw.team5.model.util.Sprite;
 import ch.zhaw.team5.model.util.Sprite.SpritePath;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The Path class represents a path in the game from one point to another.
- * It extends the StaticGameObject class and contains methods for getting the start and end points of the path, 
+ * It extends the StaticGameObject class and contains methods for getting the start and end points of the path,
  * the radius, and a list of points along the path.
+ *
  * @author strenman
  * @version 1.0.0
  */
@@ -25,7 +26,7 @@ public class Path extends StaticGameObject {
      * Creates a new Path object from the start point to the end point.
      *
      * @param start the start point of the path
-     * @param end the end point of the path
+     * @param end   the end point of the path
      */
     public Path(Point2D start, Point2D end) {
         super(start);

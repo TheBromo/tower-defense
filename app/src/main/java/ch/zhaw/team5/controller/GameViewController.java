@@ -1,9 +1,5 @@
 package ch.zhaw.team5.controller;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Semaphore;
-
 import ch.zhaw.team5.GameState;
 import ch.zhaw.team5.model.Game;
 import javafx.application.Platform;
@@ -12,15 +8,20 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
 
 
 /**
  * This class acts as a controller for the game view in a Tower Defense game.
+ *
  * @author strenman
  * @version 1.0.0
  */
@@ -78,7 +79,7 @@ public class GameViewController {
         });
         gameState.gameEndProperty().addListener((observable, oldValue, newValue) -> {
             Platform.runLater(() -> {
-                if (newValue == true) {
+                if (newValue) {
                     gameThread.shutdown();
                     Alert alert = new Alert(AlertType.INFORMATION);
                     alert.setTitle("You've lost the game");
@@ -123,6 +124,7 @@ public class GameViewController {
         Platform.exit();
         System.exit(0);
     }
+
     /**
      * Handles build tower actions based on the pressed button.
      *
@@ -164,6 +166,7 @@ public class GameViewController {
             }
         }
     }
+
     /**
      * Handles buy health action.
      */

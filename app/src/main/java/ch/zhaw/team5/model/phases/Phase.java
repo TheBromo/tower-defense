@@ -1,6 +1,7 @@
 package ch.zhaw.team5.model.phases;
 
 import java.util.concurrent.TimeUnit;
+
 /**
  * This class represents the abstract Phase class.
  *
@@ -15,7 +16,8 @@ public abstract class Phase {
 
     /**
      * Constructor of Phase class.
-     * @param totalTimeSeconds represents the amount of time the phase lasts. 
+     *
+     * @param totalTimeSeconds represents the amount of time the phase lasts.
      */
     public Phase(long totalTimeSeconds) {
         intveralMS = 50;
@@ -26,6 +28,7 @@ public abstract class Phase {
 
     /**
      * Method to get the progress of the phase between the value from 0 to 100.
+     *
      * @return the time in a double value of the current phase progress
      */
     public double getPhaseProgress() {
@@ -35,6 +38,7 @@ public abstract class Phase {
     /**
      * Checks if the phase has ended
      * Check if the phase time is over the limit
+     *
      * @return boolean if the phase has ended
      */
     public boolean hasEnded() {
@@ -65,12 +69,14 @@ public abstract class Phase {
 
     /**
      * abstract method to get the amount of the enemies
+     *
      * @return
      */
     public abstract int getEnemyAmount();
 
     /**
      * abstract method to implement the toString() method
+     *
      * @return
      */
     public abstract String toString();

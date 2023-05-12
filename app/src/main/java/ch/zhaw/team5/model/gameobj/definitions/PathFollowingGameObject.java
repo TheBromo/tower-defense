@@ -1,15 +1,15 @@
 package ch.zhaw.team5.model.gameobj.definitions;
 
-import java.util.List;
-
-
 import ch.zhaw.team5.model.gameobj.Enemy;
 import ch.zhaw.team5.model.gameobj.Path;
 import ch.zhaw.team5.model.util.RandomUtil;
 import ch.zhaw.team5.model.util.Sprite.SpritePath;
 import javafx.geometry.Point2D;
+
+import java.util.List;
+
 /**
- * Abstract class PathFollowingGameObject which extends the MovingGameObject implements all moving objects which are following a specific path. 
+ * Abstract class PathFollowingGameObject which extends the MovingGameObject implements all moving objects which are following a specific path.
  * Algorithm is based upon: The Nature of code by Daniel Shiffman Exercise 6.14, Chapter 6.12 Combinations
  *
  * @author strenman
@@ -17,14 +17,15 @@ import javafx.geometry.Point2D;
  */
 public abstract class PathFollowingGameObject extends MovingGameObject {
 
-    private int radius;
-    private double maxForce;
-    private double maxSpeed;
+    private final int radius;
+    private final double maxForce;
+    private final double maxSpeed;
     private Point2D accelleration;
 
     /**
      * Constructor for PathFollowingGameObject
-     * @param position of the PathFollowingGameObject
+     *
+     * @param position   of the PathFollowingGameObject
      * @param spritePath of the PathFollowingGameObject
      */
     public PathFollowingGameObject(Point2D position, SpritePath spritePath) {
@@ -39,8 +40,9 @@ public abstract class PathFollowingGameObject extends MovingGameObject {
 
     /**
      * Update method to apply behaviours and add velocity
+     *
      * @param enemies - List of enemies
-     * @param path - Path for submitting parameter to applyBehaviours()
+     * @param path    - Path for submitting parameter to applyBehaviours()
      */
     public void update(List<Enemy> enemies, Path path) {
         applyBehaviours(enemies, path);
@@ -52,8 +54,9 @@ public abstract class PathFollowingGameObject extends MovingGameObject {
 
     /**
      * Seperates from other enemies and seeks the path end
+     *
      * @param enemies - List of enemies
-     * @param path - Path for submitting parameter to applyBehaviours()
+     * @param path    - Path for submitting parameter to applyBehaviours()
      */
     public void applyBehaviours(List<Enemy> enemies, Path path) {
         Point2D seperate = seperate(enemies);
@@ -68,6 +71,7 @@ public abstract class PathFollowingGameObject extends MovingGameObject {
 
     /**
      * Add force to accelleration
+     *
      * @param force to add to accelleration
      */
     public void applyForce(Point2D force) {

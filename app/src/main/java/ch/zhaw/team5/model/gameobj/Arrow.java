@@ -10,25 +10,24 @@ import javafx.scene.transform.Rotate;
 /**
  * The Arrow class represents a moving arrow in the game.
  * It extends the MovingGameObject class and contains methods for updating the arrow's position and rendering it.
+ *
  * @author strenman mettlmi1
  * @version 1.0.0
  */
 public class Arrow extends MovingGameObject {
 
-    private Enemy enemy;
-
-    private double speed = 15;
-    private Point2D velocity;
     double angle;
-
     int damage, maxlifecycle, countlifecycle;
+    private final Enemy enemy;
+    private final double speed = 15;
+    private Point2D velocity;
 
     /**
      * Creates a new Arrow object that targets a specific enemy.
      *
-     * @param target the enemy that the arrow is targeting
+     * @param target        the enemy that the arrow is targeting
      * @param startPosition the starting position of the arrow
-     * @param damage the damage value of the arrow
+     * @param damage        the damage value of the arrow
      */
     public Arrow(Enemy target, Point2D startPosition, int damage) {
         super(startPosition, SpritePath.ARROW);
@@ -76,8 +75,8 @@ public class Arrow extends MovingGameObject {
         gc.save(); // saves the current state on stack, including the current transform
         rotate(gc, Math.toDegrees(angle), position.getX(), position.getY());
         gc.drawImage(sprite.getSprite(), position.getX() - width / 2,
-                position.getY() - height / 2,
-                width, height);
+            position.getY() - height / 2,
+            width, height);
         gc.restore(); // back to original state (before rotation)
 
     }

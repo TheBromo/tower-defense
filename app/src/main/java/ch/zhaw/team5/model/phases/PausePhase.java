@@ -1,8 +1,9 @@
 package ch.zhaw.team5.model.phases;
 
 import java.util.concurrent.TimeUnit;
+
 /**
- * PausePhase Class extends Phase and implements the pause phase in which the user has time to coordinate his forces. 
+ * PausePhase Class extends Phase and implements the pause phase in which the user has time to coordinate his forces.
  *
  * @author strenman
  * @version 1.0.0
@@ -12,10 +13,11 @@ public class PausePhase extends Phase {
 
     /**
      * Constructor of PausePhase
+     *
      * @param totalTimeSeconds represents the time of pause
      */
-    public PausePhase( long totalTimeSeconds) {
-        super( totalTimeSeconds);
+    public PausePhase(long totalTimeSeconds) {
+        super(totalTimeSeconds);
     }
 
     /**
@@ -29,6 +31,7 @@ public class PausePhase extends Phase {
 
     /**
      * Get the amount of an enemy
+     *
      * @return 0
      */
     @Override
@@ -38,6 +41,7 @@ public class PausePhase extends Phase {
 
     /**
      * Override toString() method
+     *
      * @return a string with the amount
      */
     @Override

@@ -1,33 +1,26 @@
 package ch.zhaw.team5;
 
 import ch.zhaw.team5.model.gameobj.Enemy;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
 /**
  * The GameState class is responsible for maintaining the state of the game.
  * It includes information about the player's money, health, game progress, and other game state data.
+ *
  * @author all
  * @version 1.0.0
  */
 public class GameState {
-    private final int priceOfHealthLoading = 20;
-    private final int healthDose = 20;
     public static final int upgradeTowerCost = 70;
     public static final int buyTowerCost = 50;
-
-    private IntegerProperty money = new SimpleIntegerProperty();
-    private DoubleProperty health = new SimpleDoubleProperty();
-    private DoubleProperty progress = new SimpleDoubleProperty();
-    private BooleanProperty renderNeeded = new SimpleBooleanProperty();
-    private BooleanProperty gameEnded = new SimpleBooleanProperty();
-    private StringProperty gamePhaseName = new SimpleStringProperty();
+    private final int priceOfHealthLoading = 20;
+    private final int healthDose = 20;
+    private final IntegerProperty money = new SimpleIntegerProperty();
+    private final DoubleProperty health = new SimpleDoubleProperty();
+    private final DoubleProperty progress = new SimpleDoubleProperty();
+    private final BooleanProperty renderNeeded = new SimpleBooleanProperty();
+    private final BooleanProperty gameEnded = new SimpleBooleanProperty();
+    private final StringProperty gamePhaseName = new SimpleStringProperty();
 
     /**
      * Initializes a new GameState object.
@@ -86,7 +79,7 @@ public class GameState {
     public void setGamePhaseName(String gamePhase) {
         this.gamePhaseName.set(gamePhase);
     }
-    
+
     /**
      * Makes the player buy health if the player has enough money and the health is less than 100.
      */
@@ -96,7 +89,7 @@ public class GameState {
             money.set(money.get() - priceOfHealthLoading);
         }
     }
-    
+
     /**
      * Decreases the player's health based on the damage done by an enemy.
      *
@@ -141,7 +134,7 @@ public class GameState {
     public int getPriceOfHealthLoading() {
         return priceOfHealthLoading;
     }
-    
+
     public int getUpgradeTowerCost() {
         return upgradeTowerCost;
     }

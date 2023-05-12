@@ -16,7 +16,8 @@ public abstract class MovingGameObject extends StaticGameObject {
 
     /**
      * Constructor of the Class MovingGameObject
-     * @param position of the MovingGameObject
+     *
+     * @param position   of the MovingGameObject
      * @param spritePath of the MovingGameObject
      */
     public MovingGameObject(Point2D position, SpritePath spritePath) {
@@ -25,13 +26,19 @@ public abstract class MovingGameObject extends StaticGameObject {
 
     /**
      * Constructor of the Class MovingGameObject
+     *
      * @param position of the MovingGameObject
      */
     public MovingGameObject(Point2D position) {
         super(position);
     }
-    
-    public Point2D getRotation(){return rotation;};
 
-    public Point2D getVelocity(){return velocity;};
+    public Point2D getRotation() {
+        return rotation;
+    }
+
+    public Point2D getVelocity() {
+        return velocity;
+    }
+
 }

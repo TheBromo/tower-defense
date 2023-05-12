@@ -9,13 +9,18 @@ import javafx.scene.canvas.Canvas;
 /**
  * The Wall class represents a wall in the game.
  * It extends the StaticGameObject class and contains methods for managing the wall's health and rendering the wall.
+ *
  * @author kuengpas
  * @version 1.0.0
  */
 public class Wall extends StaticGameObject {
     private final Sprite wallTop;
     private final Sprite wallBottom;
-
+    private final int reductionOfHealth = 5;
+    private final int increaseOfHealth = 5;
+    private final int initialHealth = 100;
+    private int health;
+    private boolean hasWallPositiveHealth;
     /**
      * Creates a new Wall object at the specified position.
      *
@@ -30,13 +35,6 @@ public class Wall extends StaticGameObject {
         height = 200;
         width = 100;
     }
-
-    private int health;
-    private final int reductionOfHealth = 5;
-    private final int increaseOfHealth = 5;
-
-    private final int initialHealth = 100;
-    private boolean hasWallPositiveHealth;
 
     /**
      * Reduces the health of the wall.
@@ -64,11 +62,7 @@ public class Wall extends StaticGameObject {
      * @return true if the wall has positive health, false otherwise
      */
     public boolean checkHealthOfWall() {
-        if (health < 0) {
-            hasWallPositiveHealth = false;
-        } else {
-            hasWallPositiveHealth = true;
-        }
+        hasWallPositiveHealth = health >= 0;
         return hasWallPositiveHealth;
     }
 
@@ -81,6 +75,6 @@ public class Wall extends StaticGameObject {
     public void render(Canvas canvas) {
         canvas.getGraphicsContext2D().drawImage(wallTop.getSprite(), position.getX(), position.getY(), width, height);
         canvas.getGraphicsContext2D().drawImage(wallBottom.getSprite(), position.getX(),
-                position.getY() + canvas.getHeight() / 2 + 50, width, height);
+            position.getY() + canvas.getHeight() / 2 + 50, width, height);
     }
 }

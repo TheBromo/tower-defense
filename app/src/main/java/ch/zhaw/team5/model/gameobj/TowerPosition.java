@@ -11,20 +11,22 @@ import javafx.scene.paint.Color;
 /**
  * The TowerPosition class represents a position in the game where a tower can be built.
  * It extends the StaticGameObject class and contains methods for managing the tower and its upgrades.
+ *
  * @author strenman
  * @version 1.0.0
  */
 public class TowerPosition extends StaticGameObject {
 
-    private Tower tower;
+    private final Tower tower;
     private boolean built;
-    private int positionNumber, towerLevel;
+    private final int positionNumber;
+    private int towerLevel;
 
     /**
      * Creates a new TowerPosition object at the specified position.
      *
      * @param position the position of the tower
-     * @param number the position number
+     * @param number   the position number
      */
     public TowerPosition(Point2D position, int number) {
         super(position, Sprite.SpritePath.HOLE);
@@ -48,9 +50,9 @@ public class TowerPosition extends StaticGameObject {
             tower.render(canvas);
         } else {
             g2d.drawImage(sprite.getSprite(), position.getX() - width / 2, position.getY() - height / 2,
-                    width, height);
+                width, height);
             g2d.setStroke(Color.GREY);
-            g2d.strokeText("" + positionNumber, position.getX(), position.getY());
+            g2d.strokeText(String.valueOf(positionNumber), position.getX(), position.getY());
         }
     }
 

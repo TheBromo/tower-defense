@@ -1,17 +1,18 @@
 package ch.zhaw.team5.model.util;
 
+import javafx.scene.image.Image;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.scene.image.Image;
-
 /**
  * Sprite class is used to manage the sprites used in the game.
+ *
  * @author strenman
  * @version 1.0.0
  */
 public class Sprite {
-    private List<Image> sprites;
+    private final List<Image> sprites;
     private int intervalMs = 300;
     private int index = 0;
     private long lastUpdate = 0;
@@ -68,7 +69,7 @@ public class Sprite {
      * Enum representing all sprite paths to images.
      */
     public enum SpritePath {
-        ARROW(1,List.of("Arrow")),
+        ARROW(1, List.of("Arrow")),
         DECO(3, List.of("Deco")),
         SMALLTOWER(3, List.of("SmallTower", "SmallTowerb"), 1000, 9000),
         WOODTOWER(3, List.of("WoodTower", "WoodTowerb"), 1000, 9000),
@@ -84,14 +85,14 @@ public class Sprite {
         public final int variants, minAnimationTimer, maxAnimationTimer;
         public final List<String> animationName;
 
-        private SpritePath(int variants, List<String> animationName, int minAnimationTimer, int maxAnimationTimer) {
+        SpritePath(int variants, List<String> animationName, int minAnimationTimer, int maxAnimationTimer) {
             this.variants = variants;
             this.animationName = animationName;
             this.minAnimationTimer = minAnimationTimer;
             this.maxAnimationTimer = maxAnimationTimer;
         }
 
-        private SpritePath(int variants, List<String> animationName) {
+        SpritePath(int variants, List<String> animationName) {
             this.variants = variants;
             this.animationName = animationName;
             this.minAnimationTimer = 100000;

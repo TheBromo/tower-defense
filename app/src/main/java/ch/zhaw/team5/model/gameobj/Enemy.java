@@ -12,6 +12,7 @@ import java.util.List;
 /**
  * The Enemy class represents an enemy in the game.
  * It extends the PathFollowingGameObject class and contains methods for managing the enemy's health, damage, reward, and other properties.
+ *
  * @author strenman mettlmi1
  * @version 1.0.0
  */
@@ -19,8 +20,8 @@ public class Enemy extends PathFollowingGameObject {
 
     private boolean isAlive = true;
     private int health = 100;
-    private int damage = 25;
-    private int reward = 5;
+    private final int damage = 25;
+    private final int reward = 5;
 
     /**
      * Creates a new Enemy object at the specified position.
@@ -56,7 +57,7 @@ public class Enemy extends PathFollowingGameObject {
      * Updates the enemy's state based on the current list of enemies and the path.
      *
      * @param enemies the current list of enemies
-     * @param path the path that the enemies are following
+     * @param path    the path that the enemies are following
      */
     @Override
     public void update(List<Enemy> enemies, Path path) {
@@ -86,16 +87,16 @@ public class Enemy extends PathFollowingGameObject {
     public void render(Canvas canvas) {
         var g2d = canvas.getGraphicsContext2D();
         g2d.drawImage(sprite.getSprite(), position.getX() - width / 2, position.getY() - height / 2,
-                width, height);
+            width, height);
         g2d.setFill(Color.LIGHTGREEN);
-        g2d.fillRect(position.getX() - width / 2, position.getY() - height / 2-10,
-                (((double) width / 100) * health), 2);
+        g2d.fillRect(position.getX() - width / 2, position.getY() - height / 2 - 10,
+            (((double) width / 100) * health), 2);
         // debugEnemy(canvas.getGraphicsContext2D());
     }
 
     private void debugEnemy(GraphicsContext g2d) {
         g2d.setFill(Color.RED);
-        g2d.strokeText("" + health, position.getX() - width / 2, position.getY() - height / 2);
+        g2d.strokeText(String.valueOf(health), position.getX() - width / 2, position.getY() - height / 2);
     }
 
     public int getHealth() {
