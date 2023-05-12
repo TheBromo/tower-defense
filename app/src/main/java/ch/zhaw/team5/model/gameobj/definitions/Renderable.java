@@ -3,7 +3,7 @@ package ch.zhaw.team5.model.gameobj.definitions;
 import javafx.scene.canvas.Canvas;
 
 /**
- * Interface Renderable
+ * Interface Renderable.
  *
  * @author strenman
  * @version 1.0.0

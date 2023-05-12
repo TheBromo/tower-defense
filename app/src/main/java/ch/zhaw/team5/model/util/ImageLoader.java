@@ -1,11 +1,12 @@
 package ch.zhaw.team5.model.util;
 
-import java.io.IOException;
-
 import javafx.scene.image.Image;
+
+import java.io.IOException;
 
 /**
  * Singleton class to manage image loading in the Tower Defense game.
+ *
  * @author strenman
  * @version 1.0.0
  */
@@ -37,6 +38,7 @@ public class ImageLoader {
     public Image getByName(String name) {
         var url = ClassLoader.getSystemClassLoader().getResource("images/" + name + ".PNG");
         try {
+            assert url != null;
             return new Image(url.openStream());
         } catch (IOException e) {
             e.printStackTrace();

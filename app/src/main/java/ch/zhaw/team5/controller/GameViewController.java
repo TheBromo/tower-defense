@@ -1,9 +1,5 @@
 package ch.zhaw.team5.controller;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Semaphore;
-
 import ch.zhaw.team5.GameState;
 import ch.zhaw.team5.model.Game;
 import javafx.application.Platform;
@@ -12,15 +8,20 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
 
 
 /**
  * This class acts as a controller for the game view in a Tower Defense game.
+ *
  * @author strenman
  * @version 1.0.0
  */
@@ -30,7 +31,6 @@ public class GameViewController {
     private GameState gameState;
     private Game game;
     private ExecutorService gameThread;
-    // private GameDecorator gameDecorator;
 
     @FXML
     private Label moneyLabel;
@@ -42,7 +42,6 @@ public class GameViewController {
     private ProgressBar healthBar;
     @FXML
     private ProgressBar progressBar;
-
     @FXML
     private Button buyHealthButton;
 
@@ -51,7 +50,6 @@ public class GameViewController {
      *
      * @param parent the parent stage of the application
      */
-
     public void initializeListeners(Stage parent) {
         gameState = new GameState();
         this.game = new Game(gameState, canvas);
@@ -64,21 +62,17 @@ public class GameViewController {
     }
 
     private void initGameState(GameState gameState) {
-        gameState.moneyProperty().addListener((observable, oldValue, newValue) -> {
-            Platform.runLater(() -> moneyLabel.setText(newValue + "$"));
-        });
-        gameState.gamePhaseNameProperty().addListener((observable, oldValue, newValue) -> {
-            Platform.runLater(() -> phaseLabel.setText(newValue));
-        });
-        gameState.healthProperty().addListener((observable, oldValue, newValue) -> {
-            Platform.runLater(() -> healthBar.setProgress((double) newValue / 100));
-        });
-        gameState.progressProperty().addListener((observable, oldValue, newValue) -> {
-            Platform.runLater(() -> progressBar.setProgress((double) newValue / 100));
-        });
-        gameState.gameEndProperty().addListener((observable, oldValue, newValue) -> {
+        gameState.moneyProperty().addListener((observable, oldValue, newValue) ->
+            Platform.runLater(() -> moneyLabel.setText(newValue + "$")));
+        gameState.gamePhaseNameProperty().addListener((observable, oldValue, newValue) ->
+            Platform.runLater(() -> phaseLabel.setText(newValue)));
+        gameState.healthProperty().addListener((observable, oldValue, newValue) ->
+            Platform.runLater(() -> healthBar.setProgress((double) newValue / 100)));
+        gameState.progressProperty().addListener((observable, oldValue, newValue) ->
+            Platform.runLater(() -> progressBar.setProgress((double) newValue / 100)));
+        gameState.gameEndProperty().addListener((observable, oldValue, newValue) ->
             Platform.runLater(() -> {
-                if (newValue == true) {
+                if (newValue) {
                     gameThread.shutdown();
                     Alert alert = new Alert(AlertType.INFORMATION);
                     alert.setTitle("You've lost the game");
@@ -88,13 +82,12 @@ public class GameViewController {
                     alert.showAndWait();
                     closeGame();
                 }
-            });
-        });
+            }));
         gameState.renderNeededProperty().addListener(render());
     }
 
     private ChangeListener<Boolean> render() {
-        // Sephamore is used so the game thread only runs after rendering (used for not
+        // Semaphore is used so the game thread only runs after rendering (used for not
         // overusing the game thread)
         return (observable, oldValue, renderNeeded) -> {
             Semaphore semaphore = new Semaphore(0);
@@ -113,9 +106,7 @@ public class GameViewController {
     }
 
     private void setOnClose(Stage parent) {
-        parent.setOnCloseRequest(event -> {
-            closeGame();
-        });
+        parent.setOnCloseRequest(event -> closeGame());
     }
 
     private void closeGame() {
@@ -123,6 +114,7 @@ public class GameViewController {
         Platform.exit();
         System.exit(0);
     }
+
     /**
      * Handles build tower actions based on the pressed button.
      *
@@ -132,27 +124,13 @@ public class GameViewController {
         Button pressedButton = (Button) event.getSource();
 
         switch (pressedButton.getId()) {
-            case "buttonTower1" -> {
-                buildOrUpgradeTower(1, pressedButton);
-            }
-            case "buttonTower2" -> {
-                buildOrUpgradeTower(2, pressedButton);
-            }
-            case "buttonTower3" -> {
-                buildOrUpgradeTower(3, pressedButton);
-            }
-            case "buttonTower4" -> {
-                buildOrUpgradeTower(4, pressedButton);
-            }
-            case "buttonTower5" -> {
-                buildOrUpgradeTower(5, pressedButton);
-            }
-            case "buttonTower6" -> {
-                buildOrUpgradeTower(6, pressedButton);
-            }
-            default -> {
-                System.err.println("unknown action");
-            }
+            case "buttonTower1" -> buildOrUpgradeTower(1, pressedButton);
+            case "buttonTower2" -> buildOrUpgradeTower(2, pressedButton);
+            case "buttonTower3" -> buildOrUpgradeTower(3, pressedButton);
+            case "buttonTower4" -> buildOrUpgradeTower(4, pressedButton);
+            case "buttonTower5" -> buildOrUpgradeTower(5, pressedButton);
+            case "buttonTower6" -> buildOrUpgradeTower(6, pressedButton);
+            default -> System.err.println("unknown action");
         }
     }
 
@@ -164,6 +142,7 @@ public class GameViewController {
             }
         }
     }
+
     /**
      * Handles buy health action.
      */

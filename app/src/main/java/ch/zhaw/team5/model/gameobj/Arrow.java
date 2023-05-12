@@ -10,25 +10,24 @@ import javafx.scene.transform.Rotate;
 /**
  * The Arrow class represents a moving arrow in the game.
  * It extends the MovingGameObject class and contains methods for updating the arrow's position and rendering it.
+ *
  * @author strenman mettlmi1
  * @version 1.0.0
  */
 public class Arrow extends MovingGameObject {
 
-    private Enemy enemy;
-
-    private double speed = 15;
-    private Point2D velocity;
+    private final Enemy enemy;
+    private final double speed = 15;
     double angle;
-
-    int damage, maxlifecycle, countlifecycle;
+    int damage, maxLifecycle, countLifecycle;
+    private Point2D velocity;
 
     /**
      * Creates a new Arrow object that targets a specific enemy.
      *
-     * @param target the enemy that the arrow is targeting
+     * @param target        the enemy that the arrow is targeting
      * @param startPosition the starting position of the arrow
-     * @param damage the damage value of the arrow
+     * @param damage        the damage value of the arrow
      */
     public Arrow(Enemy target, Point2D startPosition, int damage) {
         super(startPosition, SpritePath.ARROW);
@@ -42,7 +41,7 @@ public class Arrow extends MovingGameObject {
         velocity = velocity.normalize();
         velocity = velocity.multiply(speed);
         angle = Math.atan2(velocity.getY(), velocity.getX()) + 1.5708;
-        maxlifecycle = (int) (position.distance(this.enemy.getPosition()) / velocity.magnitude());
+        maxLifecycle = (int) (position.distance(this.enemy.getPosition()) / velocity.magnitude());
     }
 
     /**
@@ -50,7 +49,7 @@ public class Arrow extends MovingGameObject {
      */
     public void update() {
         position = position.add(velocity);
-        countlifecycle++;
+        countLifecycle++;
         if (hasHitTarget()) {
             enemy.hit(damage);
         }
@@ -62,7 +61,7 @@ public class Arrow extends MovingGameObject {
      * @return true if the arrow has hit its target, false otherwise
      */
     public boolean hasHitTarget() {
-        return countlifecycle >= maxlifecycle;
+        return countLifecycle >= maxLifecycle;
     }
 
     /**
@@ -76,8 +75,8 @@ public class Arrow extends MovingGameObject {
         gc.save(); // saves the current state on stack, including the current transform
         rotate(gc, Math.toDegrees(angle), position.getX(), position.getY());
         gc.drawImage(sprite.getSprite(), position.getX() - width / 2,
-                position.getY() - height / 2,
-                width, height);
+            position.getY() - height / 2,
+            width, height);
         gc.restore(); // back to original state (before rotation)
 
     }

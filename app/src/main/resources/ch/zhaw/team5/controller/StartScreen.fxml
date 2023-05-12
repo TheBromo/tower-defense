@@ -1,32 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-
-<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.zhaw.team5.controller.StartScreenController">
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            fx:controller="ch.zhaw.team5.controller.StartScreenController">
 
     <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" styleClass="bg">
         <image>
-            <Image url="@../../../../images/start_screen_bg.jpg" />
+            <Image url="@../../../../images/start_screen_bg.jpg"/>
         </image>
     </ImageView>
 
-    <AnchorPane id="bg-pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-                prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+    <AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="bg-pane" maxHeight="-Infinity" maxWidth="-Infinity"
+                minHeight="-Infinity"
+                minWidth="-Infinity"
+                prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19">
         <children>
             <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="30.0">
                 <children>
-                    <Button fx:id="startButton" mnemonicParsing="false" onAction="#onStartButtonClicked" prefHeight="50.0" prefWidth="150.0" text="Start"
-                            >
+                    <Button fx:id="startButton" mnemonicParsing="false" onAction="#onStartButtonClicked"
+                            prefHeight="50.0" prefWidth="150.0" text="Start"
+                    >
                         <font>
                             <Font name="System Bold" size="13.0"/>
                         </font>
                     </Button>
-                    <Button fx:id="quitButton" mnemonicParsing="false" onAction="#onQuitButtonClicked" prefHeight="50.0" prefWidth="150.0" text="Quit"
-                            >
+                    <Button fx:id="quitButton" mnemonicParsing="false" onAction="#onQuitButtonClicked" prefHeight="50.0"
+                            prefWidth="150.0" text="Quit"
+                    >
                         <VBox.margin>
                             <Insets/>
                         </VBox.margin>
@@ -48,5 +54,5 @@
         </children>
     </AnchorPane>
 
-     
+
 </AnchorPane>

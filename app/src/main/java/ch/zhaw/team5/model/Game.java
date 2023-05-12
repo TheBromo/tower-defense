@@ -19,18 +19,17 @@ import java.util.List;
 /**
  * The Game class represents the main structure of the game.
  * It is responsible for game object management and game logic.
- * @author all
+ *
+ * @author strenman, hartmdo1, paskueng, mettlmi1
  * @version 1.0.0
  */
 public class Game implements Renderable {
+    private final Wall wall;
+    private final GameState gameState;
     private List<TowerPosition> towerPositions = new ArrayList<>();
     private List<Enemy> enemies = new ArrayList<>();
     private List<Decorations> decorations = new ArrayList<>();
     private Path path;
-    private Wall wall;
-
-    private GameState gameState;
-
     private Phase currentPhase;
     private Deque<Phase> phases;
 
@@ -38,7 +37,7 @@ public class Game implements Renderable {
      * Initializes a new Game object.
      *
      * @param gameState the state of the game
-     * @param canvas the canvas to draw the game on
+     * @param canvas    the canvas to draw the game on
      */
     public Game(GameState gameState, Canvas canvas) {
         this.wall = new Wall(new Point2D(canvas.getWidth() - 100, 0));
@@ -47,7 +46,7 @@ public class Game implements Renderable {
         currentPhase = new PausePhase(20);
         phases.addFirst(new AttackPhase(180));
 
-        initEnviroment(canvas);
+        initEnvironment(canvas);
         initTowers(canvas.getWidth(), canvas.getHeight());
     }
 
@@ -73,18 +72,18 @@ public class Game implements Renderable {
      *
      * @param canvas the canvas to draw the environment on
      */
-    public void initEnviroment(Canvas canvas) {
+    public void initEnvironment(Canvas canvas) {
         path = new Path(new Point2D(0, canvas.getHeight() / 2), new Point2D(canvas.getWidth(), canvas.getHeight() / 2));
 
         decorations.add(new Decorations(5, 0, 0, (int) canvas.getWidth() - 100, (int) canvas.getHeight() / 2));
         decorations.add(new Decorations(5, 0, (int) canvas.getHeight() / 2, (int) canvas.getWidth() - 100,
-                (int) canvas.getHeight()));
+            (int) canvas.getHeight()));
     }
 
     /**
      * Initializes the game towers.
      *
-     * @param width the width of the canvas
+     * @param width  the width of the canvas
      * @param height the height of the canvas
      */
     public void initTowers(double width, double height) {
@@ -99,6 +98,9 @@ public class Game implements Renderable {
         }
     }
 
+    /**
+     * Method to spawn an enemy (also makes sure that its in a given range and not on top of another enemy).
+     */
     public void spawnEnemy() {
         int radius = path.getRadius();
         int y = (int) path.getStart().getY();

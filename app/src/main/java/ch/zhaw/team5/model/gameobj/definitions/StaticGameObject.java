@@ -4,10 +4,9 @@ package ch.zhaw.team5.model.gameobj.definitions;
 import ch.zhaw.team5.model.util.Sprite;
 import ch.zhaw.team5.model.util.Sprite.SpritePath;
 import javafx.geometry.Point2D;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
+
 /**
- * Abstract class StaticGameObject implements Renderable
+ * Abstract class StaticGameObject implements Renderable.
  *
  * @author strenman
  * @version 1.0.0
@@ -18,8 +17,9 @@ public abstract class StaticGameObject implements Renderable {
     protected int width, height;
 
     /**
-     * Constructor StaticGameObject
-     * @param position of the StaticGameObject
+     * Constructor StaticGameObject.
+     *
+     * @param position   of the StaticGameObject
      * @param spritePath of the StaticGameObject
      */
     public StaticGameObject(Point2D position, SpritePath spritePath) {
@@ -29,7 +29,8 @@ public abstract class StaticGameObject implements Renderable {
     }
 
     /**
-     * Constructor StaticGameObject
+     * Constructor StaticGameObject.
+     *
      * @param position of the StaticGameObject
      */
     public StaticGameObject(Point2D position) {
@@ -37,11 +38,10 @@ public abstract class StaticGameObject implements Renderable {
     }
 
     /**
-     * Constructor StaticGameObject
+     * Constructor StaticGameObject.
      */
     public StaticGameObject() {
     }
-
 
     public Point2D getPosition() {
         return position;
@@ -55,9 +55,4 @@ public abstract class StaticGameObject implements Renderable {
         this.sprite = new Sprite(spritePath);
     }
 
-  
-    public void renderDebugLines(GraphicsContext g2d){
-        g2d.setFill(new Color(1, 0,0, 0.2));
-        g2d.fillRect(position.getX(),position.getY(), width, height);
-    }
 }

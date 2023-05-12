@@ -15,9 +15,9 @@ import static org.mockito.Mockito.*;
 
 /**
  * Test class to test the gameState behaviour.
- * 
+ *
  * @author mettlmi1
- * @version 1.0
+ * @version 1.0.0
  */
 class GameTest {
     private Game game;
@@ -55,7 +55,7 @@ class GameTest {
     }
 
     /**
-     * Tests if a tower is buit correctly.
+     * Tests if a tower is built correctly.
      */
     @Test
     public void testBuildTower() {
