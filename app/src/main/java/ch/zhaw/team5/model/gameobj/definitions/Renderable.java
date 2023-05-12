@@ -9,6 +9,6 @@ import javafx.scene.canvas.Canvas;
  * @version 1.0.0
  */
 public interface Renderable {
-    
+
     void render(Canvas canvas);
 }

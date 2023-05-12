@@ -19,9 +19,9 @@ import java.util.Random;
 public class Tower extends StaticGameObject {
 
     public final int range = 200;
+    private final List<Arrow> arrows;
     private int damage = 20;
     private long interval = 4000, lastShot = 0;
-    private final List<Arrow> arrows;
 
     /**
      * Creates a new Tower object at the specified position.

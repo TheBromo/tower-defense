@@ -17,10 +17,10 @@ import java.util.List;
  */
 public class Enemy extends PathFollowingGameObject {
 
-    private boolean isAlive = true;
-    private int health = 100;
     private final int damage = 25;
     private final int reward = 5;
+    private boolean isAlive = true;
+    private int health = 100;
 
     /**
      * Creates a new Enemy object at the specified position.
@@ -66,11 +66,11 @@ public class Enemy extends PathFollowingGameObject {
     /**
      * Returns whether the enemy is out of the screen.
      *
-     * @param threshhold the threshhold value for determining whether the enemy is out of the screen
+     * @param threshold the threshold value for determining whether the enemy is out of the screen
      * @return true if the enemy is out of the screen, false otherwise
      */
-    public boolean outOfScreen(int threshhold) {
-        return position.getX() > threshhold;
+    public boolean outOfScreen(int threshold) {
+        return position.getX() > threshold;
     }
 
     /**

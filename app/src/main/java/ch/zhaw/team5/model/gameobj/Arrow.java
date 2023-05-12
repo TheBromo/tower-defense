@@ -16,10 +16,10 @@ import javafx.scene.transform.Rotate;
  */
 public class Arrow extends MovingGameObject {
 
-    double angle;
-    int damage, maxLifecycle, countLifecycle;
     private final Enemy enemy;
     private final double speed = 15;
+    double angle;
+    int damage, maxLifecycle, countLifecycle;
     private Point2D velocity;
 
     /**

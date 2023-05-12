@@ -18,8 +18,8 @@ import javafx.scene.paint.Color;
 public class TowerPosition extends StaticGameObject {
 
     private final Tower tower;
-    private boolean built;
     private final int positionNumber;
+    private boolean built;
     private int towerLevel;
 
     /**

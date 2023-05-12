@@ -24,14 +24,12 @@ import java.util.List;
  * @version 1.0.0
  */
 public class Game implements Renderable {
+    private final Wall wall;
+    private final GameState gameState;
     private List<TowerPosition> towerPositions = new ArrayList<>();
     private List<Enemy> enemies = new ArrayList<>();
     private List<Decorations> decorations = new ArrayList<>();
     private Path path;
-    private final Wall wall;
-
-    private final GameState gameState;
-
     private Phase currentPhase;
     private Deque<Phase> phases;
 

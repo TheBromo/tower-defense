@@ -13,9 +13,9 @@ import java.util.concurrent.TimeUnit;
  * @version 1.0.0
  */
 public class AttackPhase extends Phase {
-    private int count = 0, randomFactor = 0;
     private final AttackPatterns attackPatterns;
     private final int[] currentPattern;
+    private int count = 0, randomFactor = 0;
 
     /**
      * Constructor for AttackPhase class.
