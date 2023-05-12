@@ -11,9 +11,11 @@ import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class GameViewController {
@@ -62,9 +64,18 @@ public class GameViewController {
             Platform.runLater(() -> progressBar.setProgress((double) newValue / 100));
         });
         gameState.gameEndProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue == true) {
-                closeGame();
-            }
+            Platform.runLater(() -> {
+                if (newValue == true) {
+                    gameThread.shutdown();
+                    Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setTitle("You've lost the game");
+                    alert.setHeaderText("Oops! it's seems like you've lost the Game");
+                    alert.setContentText("Restart to try again :D");
+
+                    alert.showAndWait();
+                    closeGame();
+                }
+            });
         });
         gameState.renderNeededProperty().addListener(render());
     }

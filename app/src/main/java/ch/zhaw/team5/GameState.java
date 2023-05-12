@@ -13,7 +13,7 @@ import javafx.beans.property.StringProperty;
 public class GameState {
     private final int priceOfHealthLoading = 20;
     private final int healthDose = 20;
-    public static final int upgradeTowerCost = 30;
+    public static final int upgradeTowerCost = 70;
     public static final int buyTowerCost = 50;
 
     private IntegerProperty money = new SimpleIntegerProperty();
