@@ -15,7 +15,7 @@ public abstract class Phase {
 
     /**
      * Constructor of Phase class.
-     * @param totalTimeSeconds represents the amount of time the phase last. 
+     * @param totalTimeSeconds represents the amount of time the phase lasts. 
      */
     public Phase(long totalTimeSeconds) {
         intveralMS = 50;
