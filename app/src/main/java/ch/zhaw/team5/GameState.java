@@ -137,4 +137,12 @@ public class GameState {
             return false;
         }
     }
+
+    public int getHealthDose() {
+        return healthDose;
+    }
+
+    public int getPriceOfHealthLoading() {
+        return priceOfHealthLoading;
+    }
 }
