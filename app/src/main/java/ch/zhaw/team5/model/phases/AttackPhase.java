@@ -47,7 +47,7 @@ public class AttackPhase extends Phase {
     }
 
     /**
-     * Override of the toString() method
+     * 
      * @return Attack count
      */
     @Override
