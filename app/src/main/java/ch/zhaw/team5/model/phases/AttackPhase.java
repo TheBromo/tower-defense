@@ -18,7 +18,7 @@ public class AttackPhase extends Phase {
     private final int[] currentPattern;
 
     /**
-     * Constructor for AttackPhase class
+     * Constructor for AttackPhase class.
      *
      * @param totalTimeSeconds represents the time the attack phase lasts
      */
@@ -29,7 +29,7 @@ public class AttackPhase extends Phase {
     }
 
     /**
-     * Increases difficulty of phase by increasing enemies and duration
+     * Increases difficulty of phase by increasing enemies and duration.
      */
     @Override
     public void increaseDifficulty() {
@@ -39,7 +39,7 @@ public class AttackPhase extends Phase {
     }
 
     /**
-     * Get the amount of enemies
+     * Get the amount of enemies.
      *
      * @return the amount of enemies
      */
@@ -49,7 +49,7 @@ public class AttackPhase extends Phase {
     }
 
     /**
-     * @return Attack count
+     * @return Attack count.
      */
     @Override
     public String toString() {
@@ -57,7 +57,7 @@ public class AttackPhase extends Phase {
     }
 
     /**
-     * Get the current factor of the game state
+     * Get the current factor of the game state.
      *
      * @param pattern to provide the current pattern
      * @return value of pattern
@@ -68,13 +68,12 @@ public class AttackPhase extends Phase {
     }
 
     /**
-     * Inner Class AttackPatterns
-     * Provides the different attack patterns
+     * Inner Class AttackPatterns that provides the different attack patterns.
      *
      * @author strenman
      * @version 1.0.0
      */
-    class AttackPatterns {
+    static class AttackPatterns {
         private final List<int[]> patterns = new ArrayList<>();
 
         public AttackPatterns() {
@@ -86,7 +85,7 @@ public class AttackPhase extends Phase {
         }
 
         /**
-         * Get a random pattern
+         * Returns a random pattern.
          *
          * @return a random pattern
          */

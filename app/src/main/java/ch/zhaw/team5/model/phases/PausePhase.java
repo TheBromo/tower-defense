@@ -12,7 +12,7 @@ public class PausePhase extends Phase {
     private int count = 0;
 
     /**
-     * Constructor of PausePhase
+     * Constructor of PausePhase.
      *
      * @param totalTimeSeconds represents the time of pause
      */
@@ -21,7 +21,7 @@ public class PausePhase extends Phase {
     }
 
     /**
-     * Increase difficulty
+     * Increase difficulty.
      */
     @Override
     public void increaseDifficulty() {
@@ -30,7 +30,7 @@ public class PausePhase extends Phase {
     }
 
     /**
-     * Get the amount of an enemy
+     * Get the amount of an enemy.
      *
      * @return 0
      */
@@ -40,7 +40,7 @@ public class PausePhase extends Phase {
     }
 
     /**
-     * Override toString() method
+     * Override toString() method.
      *
      * @return a string with the amount
      */
