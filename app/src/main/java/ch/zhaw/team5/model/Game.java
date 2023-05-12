@@ -52,6 +52,23 @@ public class Game implements Renderable {
     }
 
     /**
+     * Constructor with the possibility to fill render objects for testing purposes.
+     *
+     * @param towerPositions tower position list with mocked towers
+     * @param path           mocked path
+     * @param decorations    mocked decorations
+     * @param gameState      state of the game
+     */
+    public Game(List<TowerPosition> towerPositions, List<Enemy> enemies, Path path, List<Decorations> decorations, Wall wall, GameState gameState) {
+        this.towerPositions = towerPositions;
+        this.enemies = enemies;
+        this.path = path;
+        this.decorations = decorations;
+        this.wall = wall;
+        this.gameState = gameState;
+    }
+
+    /**
      * Initializes the game environment.
      *
      * @param canvas the canvas to draw the environment on
@@ -82,7 +99,7 @@ public class Game implements Renderable {
         }
     }
 
-    private void spawnEnemy() {
+    public void spawnEnemy() {
         int radius = path.getRadius();
         int y = (int) path.getStart().getY();
         var startY = RandomUtil.getInstance().getRandomInRange(y - radius, y + radius);
@@ -238,5 +255,13 @@ public class Game implements Renderable {
      */
     public boolean canUpgradeOrBuildTower(int id) {
         return !towerPositions.get(id - 1).hasTower() || towerPositions.get(id - 1).isUpgradable();
+    }
+
+    public List<Enemy> getEnemies() {
+        return enemies;
+    }
+
+    public List<TowerPosition> getTowerPositions() {
+        return towerPositions;
     }
 }
