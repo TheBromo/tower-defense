@@ -18,6 +18,13 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
+
+/**
+ * This class acts as a controller for the game view in a Tower Defense game.
+ * @author strenman
+ * @version 1.0.0
+ */
+
 public class GameViewController {
 
     private GameState gameState;
@@ -38,6 +45,12 @@ public class GameViewController {
 
     @FXML
     private Button buyHealthButton;
+
+    /**
+     * Initializes game listeners and starts game loop.
+     *
+     * @param parent the parent stage of the application
+     */
 
     public void initializeListeners(Stage parent) {
         gameState = new GameState();
@@ -110,7 +123,11 @@ public class GameViewController {
         Platform.exit();
         System.exit(0);
     }
-
+    /**
+     * Handles build tower actions based on the pressed button.
+     *
+     * @param event the ActionEvent to be handled
+     */
     public void onBuildTower(ActionEvent event) {
         Button pressedButton = (Button) event.getSource();
 
@@ -147,7 +164,9 @@ public class GameViewController {
             }
         }
     }
-
+    /**
+     * Handles buy health action.
+     */
     public void onBuyHealth() {
 
         gameState.buyHealth();
