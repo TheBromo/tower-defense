@@ -144,8 +144,13 @@ public class Sprite {
 
 `getSprite()` returns the Image which should be displayed of the whole set an is incremented if the interval was passed.
 
+**Example sprite of enemy walking**
+
+![Sprite](https://github.zhaw.ch/storage/user/5886/files/c626a93f-6a99-4e08-bf5e-6ddf08d4db29)
 
 #### Rendering System
+
+The rendering is called each `game.loop()`. As the Rendering has to be done in the UI Thread the GameThread( `game.loop()`) is waiting. This is so the rendering does not spam the UI Thread until it dies and the calling of the render function doesn't have to be locked to a fixed number. 
 
 ```
                                                                                           ┌──────────────────┐
@@ -165,6 +170,34 @@ public class Sprite {
                                                                                           │                  │
                                                                                           └──────────────────┘
 ```
+
+
+The following classes implement the `Rendreable` interface: 
+
+![exported_from_idea drawio](https://github.zhaw.ch/storage/user/5886/files/a93f6ef8-8e4d-4ba5-9b05-fad69868de7e)
+
+The `Rendreable` interface enforces the `render(Canvas canvas)` method on it's implementers. Here an Example:
+
+```java
+    @Override
+    public void render(Canvas canvas) {
+        var g2d = canvas.getGraphicsContext2D();
+        g2d.drawImage(sprite.getSprite(), position.getX() - width / 2, position.getY() - height / 2,
+                width, height);
+        g2d.setFill(Color.LIGHTGREEN);
+        g2d.fillRect(position.getX() - width / 2, position.getY() - height / 2-10,
+                (((double) width / 100) * health), 2);
+    }
+```
+
+Here the sprite is drawn with the position of the enemy being in the middle of the Image (hence the  `- width / 2` and `- height / 2`). 
+The health of the enemy is also represented by a green Rectangle drawn with it's width being relative to the enemies health. 
+
+The top element of the render chain is the Game class which starts the rendering. Here is the order and hierarchy of the rendering process. 
+
+![exported_from_idea drawio (1)](https://github.zhaw.ch/storage/user/5886/files/59ae9acc-cdc8-4faa-803d-75f7e0fa848e)
+
+
 
 #### Update System
 
@@ -204,6 +237,7 @@ Not every pull-requests have discussion/improvement points in it, as if the revi
 5. Achievements and Leaderboards: Unlock achievements as you progress and compare your scores with players from around the world. 
 
 ## 🙌📫 Credits & Contact
+
 Tower Defense is developed by Team 5 java.lang.NullPointerException. 
 
 If you have any questions, suggestions or concerns, please feel free to contact us:
