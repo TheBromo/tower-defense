@@ -14,9 +14,7 @@ import javafx.scene.paint.Color;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.PriorityQueue;
 
 public class Game implements Renderable {
     private List<TowerPosition> towerPositions = new ArrayList<>();
