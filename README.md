@@ -203,10 +203,15 @@ The top element of the render chain is the Game class which starts the rendering
 
 > The Update System is responsible for updating the physics and businessLogic of the Game in a predifined interval.
 
+The update system has the following steps:
 
+![exported_from_idea drawio (1)](https://github.zhaw.ch/storage/user/5886/files/4a18f4d6-b972-4c19-a27a-bc5497d9e89e)
 
+> His is a overview of all steps done in the `update()` method. Some of them will be explained further in the next points.
 
 #### Enemy Spawning
+
+
 
 #### Enemy Crowd Behaviour
 
