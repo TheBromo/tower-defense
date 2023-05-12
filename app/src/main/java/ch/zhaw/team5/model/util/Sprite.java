@@ -37,7 +37,13 @@ public class Sprite {
             sprites.add(imageLoader.getByName(path + variant));
         }
     }
-    
+
+    /**
+     * Gets the current image of the sprite.
+     * The image that is returned is based on the current time and the sprite's animation interval.
+     *
+     * @return the current image of the sprite
+     */
     public Image getSprite() {
         if (System.currentTimeMillis() - lastUpdate >= intervalMs) {
             continueIndex();
