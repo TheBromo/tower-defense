@@ -17,7 +17,7 @@ import javafx.scene.transform.Rotate;
 public class Arrow extends MovingGameObject {
 
     double angle;
-    int damage, maxlifecycle, countlifecycle;
+    int damage, maxLifecycle, countLifecycle;
     private final Enemy enemy;
     private final double speed = 15;
     private Point2D velocity;
@@ -41,7 +41,7 @@ public class Arrow extends MovingGameObject {
         velocity = velocity.normalize();
         velocity = velocity.multiply(speed);
         angle = Math.atan2(velocity.getY(), velocity.getX()) + 1.5708;
-        maxlifecycle = (int) (position.distance(this.enemy.getPosition()) / velocity.magnitude());
+        maxLifecycle = (int) (position.distance(this.enemy.getPosition()) / velocity.magnitude());
     }
 
     /**
@@ -49,7 +49,7 @@ public class Arrow extends MovingGameObject {
      */
     public void update() {
         position = position.add(velocity);
-        countlifecycle++;
+        countLifecycle++;
         if (hasHitTarget()) {
             enemy.hit(damage);
         }
@@ -61,7 +61,7 @@ public class Arrow extends MovingGameObject {
      * @return true if the arrow has hit its target, false otherwise
      */
     public boolean hasHitTarget() {
-        return countlifecycle >= maxlifecycle;
+        return countLifecycle >= maxLifecycle;
     }
 
     /**

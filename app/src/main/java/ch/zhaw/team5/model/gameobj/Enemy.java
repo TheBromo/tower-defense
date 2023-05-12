@@ -4,7 +4,6 @@ import ch.zhaw.team5.model.gameobj.definitions.PathFollowingGameObject;
 import ch.zhaw.team5.model.util.Sprite;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 import java.util.List;
@@ -64,10 +63,6 @@ public class Enemy extends PathFollowingGameObject {
         super.update(enemies, path);
     }
 
-    public Point2D getPosition() {
-        return position;
-    }
-
     /**
      * Returns whether the enemy is out of the screen.
      *
@@ -91,16 +86,6 @@ public class Enemy extends PathFollowingGameObject {
         g2d.setFill(Color.LIGHTGREEN);
         g2d.fillRect(position.getX() - width / 2, position.getY() - height / 2 - 10,
             (((double) width / 100) * health), 2);
-        // debugEnemy(canvas.getGraphicsContext2D());
-    }
-
-    private void debugEnemy(GraphicsContext g2d) {
-        g2d.setFill(Color.RED);
-        g2d.strokeText(String.valueOf(health), position.getX() - width / 2, position.getY() - height / 2);
-    }
-
-    public int getHealth() {
-        return health;
     }
 
     public int getDamage() {

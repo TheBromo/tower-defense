@@ -19,11 +19,8 @@ import java.util.Random;
 public class Tower extends StaticGameObject {
 
     public final int range = 200;
-    public final int price = 50;
-
     private int damage = 20;
     private long interval = 4000, lastShot = 0;
-
     private final List<Arrow> arrows;
 
     /**
@@ -77,7 +74,7 @@ public class Tower extends StaticGameObject {
         if (enemies.size() > 0 && interval < System.currentTimeMillis() - lastShot) {
 
             var possibleTargets = new ArrayList<>(enemies);
-            possibleTargets.removeIf(enemy -> outOfRange(enemy));
+            possibleTargets.removeIf(this::outOfRange);
 
             if (possibleTargets.size() == 0)
                 return;

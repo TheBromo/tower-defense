@@ -68,7 +68,4 @@ public class Path extends StaticGameObject {
         return radius;
     }
 
-    public List<Point2D> getPointsAList() {
-        return List.of(position, end);
-    }
 }

@@ -73,20 +73,14 @@ public class TowerPosition extends StaticGameObject {
     }
 
     private SpritePath getTowerSprite(int level) {
-        switch (level) {
-            case 0:
-                return SpritePath.SMALLTOWER;
-            case 1:
-                return SpritePath.WOODTOWER;
-            case 2:
-                return SpritePath.ROCKTOWER;
-            case 3:
-                return SpritePath.BIGTOWER;
-            case 4:
-                return SpritePath.ARROWTOWER;
-            default:
-                return SpritePath.ARROWTOWER;
-        }
+        return switch (level) {
+            case 0 -> SpritePath.SMALLTOWER;
+            case 1 -> SpritePath.WOODTOWER;
+            case 2 -> SpritePath.ROCKTOWER;
+            case 3 -> SpritePath.BIGTOWER;
+            case 4 -> SpritePath.ARROWTOWER;
+            default -> SpritePath.ARROWTOWER;
+        };
     }
 
     public Tower getTower() {
@@ -100,10 +94,6 @@ public class TowerPosition extends StaticGameObject {
      */
     public boolean hasTower() {
         return built;
-    }
-
-    public int getNumber() {
-        return positionNumber;
     }
 
     /**
