@@ -28,7 +28,7 @@ public class AttackPhase extends Phase {
     }
 
     /**
-     * Method to increase difficulty
+     * Increases difficulty of phase by increasing enemies and duration
      */
     @Override
     public void increaseDifficulty() {
