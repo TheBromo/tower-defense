@@ -9,7 +9,8 @@ import ch.zhaw.team5.model.util.RandomUtil;
 import ch.zhaw.team5.model.util.Sprite.SpritePath;
 import javafx.geometry.Point2D;
 /**
- * Abstract class PathFollowingGameObject which extends the MovingGameObject
+ * Abstract class PathFollowingGameObject which extends the MovingGameObject implements all moving objects which are following a specific path. 
+ * Algorithm is based upon: The Nature of code by Daniel Shiffman Exercise 6.14, Chapter 6.12 Combinations
  *
  * @author strenman
  * @version 1.0.0

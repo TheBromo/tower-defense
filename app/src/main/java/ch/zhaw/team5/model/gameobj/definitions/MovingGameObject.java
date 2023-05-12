@@ -4,7 +4,7 @@ import ch.zhaw.team5.model.util.Sprite.SpritePath;
 import javafx.geometry.Point2D;
 
 /**
- * Abstract class MovingGameObject which extends the StaticGameObject
+ * Abstract class MovingGameObject which extends the StaticGameObject implements all moving objects in the game.
  *
  * @author strenman
  * @version 1.0.0
