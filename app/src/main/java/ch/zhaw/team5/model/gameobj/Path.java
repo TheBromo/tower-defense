@@ -48,11 +48,11 @@ public class Path extends StaticGameObject {
      */
     @Override
     public void render(Canvas canvas) {
-        int boundryX = 0;
+        int boundaryX = 0;
         var g2d = canvas.getGraphicsContext2D();
         for (Sprite sprite : sprites) {
-            g2d.drawImage(sprite.getSprite(), position.getX() + boundryX, position.getY() - radius, width, height);
-            boundryX += width;
+            g2d.drawImage(sprite.getSprite(), position.getX() + boundaryX, position.getY() - radius, width, height);
+            boundaryX += width;
         }
     }
 

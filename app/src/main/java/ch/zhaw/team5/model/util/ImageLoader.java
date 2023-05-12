@@ -38,6 +38,7 @@ public class ImageLoader {
     public Image getByName(String name) {
         var url = ClassLoader.getSystemClassLoader().getResource("images/" + name + ".PNG");
         try {
+            assert url != null;
             return new Image(url.openStream());
         } catch (IOException e) {
             e.printStackTrace();

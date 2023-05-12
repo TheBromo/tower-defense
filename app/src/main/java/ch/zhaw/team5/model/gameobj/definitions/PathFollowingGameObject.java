@@ -53,19 +53,19 @@ public abstract class PathFollowingGameObject extends MovingGameObject {
     }
 
     /**
-     * Seperates from other enemies and seeks the path end.
+     * Separates from other enemies and seeks the path end.
      *
      * @param enemies - List of enemies
      * @param path    - Path for submitting parameter to applyBehaviours()
      */
     public void applyBehaviours(List<Enemy> enemies, Path path) {
-        Point2D seperate = separate(enemies);
+        Point2D separate = separate(enemies);
         Point2D seek = seek(path.getEnd());
 
-        seperate = seperate.multiply(1.5);
+        separate = separate.multiply(1.5);
         seek = seek.multiply(0.5);
 
-        applyForce(seperate);
+        applyForce(separate);
         applyForce(seek);
     }
 
@@ -105,10 +105,10 @@ public abstract class PathFollowingGameObject extends MovingGameObject {
     }
 
     private Point2D seek(Point2D target) {
-        Point2D desiredLocaction = target.subtract(position);
-        desiredLocaction = desiredLocaction.normalize();
-        desiredLocaction = desiredLocaction.multiply(maxSpeed);
-        Point2D steer = desiredLocaction.subtract(velocity);
+        Point2D desiredLocation = target.subtract(position);
+        desiredLocation = desiredLocation.normalize();
+        desiredLocation = desiredLocation.multiply(maxSpeed);
+        Point2D steer = desiredLocation.subtract(velocity);
         steer = limit(steer, maxForce);
         return steer;
     }
