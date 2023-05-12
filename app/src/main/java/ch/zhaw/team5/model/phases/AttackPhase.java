@@ -19,7 +19,7 @@ public class AttackPhase extends Phase {
 
     /**
      * Constructor for AttackPhase Class, get the param totalTimeSeconds
-     * @param totalTimeSeconds
+     * @param totalTimeSeconds represents the time the attack phase lasts
      */
     public AttackPhase( long totalTimeSeconds) {
         super( totalTimeSeconds);
