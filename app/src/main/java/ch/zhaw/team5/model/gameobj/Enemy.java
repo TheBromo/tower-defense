@@ -9,6 +9,12 @@ import javafx.scene.paint.Color;
 
 import java.util.List;
 
+/**
+ * The Enemy class represents an enemy in the game.
+ * It extends the PathFollowingGameObject class and contains methods for managing the enemy's health, damage, reward, and other properties.
+ * @author strenman mettlmi1
+ * @version 1.0.0
+ */
 public class Enemy extends PathFollowingGameObject {
 
     private boolean isAlive = true;
@@ -16,21 +22,42 @@ public class Enemy extends PathFollowingGameObject {
     private int damage = 25;
     private int reward = 5;
 
+    /**
+     * Creates a new Enemy object at the specified position.
+     *
+     * @param position the initial position of the enemy
+     */
     public Enemy(Point2D position) {
         super(position, Sprite.SpritePath.ENEMY);
         width = 50;
         height = 50;
     }
 
+    /**
+     * Reduces the enemy's health by the specified damage.
+     *
+     * @param damage the amount of damage to inflict on the enemy
+     */
     public void hit(int damage) {
         health -= damage;
         isAlive = health > 0;
     }
 
+    /**
+     * Returns whether the enemy is alive.
+     *
+     * @return true if the enemy is alive, false otherwise
+     */
     public boolean isAlive() {
         return isAlive;
     }
 
+    /**
+     * Updates the enemy's state based on the current list of enemies and the path.
+     *
+     * @param enemies the current list of enemies
+     * @param path the path that the enemies are following
+     */
     @Override
     public void update(List<Enemy> enemies, Path path) {
         super.update(enemies, path);
@@ -40,10 +67,21 @@ public class Enemy extends PathFollowingGameObject {
         return position;
     }
 
+    /**
+     * Returns whether the enemy is out of the screen.
+     *
+     * @param threshhold the threshhold value for determining whether the enemy is out of the screen
+     * @return true if the enemy is out of the screen, false otherwise
+     */
     public boolean outOfScreen(int threshhold) {
         return position.getX() > threshhold;
     }
 
+    /**
+     * Renders the enemy on the provided canvas.
+     *
+     * @param canvas the canvas to draw the enemy on
+     */
     @Override
     public void render(Canvas canvas) {
         var g2d = canvas.getGraphicsContext2D();
