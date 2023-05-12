@@ -150,6 +150,8 @@ public class Sprite {
 
 #### Rendering System
 
+> The Rendering System is responsible for visualizing elements on the canvas. What classes can be renderd is defined by the `Rendreable` interface. 
+
 The rendering is called each `game.loop()`. As the Rendering has to be done in the UI Thread the GameThread( `game.loop()`) is waiting. This is so the rendering does not spam the UI Thread until it dies and the calling of the render function doesn't have to be locked to a fixed number. 
 
 ```
@@ -170,7 +172,7 @@ The rendering is called each `game.loop()`. As the Rendering has to be done in t
                                                                                           │                  │
                                                                                           └──────────────────┘
 ```
-
+> This graph is from PR [#52](https://github.zhaw.ch/PM2-IT22tbWIN-scmy-bles-krea/Team05-java.lang.NullPointerException-projekt2-tower-defense/pull/52)
 
 The following classes implement the `Rendreable` interface: 
 
@@ -197,9 +199,12 @@ The top element of the render chain is the Game class which starts the rendering
 
 ![exported_from_idea drawio (1)](https://github.zhaw.ch/storage/user/5886/files/59ae9acc-cdc8-4faa-803d-75f7e0fa848e)
 
-
-
 #### Update System
+
+> The Update System is responsible for updating the physics and businessLogic of the Game in a predifined interval.
+
+
+
 
 #### Enemy Spawning
 
