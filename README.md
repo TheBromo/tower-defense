@@ -168,10 +168,14 @@ public class Sprite {
 
 #### Update System
 
+#### Enemy Spawning
 
+#### Enemy Crowd Behaviour
 
 #### Phase System
 
+
+#### Attack Patterns
 
 ### 🌳 Branching Modell 
 
