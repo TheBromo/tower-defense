@@ -1,3 +1,5 @@
+# Copy of ZHAW repo
+
 # Team05-java.lang.NullPointerException-projekt2-tower-defense
 ## 🏰 🥷 🏰 Short Introduction to the Game Tower Defense
 Tower Defense is a captivating game that challenges players to strategically place towers to defend their base from waves of relentless enemies. This game is still an MVP. However, with further development, and with a variety of towers, enemies, and maps, players will find themselves immersed in a world of strategic decision-making and excitement. 
